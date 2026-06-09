@@ -55,6 +55,23 @@ class AuthService {
     });
   }
 
+  async forgotPassword(username: string, tenantSlug: string): Promise<void> {
+    await apiPost('/auth/forgot-password', { username, tenantSlug });
+  }
+
+  async resetPassword(token: string, novaSenha: string): Promise<void> {
+    await apiPost('/auth/reset-password', { token, novaSenha });
+  }
+
+  async getTenantInfo(slug: string): Promise<{ id: string; nome: string; slug: string; plano: string } | null> {
+    try {
+      const response = await apiGet<{ success: boolean; data: { id: string; nome: string; slug: string; plano: string } }>(`/tenant/info?slug=${encodeURIComponent(slug)}`);
+      return response.data;
+    } catch {
+      return null;
+    }
+  }
+
   private readonly ROLE_HIERARCHY: Record<UserRole, number> = {
     superadmin: 5,
     org_admin: 4,

@@ -22,10 +22,10 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [departamentos, setDepartamentos] = useState<Departamento[]>([]);
   
-  // Editor só pode criar usuários no seu departamento
+  // Apenas editores têm restrição de departamento; admins e org_admins têm acesso total
   const isEditor = user?.role === 'editor';
-  const userDepartmentId = typeof user?.departamento === 'string' 
-    ? user.departamento 
+  const userDepartmentId = typeof user?.departamento === 'string'
+    ? user.departamento
     : user?.departamento?._id;
   
   const [formData, setFormData] = useState<CreateUsuario>({
@@ -310,13 +310,13 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
         >
           <option value="user">Usuário (Nível Básico)</option>
           <option value="editor">Editor (Gerente Departamental)</option>
-          <option value="admin">Administrador (Acesso Total - Único)</option>
+          <option value="org_admin">Administrador da Empresa (Acesso Total)</option>
         </select>
         {errors.role && (
           <p className="mt-1 text-sm text-red-600">{errors.role}</p>
         )}
         <p className="mt-1 text-sm text-gray-500">
-          {formData.role === 'admin' && '⚠️ Admin tem acesso total ao sistema e deve ser único'}
+          {formData.role === 'org_admin' && '⚠️ Administrador tem acesso total à empresa e deve ser único'}
           {formData.role === 'editor' && 'Editor gerencia documentos e categorias do seu departamento'}
           {formData.role === 'user' && 'Usuário tem acesso básico de visualização e criação'}
         </p>

@@ -11,7 +11,9 @@ const DashboardPage = () => {
   useEffect(() => {
     if (!loading && user) {
       // Redirecionar baseado no role do usuário
-      if (user.role === 'admin') {
+      if (user.role === 'superadmin') {
+        router.replace('/dashboard/superadmin');
+      } else if (user.role === 'org_admin' || user.role === 'admin') {
         router.replace('/dashboard/admin');
       } else if (user.role === 'editor') {
         router.replace('/dashboard/editor');

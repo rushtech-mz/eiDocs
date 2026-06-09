@@ -34,14 +34,17 @@ export interface TipoDocumento {
   dataAtualizacao: string;
 }
 
+export type UserRole = 'superadmin' | 'org_admin' | 'admin' | 'editor' | 'user';
+
 export interface Usuario {
   _id: string;
   nome: string;
   apelido: string;
   username: string;
-  senha?: string; // Only for creation/update, not returned in GET
-  departamento: string | Departamento; // ID ou objeto populado
-  role: 'admin' | 'editor' | 'user'; // Single role: admin (único), editor (gerente departamental), user (básico)
+  senha?: string;
+  tenantId?: string;
+  departamento: string | Departamento | null;
+  role: UserRole;
   ativo: boolean;
   dataCriacao: string;
   dataAtualizacao: string;
@@ -62,13 +65,14 @@ export interface Documento {
   dataEnvio?: string;    // Para documentos enviados
   dataRecebimento?: string; // Para documentos recebidos
   arquivo: {
-    cloudinaryId: string;
-    url: string;
-    secureUrl: string;
+    fileId: string;
+    path: string;
     originalName: string;
+    filename: string;
     format: string;
     size: number;
-    resourceType?: 'image' | 'raw' | 'video' | 'auto';
+    hash?: string;
+    uploadedAt?: string;
   };
   status: 'ativo' | 'arquivado';
   tags: string[];
@@ -134,7 +138,7 @@ export interface DocumentoQueryParams extends BaseQueryParams {
 }
 
 export interface UsuarioQueryParams extends BaseQueryParams {
-  role?: 'admin' | 'editor' | 'user';
+  role?: UserRole;
 }
 
 // Tipos para criação/edição (omitindo campos automáticos)
@@ -193,8 +197,8 @@ export interface CreateUsuario {
   apelido: string;
   username: string;
   senha: string;
-  departamento: string;
-  role?: 'admin' | 'editor' | 'user'; // Default: 'user'
+  departamento?: string;
+  role?: UserRole;
   ativo?: boolean;
 }
 

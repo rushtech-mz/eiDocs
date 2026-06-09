@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { authService, User } from '@/services/authService';
+import { authService, User, UserRole } from '@/services/authService';
 
 interface AuthContextType {
   user: User | null;
@@ -10,6 +10,8 @@ interface AuthContextType {
   login: (username: string, senha: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
+  isSuperAdmin: () => boolean;
+  isOrgAdmin: () => boolean;
   isAdmin: () => boolean;
   isEditor: () => boolean;
   canEdit: () => boolean;
@@ -17,9 +19,9 @@ interface AuthContextType {
   canDeleteDocuments: () => boolean;
   canAccessAllDepartments: () => boolean;
   canAccessDepartment: (departmentId: string) => boolean;
-  hasRole: (role: 'admin' | 'editor' | 'user') => boolean;
-  hasAnyRole: (roles: ('admin' | 'editor' | 'user')[]) => boolean;
-  hasMinimumRole: (minRole: 'admin' | 'editor' | 'user') => boolean;
+  hasRole: (role: UserRole) => boolean;
+  hasAnyRole: (roles: UserRole[]) => boolean;
+  hasMinimumRole: (minRole: UserRole) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -90,6 +92,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   // Métodos de verificação de permissões
+  const isSuperAdmin = () => user ? authService.isSuperAdmin(user) : false;
+  const isOrgAdmin = () => user ? authService.isOrgAdmin(user) : false;
   const isAdmin = () => user ? authService.isAdmin(user) : false;
   const isEditor = () => user ? authService.isEditor(user) : false;
   const canEdit = () => user ? authService.canEdit(user) : false;
@@ -97,9 +101,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const canDeleteDocuments = () => user ? authService.canDeleteDocuments(user) : false;
   const canAccessAllDepartments = () => user ? authService.canAccessAllDepartments(user) : false;
   const canAccessDepartment = (departmentId: string) => user ? authService.canAccessDepartment(user, departmentId) : false;
-  const hasRole = (role: 'admin' | 'editor' | 'user') => user ? authService.hasRole(user, role) : false;
-  const hasAnyRole = (roles: ('admin' | 'editor' | 'user')[]) => user ? authService.hasAnyRole(user, roles) : false;
-  const hasMinimumRole = (minRole: 'admin' | 'editor' | 'user') => user ? authService.hasMinimumRole(user, minRole) : false;
+  const hasRole = (role: UserRole) => user ? authService.hasRole(user, role) : false;
+  const hasAnyRole = (roles: UserRole[]) => user ? authService.hasAnyRole(user, roles) : false;
+  const hasMinimumRole = (minRole: UserRole) => user ? authService.hasMinimumRole(user, minRole) : false;
 
   const value: AuthContextType = {
     user,
@@ -107,6 +111,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     logout,
     refreshUser,
+    isSuperAdmin,
+    isOrgAdmin,
     isAdmin,
     isEditor,
     canEdit,

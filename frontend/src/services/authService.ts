@@ -1,16 +1,19 @@
 import { apiPost, apiGet } from '@/lib/api';
 
+export type UserRole = 'superadmin' | 'org_admin' | 'admin' | 'editor' | 'user';
+
 export interface User {
   _id: string;
   username: string;
   nome: string;
   apelido: string;
+  tenantId?: string;
   departamento: {
     _id: string;
     nome: string;
     codigo: string;
-  };
-  role: 'admin' | 'editor' | 'user';
+  } | null;
+  role: UserRole;
   ativo: boolean;
 }
 
@@ -52,13 +55,24 @@ class AuthService {
     });
   }
 
-  // Métodos para verificar permissões baseados no novo sistema hierárquico
-  // admin: único, acesso total
-  // editor: gerente departamental, acesso ao seu departamento
-  // user: nível básico
-  
+  private readonly ROLE_HIERARCHY: Record<UserRole, number> = {
+    superadmin: 5,
+    org_admin: 4,
+    admin: 3,
+    editor: 2,
+    user: 1,
+  };
+
+  isSuperAdmin(user: User): boolean {
+    return user.role === 'superadmin';
+  }
+
+  isOrgAdmin(user: User): boolean {
+    return user.role === 'org_admin' || user.role === 'admin';
+  }
+
   isAdmin(user: User): boolean {
-    return user.role === 'admin';
+    return this.isOrgAdmin(user) || this.isSuperAdmin(user);
   }
 
   isEditor(user: User): boolean {
@@ -70,56 +84,41 @@ class AuthService {
   }
 
   canEdit(user: User): boolean {
-    // Admin e Editor podem editar
-    return user.role === 'admin' || user.role === 'editor';
+    return this.ROLE_HIERARCHY[user.role] >= this.ROLE_HIERARCHY['editor'];
   }
 
   canManageUsers(user: User): boolean {
-    // Apenas Admin pode gerenciar usuários
-    return user.role === 'admin';
+    return this.isAdmin(user);
   }
 
   canDeleteDocuments(user: User): boolean {
-    // Admin e Editor podem deletar documentos
-    return user.role === 'admin' || user.role === 'editor';
+    return this.ROLE_HIERARCHY[user.role] >= this.ROLE_HIERARCHY['editor'];
   }
 
   canAccessAllDepartments(user: User): boolean {
-    // Apenas Admin pode acessar todos os departamentos
-    return user.role === 'admin';
+    return this.isAdmin(user);
   }
 
   canAccessDepartment(user: User, departmentId: string): boolean {
-    // Admin: acesso a todos
-    // Editor: acesso apenas ao seu departamento
-    // User: acesso apenas ao seu departamento
-    if (user.role === 'admin') return true;
-    return user.departamento._id === departmentId;
+    if (this.isAdmin(user)) return true;
+    return user.departamento?._id === departmentId;
   }
 
-  hasRole(user: User, role: 'admin' | 'editor' | 'user'): boolean {
+  hasRole(user: User, role: UserRole): boolean {
     return user.role === role;
   }
 
-  hasAnyRole(user: User, roles: ('admin' | 'editor' | 'user')[]): boolean {
+  hasAnyRole(user: User, roles: UserRole[]): boolean {
     return roles.includes(user.role);
   }
 
-  hasMinimumRole(user: User, minRole: 'admin' | 'editor' | 'user'): boolean {
-    // Hierarquia: admin > editor > user
-    const hierarchy: Record<string, number> = {
-      admin: 3,
-      editor: 2,
-      user: 1
-    };
-    return hierarchy[user.role] >= hierarchy[minRole];
+  hasMinimumRole(user: User, minRole: UserRole): boolean {
+    return this.ROLE_HIERARCHY[user.role] >= this.ROLE_HIERARCHY[minRole];
   }
 
-  // Determinar dashboard baseado nos roles
   getDashboardPath(user: User): string {
-    if (this.isAdmin(user)) {
-      return '/dashboard/admin';
-    }
+    if (this.isSuperAdmin(user)) return '/dashboard/superadmin';
+    if (this.isOrgAdmin(user)) return '/dashboard/admin';
     return '/dashboard/user';
   }
 }

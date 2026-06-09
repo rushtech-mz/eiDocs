@@ -197,6 +197,13 @@ const LoginPage = () => {
               )}
             </button>
           </form>
+
+          <p className="mt-6 text-center text-sm text-gray-500">
+            Não tens conta?{" "}
+            <Link href="/register" className="font-medium text-blue-600 hover:text-blue-700">
+              Criar empresa
+            </Link>
+          </p>
         </div>
       </div>
     </div>

@@ -48,6 +48,13 @@ class AuthService {
     return response.data;
   }
 
+  async register(payload: {
+    empresa: { nome: string; slug: string };
+    admin: { nome: string; apelido: string; username: string; email?: string; senha: string };
+  }): Promise<void> {
+    await apiPost('/onboarding/register', payload);
+  }
+
   async changePassword(currentPassword: string, newPassword: string): Promise<void> {
     await apiPost('/auth/change-password', {
       senhaAtual: currentPassword,

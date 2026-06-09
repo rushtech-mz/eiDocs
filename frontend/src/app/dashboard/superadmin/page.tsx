@@ -5,7 +5,7 @@ import SuperadminLayout from '@/components/layouts/SuperadminLayout';
 import superadminService, { Tenant, CreateTenantPayload } from '@/services/superadminService';
 import { useToastContext } from '@/contexts/ToastContext';
 import { Button } from '@/components/ui/button';
-import { RefreshCw, Plus, Power, Trash2, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { RefreshCw, Plus, Power, Trash2, Download, ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const PLAN_LABELS: Record<string, string> = {
   trial: 'Trial',
@@ -310,6 +310,13 @@ export default function SuperadminPage() {
                   <td className="px-4 py-4 text-right">
                     {!tenant.deleted && (
                       <div className="flex justify-end gap-2">
+                        <a
+                          href={superadminService.getExportUrl(tenant._id)}
+                          title="Exportar dados (ZIP)"
+                          className="rounded p-1.5 text-blue-500 hover:bg-blue-50 transition-colors"
+                        >
+                          <Download className="h-4 w-4" />
+                        </a>
                         <button
                           title={tenant.ativo ? 'Desativar' : 'Ativar'}
                           disabled={togglingId === tenant._id}

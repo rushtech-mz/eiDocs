@@ -104,6 +104,11 @@ const superadminService = {
   async deleteTenant(id: string): Promise<void> {
     await apiDelete(`/admin/tenants/${id}`);
   },
+
+  getExportUrl(id: string): string {
+    const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+    return `${base}/admin/tenants/${id}/export`;
+  },
 };
 
 export default superadminService;

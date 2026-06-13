@@ -110,9 +110,9 @@ const BuscarDocumentosPage = () => {
 
   const getMovementBadge = (tipoMovimento: string, record: any) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      'recebido': { bg: 'bg-blue-100', text: 'text-blue-800', label: 'Recebido' },
-      'enviado': { bg: 'bg-green-100', text: 'text-green-800', label: 'Enviado' },
-      'interno': { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Interno' }
+      'recebido': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      'enviado': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
+      'interno': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' }
     };
     
     const config = movementConfig[tipoMovimento] || movementConfig.interno;
@@ -132,14 +132,14 @@ const BuscarDocumentosPage = () => {
       render: (value, record: any) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
-            <FileText className="w-5 h-5 text-gray-400" />
+            <FileText className="w-5 h-5 text-gray-400 dark:text-gray-500" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="font-medium text-gray-900 truncate">{value}</div>
+            <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{value}</div>
             {record.descricao && (
-              <div className="text-sm text-gray-500 truncate">{record.descricao}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.descricao}</div>
             )}
-            <div className="text-xs text-gray-400 mt-1 flex items-center space-x-2">
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 flex items-center space-x-2">
               <span>{record.arquivo?.originalName || 'Arquivo não encontrado'}</span>
               <span>•</span>
               <span>{formatFileSize(record.arquivo?.size || 0)}</span>
@@ -154,10 +154,10 @@ const BuscarDocumentosPage = () => {
       width: 'w-32',
       render: (value: any) => (
         <div className="flex items-center space-x-2">
-          <Building2 className="w-4 h-4 text-gray-400" />
+          <Building2 className="w-4 h-4 text-gray-400 dark:text-gray-500" />
           <div>
             <div className="font-medium text-sm">{value?.nome || 'N/A'}</div>
-            <div className="text-xs text-gray-500">{value?.codigo || ''}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{value?.codigo || ''}</div>
           </div>
         </div>
       ),
@@ -168,7 +168,7 @@ const BuscarDocumentosPage = () => {
       width: 'w-28',
       render: (value: any) => (
         <div className="flex items-center space-x-2">
-          <div className={`w-3 h-3 rounded-full bg-${value?.cor || 'gray'}-500`}></div>
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value?.cor || '#6B7280' }}></div>
           <span className="text-sm">{value?.nome || 'N/A'}</span>
         </div>
       ),
@@ -188,14 +188,14 @@ const BuscarDocumentosPage = () => {
           {value?.slice(0, 2).map((tag: string, index: number) => (
             <span
               key={index}
-              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full"
+              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
             >
               <Tag className="w-3 h-3 mr-1" />
               {tag}
             </span>
           )) || []}
           {value?.length > 2 && (
-            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">
+            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
               +{value.length - 2}
             </span>
           )}
@@ -208,7 +208,7 @@ const BuscarDocumentosPage = () => {
       sortable: true,
       width: 'w-24',
       render: (value) => (
-        <div className="flex items-center space-x-1 text-sm text-gray-600">
+        <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
           <Calendar className="w-4 h-4" />
           <span>{formatDate(value)}</span>
         </div>
@@ -255,7 +255,7 @@ const BuscarDocumentosPage = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" />
               </div>
               <input
                 type="text"
@@ -270,7 +270,7 @@ const BuscarDocumentosPage = () => {
                   onClick={clearSearch}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  <X className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" />
+                  <X className="h-5 w-5 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-200" />
                 </button>
               )}
             </div>
@@ -344,13 +344,13 @@ const BuscarDocumentosPage = () => {
               <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                 Resultados da Busca
                 {searchResults.length > 0 && (
-                  <span className="ml-2 text-sm text-gray-500">
+                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
                     ({searchResults.length} documento{searchResults.length !== 1 ? 's' : ''} encontrado{searchResults.length !== 1 ? 's' : ''})
                   </span>
                 )}
               </h2>
               {searchQuery && (
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   Buscando por: "<span className="font-medium">{searchQuery}</span>"
                 </p>
               )}
@@ -363,11 +363,11 @@ const BuscarDocumentosPage = () => {
               loading={isSearching}
               emptyMessage={
                 <div className="text-center py-12">
-                  <Search className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  <Search className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                     Nenhum documento encontrado
                   </h3>
-                  <p className="text-gray-500">
+                  <p className="text-gray-500 dark:text-gray-400">
                     Tente usar termos diferentes ou verifique a ortografia
                   </p>
                 </div>
@@ -382,15 +382,15 @@ const BuscarDocumentosPage = () => {
         {/* Estado inicial */}
         {!hasSearched && (
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 sm:p-12 text-center">
-            <Search className="mx-auto h-16 w-16 text-gray-300 mb-6" />
-            <h2 className="text-xl font-medium text-gray-900 mb-3">
+            <Search className="mx-auto h-16 w-16 text-gray-300 dark:text-gray-600 mb-6" />
+            <h2 className="text-xl font-medium text-gray-900 dark:text-gray-100 mb-3">
               Busque por documentos
             </h2>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Use a barra de busca acima para encontrar documentos por título, descrição, tags ou conteúdo. 
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
+              Use a barra de busca acima para encontrar documentos por título, descrição, tags ou conteúdo.
               Você também pode usar os filtros avançados para refinar sua busca.
             </p>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
               <p><strong>Dicas de busca:</strong></p>
               <ul className="mt-2 space-y-1 text-left max-w-md mx-auto">
                 <li>• Use palavras-chave específicas</li>

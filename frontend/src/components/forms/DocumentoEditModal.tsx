@@ -29,7 +29,7 @@ export interface DocumentoEditData {
 }
 
 const inputClass =
-  'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors';
+  'w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors';
 
 const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
   documento,
@@ -137,18 +137,18 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
     >
       <form id="documento-edit-form" onSubmit={handleSubmit} className="space-y-0">
         {/* Sub-header informativo */}
-        <div className="flex items-center gap-3 p-4 mb-5 bg-blue-50 rounded-lg">
-          <div className="w-9 h-9 flex-shrink-0 bg-blue-100 rounded-lg flex items-center justify-center">
-            <FileText className="w-4 h-4 text-blue-600" />
+        <div className="flex items-center gap-3 p-4 mb-5 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="w-9 h-9 flex-shrink-0 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
+            <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-medium text-blue-900 truncate">{documento.titulo}</p>
-            <p className="text-xs text-blue-600">Editando metadados do documento</p>
+            <p className="text-sm font-medium text-blue-900 dark:text-blue-200 truncate">{documento.titulo}</p>
+            <p className="text-xs text-blue-600 dark:text-blue-400">Editando metadados do documento</p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-5 px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+          <div className="mb-5 px-4 py-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
@@ -157,8 +157,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
           {/* Coluna esquerda */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Título <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Título <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -171,7 +171,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Descrição
               </label>
               <textarea
@@ -185,8 +185,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Categoria <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Categoria <span className="text-red-500 dark:text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -198,8 +198,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Tipo <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Tipo <span className="text-red-500 dark:text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -213,8 +213,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Tipo de Movimento <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Tipo de Movimento <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <select
                 name="tipoMovimento"
@@ -229,7 +229,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Status
               </label>
               <select
@@ -249,7 +249,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
           <div className="space-y-4">
             {formData.tipoMovimento === 'recebido' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   Remetente
                 </label>
                 <input
@@ -263,7 +263,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             )}
             {formData.tipoMovimento === 'enviado' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   Destinatário
                 </label>
                 <input
@@ -277,8 +277,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             )}
             {formData.tipoMovimento === 'interno' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Responsável <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Responsável <span className="text-red-500 dark:text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -292,7 +292,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             )}
             {formData.tipoMovimento === 'enviado' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   Data de Envio
                 </label>
                 <input
@@ -306,7 +306,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             )}
             {formData.tipoMovimento === 'recebido' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   Data de Recebimento
                 </label>
                 <input
@@ -320,8 +320,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Tags <span className="text-gray-400 font-normal text-xs">(separadas por vírgula)</span>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Tags <span className="text-gray-400 dark:text-gray-500 font-normal text-xs">(separadas por vírgula)</span>
               </label>
               <input
                 type="text"
@@ -335,7 +335,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                   {formData.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex px-2 py-0.5 text-xs bg-blue-100 text-blue-800 rounded-full"
+                      className="inline-flex px-2 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
                     >
                       {tag}
                     </span>
@@ -345,13 +345,13 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Substituir Arquivo{' '}
-                <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+                <span className="text-gray-400 dark:text-gray-500 font-normal text-xs">(opcional)</span>
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-400 transition-colors text-center">
-                <Upload className="mx-auto h-7 w-7 text-gray-400 mb-1.5" />
-                <p className="text-sm text-gray-500 mb-2">Clique para selecionar um novo arquivo</p>
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 hover:border-blue-400 dark:hover:border-blue-500 transition-colors text-center">
+                <Upload className="mx-auto h-7 w-7 text-gray-400 dark:text-gray-500 mb-1.5" />
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Clique para selecionar um novo arquivo</p>
                 <input
                   type="file"
                   onChange={handleFileChange}
@@ -366,7 +366,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                   Escolher Arquivo
                 </label>
                 {formData.novoArquivo && (
-                  <p className="mt-2 text-xs text-gray-600">
+                  <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                     Selecionado: {formData.novoArquivo.name}
                   </p>
                 )}
@@ -376,12 +376,12 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
         </div>
 
         {/* Botões dentro do form (necessário para submit) */}
-        <div className="flex items-center justify-end gap-3 mt-6 pt-5 border-t border-gray-200">
+        <div className="flex items-center justify-end gap-3 mt-6 pt-5 border-t border-gray-200 dark:border-gray-700">
           <button
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
           >
             Cancelar
           </button>

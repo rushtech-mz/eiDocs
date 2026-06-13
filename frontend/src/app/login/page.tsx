@@ -96,9 +96,9 @@ const LoginPage = () => {
   const slugParam = searchParams.get("slug") ?? getSubdomainSlug();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white shadow-xl rounded-2xl p-8 space-y-6">
+        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-2">
             <div className="w-16 h-16 mx-auto">
@@ -109,20 +109,20 @@ const LoginPage = () => {
               />
             </div>
             {loadingTenant ? (
-              <div className="h-7 w-40 mx-auto bg-gray-100 rounded animate-pulse" />
+              <div className="h-7 w-40 mx-auto bg-gray-100 dark:bg-gray-700 rounded animate-pulse" />
             ) : tenantInfo ? (
               <>
-                <div className="flex items-center justify-center gap-2 text-gray-500 text-xs">
+                <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 text-xs">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>{tenantInfo.nome}</span>
                 </div>
-                <h1 className="text-2xl font-bold text-gray-900">Entrar</h1>
-                <p className="text-gray-600 text-sm">Entre na conta da <strong>{tenantInfo.nome}</strong></p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Entrar</h1>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">Entre na conta da <strong>{tenantInfo.nome}</strong></p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-gray-900">eiDocuments</h1>
-                <p className="text-gray-600">Entre na sua conta</p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">eiDocuments</h1>
+                <p className="text-gray-600 dark:text-gray-400">Entre na sua conta</p>
               </>
             )}
           </div>
@@ -130,18 +130,18 @@ const LoginPage = () => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="username" className="text-sm font-medium text-gray-700">
+              <label htmlFor="username" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Username
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Digite o seu username"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
                   required
                   disabled={loading}
                 />
@@ -150,32 +150,32 @@ const LoginPage = () => {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="senha" className="text-sm font-medium text-gray-700">
+                <label htmlFor="senha" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Senha
                 </label>
                 <Link
                   href={`/forgot-password${slugParam ? `?slug=${slugParam}` : ""}`}
-                  className="text-xs text-blue-600 hover:text-blue-700"
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                 >
                   Esqueceu a senha?
                 </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   id="senha"
                   type={showPassword ? "text" : "password"}
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   placeholder="Digite a sua senha"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
                   required
                   disabled={loading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -198,9 +198,9 @@ const LoginPage = () => {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-500">
+          <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
             Não tens conta?{" "}
-            <Link href="/register" className="font-medium text-blue-600 hover:text-blue-700">
+            <Link href="/register" className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
               Criar empresa
             </Link>
           </p>

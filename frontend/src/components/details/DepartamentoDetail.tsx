@@ -69,18 +69,18 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
     >
       <div className="space-y-6">
         {/* Informações Básicas */}
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-gray-50 dark:bg-gray-900/40 rounded-lg p-4">
           <div className="flex items-start space-x-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Building2 className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
+              <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-3 mb-2">
-                <h3 className="text-lg font-semibold text-gray-900">{departamento.nome}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{departamento.nome}</h3>
                 <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                  departamento.ativo 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
+                  departamento.ativo
+                    ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+                    : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
                 }`}>
                   {departamento.ativo ? (
                     <>
@@ -96,9 +96,9 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
                 </span>
               </div>
               {departamento.descricao && (
-                <p className="text-gray-600 mb-3">{departamento.descricao}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-3">{departamento.descricao}</p>
               )}
-              <div className="flex items-center space-x-4 text-sm text-gray-500">
+              <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex items-center space-x-1">
                   <Code className="w-4 h-4" />
                   <span>Código: {departamento.codigo}</span>
@@ -116,35 +116,35 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
         {loading ? (
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <span className="ml-2 text-gray-600">Carregando estatísticas...</span>
+            <span className="ml-2 text-gray-600 dark:text-gray-400">Carregando estatísticas...</span>
           </div>
         ) : stats && (
           <>
             {/* Cards de Totais */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-blue-600">Total de Documentos</p>
-                <p className="text-2xl font-bold text-blue-900">{stats.documentos?.total ?? 0}</p>
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Total de Documentos</p>
+                <p className="text-2xl font-bold text-blue-900 dark:text-blue-200">{stats.documentos?.total ?? 0}</p>
               </div>
-              <div className="bg-green-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-green-600">Ativos</p>
-                <p className="text-2xl font-bold text-green-900">{stats.documentos?.ativos ?? 0}</p>
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-green-600 dark:text-green-400">Ativos</p>
+                <p className="text-2xl font-bold text-green-900 dark:text-green-200">{stats.documentos?.ativos ?? 0}</p>
               </div>
-              <div className="bg-orange-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-orange-600">Arquivados</p>
-                <p className="text-2xl font-bold text-orange-900">{stats.documentos?.arquivados ?? 0}</p>
+              <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Arquivados</p>
+                <p className="text-2xl font-bold text-orange-900 dark:text-orange-200">{stats.documentos?.arquivados ?? 0}</p>
               </div>
             </div>
 
             {/* Documentos por Categoria */}
             {stats.documentos?.porCategoria?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Documentos por Categoria</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Documentos por Categoria</h4>
                 <div className="space-y-2">
                   {stats.documentos.porCategoria.map((cat: any, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium text-gray-900">{cat.categoria}</span>
-                      <span className="text-sm text-gray-600">{cat.quantidade} docs</span>
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{cat.categoria}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{cat.quantidade} docs</span>
                     </div>
                   ))}
                 </div>
@@ -154,12 +154,12 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
             {/* Documentos por Tipo */}
             {stats.documentos?.porTipo?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Documentos por Tipo</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Documentos por Tipo</h4>
                 <div className="space-y-2">
                   {stats.documentos.porTipo.map((tipo: any, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium text-gray-900">{tipo.tipo}</span>
-                      <span className="text-sm text-gray-600">{tipo.quantidade} docs</span>
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{tipo.tipo}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{tipo.quantidade} docs</span>
                     </div>
                   ))}
                 </div>
@@ -169,15 +169,15 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
             {/* Documentos Recentes */}
             {stats.documentos?.recentes?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Documentos Recentes</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Documentos Recentes</h4>
                 <div className="space-y-2">
                   {stats.documentos.recentes.map((doc: any, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
                       <div>
-                        <span className="text-sm font-medium text-gray-900">{doc.titulo}</span>
-                        <span className="ml-2 text-xs text-gray-500">{formatDate(doc.dataCriacao)}</span>
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{doc.titulo}</span>
+                        <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">{formatDate(doc.dataCriacao)}</span>
                       </div>
-                      <span className="text-xs text-gray-500">{doc.categoria?.nome} / {doc.tipo?.nome}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{doc.categoria?.nome} / {doc.tipo?.nome}</span>
                     </div>
                   ))}
                 </div>
@@ -188,11 +188,11 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
 
         {/* Metadados */}
         <div className="border-t pt-4">
-          <h4 className="text-md font-medium text-gray-900 mb-3">Informações do Sistema</h4>
+          <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3">Informações do Sistema</h4>
           <div className="text-sm">
             <div>
-              <span className="text-gray-500">Última Atualização:</span>
-              <span className="ml-2 text-gray-900">{formatDate(departamento.dataAtualizacao)}</span>
+              <span className="text-gray-500 dark:text-gray-400">Última Atualização:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100">{formatDate(departamento.dataAtualizacao)}</span>
             </div>
           </div>
         </div>

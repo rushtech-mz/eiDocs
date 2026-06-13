@@ -494,25 +494,25 @@ const UploadPage = () => {
         />
 
         {/* Área de Upload de Arquivos */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Selecionar Arquivos</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Selecionar Arquivos</h3>
           
           {/* Drag & Drop Area */}
           <div
             className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 ${
-              isDragOver 
-                ? 'border-blue-500 bg-blue-50' 
-                : 'border-gray-300 hover:border-gray-400'
+              isDragOver
+                ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
             }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <p className="text-lg font-medium text-gray-900 mb-2">
+            <Upload className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
+            <p className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
               {isDragOver ? 'Solte os arquivos aqui' : 'Arraste arquivos aqui'}
             </p>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               ou clique para selecionar arquivos
             </p>
             
@@ -533,7 +533,7 @@ const UploadPage = () => {
               Selecionar Arquivos
             </label>
             
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
               Tipos suportados: PDF, Word, Excel, PowerPoint, Imagens, Texto • Máximo: 50MB
             </p>
           </div>
@@ -541,19 +541,19 @@ const UploadPage = () => {
 
         {/* Lista de Arquivos Selecionados */}
         {files.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
               Arquivos Selecionados ({files.length})
             </h3>
             
             <div className="space-y-3">
               {files.map((file) => (
-                <div key={file.id} className="flex items-start sm:items-center justify-between gap-3 p-3 border border-gray-200 rounded-lg">
+                <div key={file.id} className="flex items-start sm:items-center justify-between gap-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
                   <div className="flex items-center space-x-3 min-w-0">
                     <div className="text-xl flex-shrink-0">{getFileIcon(file.type)}</div>
                     <div className="min-w-0">
-                      <p className="font-medium text-gray-900 text-sm truncate">{file.name}</p>
-                      <p className="text-xs text-gray-600">
+                      <p className="font-medium text-gray-900 dark:text-gray-100 text-sm truncate">{file.name}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
                         {formatFileSize(file.size)}
                       </p>
                     </div>
@@ -561,7 +561,7 @@ const UploadPage = () => {
 
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {file.status === 'ready' && (
-                      <div className="flex items-center gap-1 text-blue-600">
+                      <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
                         <FileText className="h-4 w-4" />
                         <span className="text-xs font-medium hidden sm:inline">Pronto</span>
                       </div>
@@ -569,33 +569,33 @@ const UploadPage = () => {
 
                     {file.status === 'uploading' && (
                       <div className="flex items-center gap-2">
-                        <div className="w-12 sm:w-16 bg-gray-200 rounded-full h-1.5">
+                        <div className="w-12 sm:w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                           <div
                             className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
                             style={{ width: `${file.progress}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs text-gray-600">{file.progress}%</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400">{file.progress}%</span>
                       </div>
                     )}
 
                     {file.status === 'success' && (
-                      <div className="flex items-center gap-1 text-green-600">
+                      <div className="flex items-center gap-1 text-green-600 dark:text-green-400">
                         <CheckCircle className="h-4 w-4" />
                         <span className="text-xs font-medium hidden sm:inline">Enviado</span>
                       </div>
                     )}
 
                     {file.status === 'error' && (
-                      <div className="flex items-center gap-1 text-red-600">
+                      <div className="flex items-center gap-1 text-red-600 dark:text-red-400">
                         <AlertCircle className="h-4 w-4" />
                         <span className="text-xs font-medium hidden sm:inline">Erro</span>
                       </div>
                     )}
-                    
+
                     <button
                       onClick={() => removeFile(file.id)}
-                      className="p-1 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+                      className="p-1 text-gray-400 dark:text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition-colors"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -607,22 +607,22 @@ const UploadPage = () => {
         )}
 
         {/* Formulário de Metadados */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">
             Informações do Documento
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Título */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Título do Documento *
               </label>
               <input
                 type="text"
                 value={formData.titulo}
                 onChange={(e) => handleInputChange('titulo', e.target.value)}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Digite o título do documento"
                 required
               />
@@ -630,25 +630,25 @@ const UploadPage = () => {
 
             {/* Departamento (somente leitura) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Departamento
               </label>
-              <div className="flex items-center px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
-                <Building2 className="w-4 h-4 text-gray-400 mr-2" />
-                <span className="text-gray-700">{userDepartment}</span>
+              <div className="flex items-center px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md">
+                <Building2 className="w-4 h-4 text-gray-400 dark:text-gray-500 mr-2" />
+                <span className="text-gray-700 dark:text-gray-300">{userDepartment}</span>
               </div>
-              <p className="text-xs text-gray-500 mt-1">Departamento do usuário logado</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Departamento do usuário logado</p>
             </div>
 
             {/* Categoria */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Categoria *
               </label>
               <select
                 value={formData.categoria}
                 onChange={(e) => handleInputChange('categoria', e.target.value)}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               >
                 <option value="">Selecione uma categoria...</option>
@@ -659,20 +659,20 @@ const UploadPage = () => {
                 ))}
               </select>
               {loadingCategorias && (
-                <p className="text-xs text-blue-500 mt-1">Carregando categorias...</p>
+                <p className="text-xs text-blue-500 dark:text-blue-400 mt-1">Carregando categorias...</p>
               )}
-              <p className="text-xs text-gray-500 mt-1">Selecione a categoria do documento</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Selecione a categoria do documento</p>
             </div>
 
             {/* Tipo */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Tipo <span className="text-gray-400 text-xs">(opcional)</span>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Tipo <span className="text-gray-400 dark:text-gray-500 text-xs">(opcional)</span>
               </label>
               <select
                 value={formData.tipo}
                 onChange={(e) => handleInputChange('tipo', e.target.value)}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 disabled={!formData.categoria || loadingTipos}
               >
                 <option value="">
@@ -689,27 +689,27 @@ const UploadPage = () => {
                 ))}
               </select>
               {loadingTipos && (
-                <p className="text-xs text-blue-500 mt-1">Carregando tipos...</p>
+                <p className="text-xs text-blue-500 dark:text-blue-400 mt-1">Carregando tipos...</p>
               )}
               {formData.categoria && tiposFiltrados.length === 0 && !loadingTipos && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   ℹ️ Esta categoria não possui tipos específicos. Você pode prosseguir sem selecionar um tipo.
                 </p>
               )}
               {!formData.categoria && (
-                <p className="text-xs text-gray-500 mt-1">Selecione uma categoria para ver os tipos disponíveis</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Selecione uma categoria para ver os tipos disponíveis</p>
               )}
             </div>
 
             {/* Tipo de Movimento */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Tipo de Movimento
               </label>
               <select
                 value={formData.tipoMovimento}
                 onChange={(e) => handleInputChange('tipoMovimento', e.target.value as 'recebido' | 'enviado' | 'interno')}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="interno">Interno</option>
                 <option value="recebido">Recebido</option>
@@ -721,32 +721,32 @@ const UploadPage = () => {
             {formData.tipoMovimento === 'enviado' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Destinatário *
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="text"
                       value={formData.destinatario}
                       onChange={(e) => handleInputChange('destinatario', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Nome do destinatário"
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Data de Envio *
                   </label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="date"
                       value={formData.dataEnvio}
                       onChange={(e) => handleInputChange('dataEnvio', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       required
                     />
                   </div>
@@ -757,32 +757,32 @@ const UploadPage = () => {
             {formData.tipoMovimento === 'recebido' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Remetente *
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="text"
                       value={formData.remetente}
                       onChange={(e) => handleInputChange('remetente', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Nome do remetente"
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Data de Recebimento *
                   </label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="date"
                       value={formData.dataRecebimento}
                       onChange={(e) => handleInputChange('dataRecebimento', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       required
                     />
                   </div>
@@ -792,16 +792,16 @@ const UploadPage = () => {
 
             {formData.tipoMovimento === 'interno' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Responsável *
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                   <input
                     type="text"
                     value={formData.responsavel}
                     onChange={(e) => handleInputChange('responsavel', e.target.value)}
-                    className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Nome do responsável pelo documento"
                     required
                   />
@@ -811,7 +811,7 @@ const UploadPage = () => {
 
             {/* Descrição */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Descrição
               </label>
               <textarea
@@ -819,25 +819,25 @@ const UploadPage = () => {
                 onChange={(e) => handleInputChange('descricao', e.target.value)}
                 placeholder="Descreva o conteúdo do documento..."
                 rows={3}
-                className="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
               />
             </div>
 
             {/* Tags */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Tags
               </label>
               <div className="flex items-center space-x-2 mb-3">
                 <div className="flex-1 relative">
-                  <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                   <input
                     type="text"
                     placeholder="Adicionar tag..."
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyDown={handleTagKeyPress}
-                    className="block w-full pl-10 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
                 <button
@@ -855,13 +855,13 @@ const UploadPage = () => {
                   {formData.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center space-x-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                      className="inline-flex items-center space-x-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full text-sm"
                     >
                       <span>{tag}</span>
                       <button
                         type="button"
                         onClick={() => removeTag(tag)}
-                        className="text-blue-600 hover:text-blue-800 transition-colors"
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                       >
                         <X className="h-3 w-3" />
                       </button>
@@ -878,7 +878,7 @@ const UploadPage = () => {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             Cancelar
           </button>
@@ -904,10 +904,10 @@ const UploadPage = () => {
 
         {/* Mensagem de validação */}
         {!isFormValid() && (files.length > 0 || formData.titulo || formData.dataEnvio || formData.dataRecebimento || formData.remetente || formData.destinatario || formData.responsavel) && (
-          <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+          <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
             <div className="flex items-center">
-              <AlertCircle className="h-4 w-4 text-yellow-600 mr-2" />
-              <div className="text-sm text-yellow-800">
+              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mr-2" />
+              <div className="text-sm text-yellow-800 dark:text-yellow-300">
                 <p className="font-medium mb-1">Campos obrigatórios pendentes:</p>
                 <ul className="list-disc list-inside space-y-1">
                   {files.length === 0 && <li>Selecione pelo menos um arquivo</li>}

@@ -101,19 +101,19 @@ const UsuariosPage = () => {
 
   const getRoleBadge = (role: 'admin' | 'editor' | 'user') => {
     const roleMap: Record<'admin' | 'editor' | 'user', { label: string; class: string; icon: React.ReactNode }> = {
-      admin: { 
-        label: 'Administrador', 
-        class: 'bg-red-100 text-red-800',
+      admin: {
+        label: 'Administrador',
+        class: 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300',
         icon: <Shield className="w-3 h-3" />
       },
-      editor: { 
-        label: 'Editor (Gerente)', 
-        class: 'bg-blue-100 text-blue-800',
+      editor: {
+        label: 'Editor (Gerente)',
+        class: 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300',
         icon: <Users className="w-3 h-3" />
       },
-      user: { 
-        label: 'Usuário', 
-        class: 'bg-gray-100 text-gray-800',
+      user: {
+        label: 'Usuário',
+        class: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300',
         icon: <User className="w-3 h-3" />
       },
     };
@@ -135,14 +135,14 @@ const UsuariosPage = () => {
       render: (value, record) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-              <User className="w-4 h-4 text-blue-600" />
+            <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
           <div>
-            <div className="font-medium text-gray-900">{value}</div>
-            <div className="text-sm text-gray-500">@{record.username}</div>
-            <div className="text-sm text-gray-500">{record.apelido}</div>
+            <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">@{record.username}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{record.apelido}</div>
           </div>
         </div>
       ),
@@ -154,7 +154,7 @@ const UsuariosPage = () => {
       width: 'w-32',
       render: (value) => (
         <div className="flex items-center space-x-2">
-          <Building2 className="w-4 h-4 text-gray-400" />
+          <Building2 className="w-4 h-4 text-gray-400 dark:text-gray-500" />
           <div>
             <div className="font-medium text-sm">{typeof value === 'string' ? value : value?.nome || 'N/A'}</div>
           </div>
@@ -174,7 +174,7 @@ const UsuariosPage = () => {
       sortable: true,
       width: 'w-32',
       render: (value) => (
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-gray-600 dark:text-gray-400">
           {new Date(value).toLocaleDateString('pt-BR')}
         </span>
       ),
@@ -188,8 +188,8 @@ const UsuariosPage = () => {
         <span
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
             value
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
+              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+              : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
           }`}
         >
           {value ? 'Ativo' : 'Inativo'}

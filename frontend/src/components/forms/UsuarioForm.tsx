@@ -177,7 +177,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Nome */}
       <div>
-        <label htmlFor="nome" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="nome" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Nome *
         </label>
         <input
@@ -186,19 +186,19 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="nome"
           value={formData.nome}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
           placeholder="Digite o nome completo"
           disabled={loading}
           maxLength={100}
         />
         {errors.nome && (
-          <p className="mt-1 text-sm text-red-600">{errors.nome}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.nome}</p>
         )}
       </div>
 
       {/* Apelido */}
       <div>
-        <label htmlFor="apelido" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="apelido" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Apelido *
         </label>
         <input
@@ -207,19 +207,19 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="apelido"
           value={formData.apelido}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.apelido ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.apelido ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
           placeholder="Como prefere ser chamado"
           disabled={loading}
           maxLength={50}
         />
         {errors.apelido && (
-          <p className="mt-1 text-sm text-red-600">{errors.apelido}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.apelido}</p>
         )}
       </div>
 
       {/* Username */}
       <div>
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Username *
         </label>
         <input
@@ -228,23 +228,23 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="username"
           value={formData.username}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.username ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm lowercase`}
+          className={`mt-1 block w-full rounded-md border ${errors.username ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm lowercase`}
           placeholder="usuario.nome"
           disabled={loading}
           maxLength={30}
           style={{ textTransform: 'lowercase' }}
         />
         {errors.username && (
-          <p className="mt-1 text-sm text-red-600">{errors.username}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.username}</p>
         )}
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Use apenas letras, números, pontos e underscores
         </p>
       </div>
 
       {/* Senha */}
       <div>
-        <label htmlFor="senha" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="senha" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Senha {!isEditing && '*'}
         </label>
         <input
@@ -253,21 +253,21 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="senha"
           value={formData.senha}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.senha ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.senha ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
           placeholder={isEditing ? "Deixe vazio para manter a senha atual" : "Digite a senha"}
           disabled={loading}
         />
         {errors.senha && (
-          <p className="mt-1 text-sm text-red-600">{errors.senha}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.senha}</p>
         )}
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           {isEditing ? "Deixe vazio para não alterar a senha" : "Mínimo de 6 caracteres"}
         </p>
       </div>
 
       {/* Departamento */}
       <div>
-        <label htmlFor="departamento" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="departamento" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Departamento *
         </label>
         <select
@@ -275,7 +275,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="departamento"
           value={formData.departamento}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm ${isEditor ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+          className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm ${isEditor ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : ''}`}
           disabled={loading || isEditor}
         >
           <option value="">Selecione um departamento</option>
@@ -286,10 +286,10 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           ))}
         </select>
         {errors.departamento && (
-          <p className="mt-1 text-sm text-red-600">{errors.departamento}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.departamento}</p>
         )}
         {isEditor && (
-          <p className="mt-1 text-sm text-blue-600">
+          <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
             🔒 Editores só podem criar usuários no seu próprio departamento
           </p>
         )}
@@ -297,7 +297,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
 
       {/* Role */}
       <div>
-        <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Função *
         </label>
         <select
@@ -305,7 +305,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="role"
           value={formData.role}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.role ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.role ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
           disabled={loading}
         >
           <option value="user">Usuário (Nível Básico)</option>
@@ -313,9 +313,9 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           <option value="org_admin">Administrador da Empresa (Acesso Total)</option>
         </select>
         {errors.role && (
-          <p className="mt-1 text-sm text-red-600">{errors.role}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.role}</p>
         )}
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           {formData.role === 'org_admin' && '⚠️ Administrador tem acesso total à empresa e deve ser único'}
           {formData.role === 'editor' && 'Editor gerencia documentos e categorias do seu departamento'}
           {formData.role === 'user' && 'Usuário tem acesso básico de visualização e criação'}
@@ -330,14 +330,14 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
             name="ativo"
             checked={formData.ativo}
             onChange={handleInputChange}
-            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
             disabled={loading}
           />
-          <span className="ml-2 text-sm font-medium text-gray-700">
+          <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
             Usuário ativo
           </span>
         </label>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Usuários inativos não poderão fazer login no sistema
         </p>
       </div>

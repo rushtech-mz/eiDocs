@@ -15,10 +15,10 @@ const PLAN_LABELS: Record<string, string> = {
 };
 
 const PLAN_COLORS: Record<string, string> = {
-  trial: 'bg-yellow-100 text-yellow-800',
-  starter: 'bg-blue-100 text-blue-800',
-  pro: 'bg-purple-100 text-purple-800',
-  enterprise: 'bg-green-100 text-green-800',
+  trial: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300',
+  starter: 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300',
+  pro: 'bg-purple-100 dark:bg-purple-900/40 text-purple-800 dark:text-purple-300',
+  enterprise: 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300',
 };
 
 function formatBytes(bytes: number): string {
@@ -74,36 +74,36 @@ function CreateTenantModal({ onClose, onCreated }: CreateTenantModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+      <div className="w-full max-w-md rounded-xl bg-white dark:bg-gray-800 p-6 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Nova Empresa</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="h-5 w-5" /></button>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Nova Empresa</h2>
+          <button onClick={onClose} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"><X className="h-5 w-5" /></button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
             <input
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
               value={form.nome}
               onChange={e => handleNomeChange(e.target.value)}
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Slug</label>
             <input
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm font-mono focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
               value={form.slug}
               onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))}
               required
             />
-            <p className="mt-1 text-xs text-gray-500">{form.slug}.eidocs.pt</p>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{form.slug}.eidocs.pt</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Plano</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Plano</label>
             <select
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
               value={form.plano}
               onChange={e => setForm(f => ({ ...f, plano: e.target.value as any }))}
             >
@@ -202,8 +202,8 @@ export default function SuperadminPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Empresas</h1>
-            <p className="text-sm text-gray-500 mt-1">{total} empresa{total !== 1 ? 's' : ''} registada{total !== 1 ? 's' : ''}</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Empresas</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{total} empresa{total !== 1 ? 's' : ''} registada{total !== 1 ? 's' : ''}</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={load} disabled={loading}>
@@ -220,13 +220,13 @@ export default function SuperadminPage() {
         {/* Filters */}
         <div className="flex flex-wrap gap-3">
           <input
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-64 focus:border-indigo-500 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm w-64 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
             placeholder="Pesquisar por nome ou slug…"
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
           />
           <select
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
             value={filterAtivo}
             onChange={e => { setFilterAtivo(e.target.value as any); setPage(1); }}
           >
@@ -235,7 +235,7 @@ export default function SuperadminPage() {
             <option value="false">Inativas</option>
           </select>
           <select
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
             value={filterPlano}
             onChange={e => { setFilterPlano(e.target.value); setPage(1); }}
           >
@@ -248,61 +248,61 @@ export default function SuperadminPage() {
         </div>
 
         {/* Table */}
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-900">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plano</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Utilizadores</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documentos</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Storage</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trial expira</th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Empresa</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Plano</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Utilizadores</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Documentos</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Storage</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Trial expira</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Estado</th>
+                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Ações</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {loading && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-sm text-gray-500">A carregar…</td>
+                  <td colSpan={8} className="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">A carregar…</td>
                 </tr>
               )}
               {!loading && tenants.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-sm text-gray-500">Nenhuma empresa encontrada.</td>
+                  <td colSpan={8} className="px-6 py-12 text-center text-sm text-gray-500 dark:text-gray-400">Nenhuma empresa encontrada.</td>
                 </tr>
               )}
               {!loading && tenants.map(tenant => (
-                <tr key={tenant._id} className={`hover:bg-gray-50 ${tenant.deleted ? 'opacity-50' : ''}`}>
+                <tr key={tenant._id} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${tenant.deleted ? 'opacity-50' : ''}`}>
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium text-gray-900">{tenant.nome}</span>
-                      <span className="text-xs text-gray-500 font-mono">{tenant.slug}.eidocs.pt</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{tenant.nome}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{tenant.slug}.eidocs.pt</span>
                     </div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${PLAN_COLORS[tenant.plano] ?? 'bg-gray-100 text-gray-800'}`}>
+                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${PLAN_COLORS[tenant.plano] ?? 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'}`}>
                       {PLAN_LABELS[tenant.plano] ?? tenant.plano}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-sm text-gray-700">
+                  <td className="px-4 py-4 text-sm text-gray-700 dark:text-gray-300">
                     {tenant.uso.utilizadores} / {tenant.limites.maxUtilizadores}
                   </td>
-                  <td className="px-4 py-4 text-sm text-gray-700">
+                  <td className="px-4 py-4 text-sm text-gray-700 dark:text-gray-300">
                     {tenant.uso.documentos} / {tenant.limites.maxDocumentos}
                   </td>
-                  <td className="px-4 py-4 text-sm text-gray-700">
+                  <td className="px-4 py-4 text-sm text-gray-700 dark:text-gray-300">
                     {formatBytes(tenant.uso.armazenamentoBytes)} / {tenant.limites.maxArmazenamentoGB} GB
                   </td>
-                  <td className="px-4 py-4 text-sm text-gray-700">
+                  <td className="px-4 py-4 text-sm text-gray-700 dark:text-gray-300">
                     {tenant.plano === 'trial' ? formatDate(tenant.trialExpiraEm) : '—'}
                   </td>
                   <td className="px-4 py-4">
                     {tenant.deleted ? (
-                      <span className="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700">Eliminada</span>
+                      <span className="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/40 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:text-red-300">Eliminada</span>
                     ) : (
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${tenant.ativo ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}`}>
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${tenant.ativo ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}`}>
                         {tenant.ativo ? 'Ativa' : 'Inativa'}
                       </span>
                     )}
@@ -313,7 +313,7 @@ export default function SuperadminPage() {
                         <a
                           href={superadminService.getExportUrl(tenant._id)}
                           title="Exportar dados (ZIP)"
-                          className="rounded p-1.5 text-blue-500 hover:bg-blue-50 transition-colors"
+                          className="rounded p-1.5 text-blue-500 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
                         >
                           <Download className="h-4 w-4" />
                         </a>
@@ -321,7 +321,7 @@ export default function SuperadminPage() {
                           title={tenant.ativo ? 'Desativar' : 'Ativar'}
                           disabled={togglingId === tenant._id}
                           onClick={() => handleToggle(tenant)}
-                          className={`rounded p-1.5 transition-colors ${tenant.ativo ? 'text-orange-500 hover:bg-orange-50' : 'text-green-600 hover:bg-green-50'} disabled:opacity-40`}
+                          className={`rounded p-1.5 transition-colors ${tenant.ativo ? 'text-orange-500 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/30' : 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30'} disabled:opacity-40`}
                         >
                           <Power className="h-4 w-4" />
                         </button>
@@ -329,7 +329,7 @@ export default function SuperadminPage() {
                           title="Eliminar empresa"
                           disabled={deletingId === tenant._id}
                           onClick={() => handleDelete(tenant)}
-                          className="rounded p-1.5 text-red-500 hover:bg-red-50 transition-colors disabled:opacity-40"
+                          className="rounded p-1.5 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors disabled:opacity-40"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -345,7 +345,7 @@ export default function SuperadminPage() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               Página {page} de {totalPages} ({total} resultados)
             </p>
             <div className="flex gap-2">

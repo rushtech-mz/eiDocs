@@ -70,7 +70,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <select
             value={filters[field.id] || ''}
             onChange={(e) => handleChange(field.id, e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="">{field.placeholder || 'Selecione...'}</option>
             {field.options?.map(opt => (
@@ -86,7 +86,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         return (
           <div className="space-y-2">
             {field.options?.map(opt => (
-              <label key={opt.id} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+              <label key={opt.id} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded">
                 <input
                   type="checkbox"
                   checked={selectedValues.includes(opt.value)}
@@ -96,9 +96,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                       : selectedValues.filter((v: string) => v !== opt.value);
                     handleChange(field.id, newValues);
                   }}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-blue-600 border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded focus:ring-blue-500"
                 />
-                <span className="text-sm text-gray-700">{opt.label}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">{opt.label}</span>
               </label>
             ))}
           </div>
@@ -110,7 +110,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             type="date"
             value={filters[field.id] || ''}
             onChange={(e) => handleChange(field.id, e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         );
 
@@ -122,14 +122,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               value={filters[`${field.id}_start`] || ''}
               onChange={(e) => handleChange(`${field.id}_start`, e.target.value)}
               placeholder="Data inicial"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <input
               type="date"
               value={filters[`${field.id}_end`] || ''}
               onChange={(e) => handleChange(`${field.id}_end`, e.target.value)}
               placeholder="Data final"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         );
@@ -141,7 +141,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             value={filters[field.id] || ''}
             onChange={(e) => handleChange(field.id, e.target.value)}
             placeholder={field.placeholder}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         );
 
@@ -159,33 +159,33 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       />
 
       {/* Panel com animação de slide */}
-      <div className={`fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed right-0 top-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 shadow-2xl z-50 transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Filtros</h2>
-              <p className="text-sm text-gray-500 mt-0.5">Refine sua busca</p>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Filtros</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Refine sua busca</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-white rounded-lg transition-colors shadow-sm"
+              className="p-2 hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-colors shadow-sm"
               aria-label="Fechar filtros"
             >
-              <X className="w-5 h-5 text-gray-500" />
+              <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
             </button>
           </div>
 
           {/* Content */}
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {fields.length === 0 ? (
-              <div className="text-center text-gray-500 py-8">
+              <div className="text-center text-gray-500 dark:text-gray-400 py-8">
                 <p>Nenhum filtro disponível</p>
               </div>
             ) : (
               fields.map(field => (
                 <div key={field.id} className="animate-fadeIn">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {field.label}
                   </label>
                   {renderField(field)}
@@ -195,7 +195,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-200 p-6 space-y-3 bg-gray-50">
+          <div className="border-t border-gray-200 dark:border-gray-700 p-6 space-y-3 bg-gray-50 dark:bg-gray-900/40">
             <ModernButton
               onClick={handleApply}
               className="w-full flex items-center justify-center space-x-2"

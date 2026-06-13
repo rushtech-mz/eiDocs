@@ -182,7 +182,7 @@ const CategoriasPage = () => {
       sortable: true,
       width: 'w-24',
       render: (value) => (
-        <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">
+        <span className="font-mono text-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 px-2 py-1 rounded">
           {value}
         </span>
       ),
@@ -198,15 +198,15 @@ const CategoriasPage = () => {
         return (
           <div className="flex items-center space-x-3">
             <div className="flex-shrink-0">
-              <div 
-                className="w-3 h-3 rounded-full border border-gray-200"
+              <div
+                className="w-3 h-3 rounded-full border border-gray-200 dark:border-gray-600"
                 style={{ backgroundColor: color.bg }}
               ></div>
             </div>
             <div className="min-w-0 flex-1">
-              <div className="font-medium text-gray-900">{value}</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
               {record.descricao && (
-                <div className="text-sm text-gray-500 overflow-hidden text-ellipsis whitespace-nowrap">
+                <div className="text-sm text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap">
                   {record.descricao}
                 </div>
               )}
@@ -223,11 +223,11 @@ const CategoriasPage = () => {
         const color = getColorDisplay(value);
         return (
           <div className="flex items-center space-x-2">
-            <div 
-              className="w-4 h-4 rounded-full border border-gray-200"
+            <div
+              className="w-4 h-4 rounded-full border border-gray-200 dark:border-gray-600"
               style={{ backgroundColor: color.bg }}
             ></div>
-            <span className="text-xs text-gray-600 font-mono">
+            <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
               {value || '#6b7280'}
             </span>
           </div>
@@ -243,8 +243,8 @@ const CategoriasPage = () => {
         <span
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
             value
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
+              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+              : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
           }`}
         >
           {value ? 'Ativo' : 'Inativo'}
@@ -257,7 +257,7 @@ const CategoriasPage = () => {
       sortable: true,
       width: 'w-32',
       render: (value) => (
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-gray-600 dark:text-gray-400">
           {new Date(value).toLocaleDateString('pt-BR')}
         </span>
       ),

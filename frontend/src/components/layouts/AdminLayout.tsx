@@ -72,21 +72,21 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg">
+      <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg">
         {/* Header */}
-        <div className="flex h-16 items-center justify-center border-b border-gray-200">
+        <div className="flex h-16 items-center justify-center border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-2">
-            <img 
-              src="/logo.jpg" 
-              alt="Contratuz Logo" 
+            <img
+              src="/logo.jpg"
+              alt="eiDocs Logo"
               className="w-8 h-8 rounded-lg object-cover"
             />
-            <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Admin Panel</h1>
           </div>
         </div>
-        
+
         {/* Menu */}
         <nav className="mt-8 px-4">
           <ul className="space-y-2">
@@ -96,8 +96,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   href={item.href}
                   className={`flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     pathname === item.href
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
                   }`}
                 >
                   {item.icon}
@@ -112,20 +112,20 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       {/* Main content */}
       <div className="ml-64">
         {/* Top bar */}
-        <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6">
-          <h2 className="text-lg font-semibold text-gray-900">
+        <header className="flex h-16 items-center justify-between border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Administração
           </h2>
-          
+
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               Olá, {user?.nome || user?.username}
             </span>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               onClick={logout}
-              className="text-red-600 hover:text-red-700"
+              className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
             >
               Sair
             </Button>

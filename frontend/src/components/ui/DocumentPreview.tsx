@@ -58,7 +58,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     setContent(null);
 
     try {
-      // Baixar o documento como blob usando o service
+                // Baixar o documento como blob usando o service
       const blob = await DocumentosService.baixar(documento._id);
       setDocumentBlob(blob);
 
@@ -118,10 +118,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   };
 
   const renderPDFPreview = () => (
-    <div className="h-full flex flex-col bg-gray-100">
-      <div className="flex items-center justify-between p-4 bg-white border-b">
+    <div className="h-full flex flex-col bg-gray-100 dark:bg-gray-900">
+      <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-4">
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-gray-600 dark:text-gray-400">
             Página {pageNumber} de {numPages || 1}
           </span>
         </div>
@@ -129,14 +129,14 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           <button
             onClick={() => setPageNumber(Math.max(1, pageNumber - 1))}
             disabled={pageNumber <= 1}
-            className="px-3 py-1 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded disabled:opacity-50"
           >
             Anterior
           </button>
           <button
             onClick={() => setPageNumber(Math.min(numPages || 1, pageNumber + 1))}
             disabled={pageNumber >= (numPages || 1)}
-            className="px-3 py-1 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded disabled:opacity-50"
           >
             Próxima
           </button>
@@ -154,7 +154,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             setLoading(false);
           }}
           loading={
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
               <Loader2 className="w-6 h-6 animate-spin" />
               <span>Carregando PDF...</span>
             </div>
@@ -172,16 +172,16 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   );
 
   const renderWordPreview = () => (
-    <div className="h-full overflow-auto bg-white p-8">
-      <div 
-        className="max-w-4xl mx-auto prose prose-sm"
+    <div className="h-full overflow-auto bg-white dark:bg-gray-900 p-8">
+      <div
+        className="max-w-4xl mx-auto prose prose-sm dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
   );
 
   const renderExcelPreview = () => (
-    <div className="h-full overflow-auto bg-white p-4">
+    <div className="h-full overflow-auto bg-white dark:bg-gray-900 p-4">
       <style jsx>{`
         table {
           border-collapse: collapse;
@@ -200,6 +200,18 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         table tr:nth-child(even) {
           background-color: #f9f9f9;
         }
+        :global(.dark) table {
+          color: #e5e7eb;
+        }
+        :global(.dark) table td, :global(.dark) table th {
+          border-color: #4b5563;
+        }
+        :global(.dark) table th {
+          background-color: #374151;
+        }
+        :global(.dark) table tr:nth-child(even) {
+          background-color: #1f2937;
+        }
       `}</style>
       <div 
         className="w-full"
@@ -213,8 +225,8 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     const isCode = ['js', 'ts', 'css', 'html', 'json', 'xml'].includes(lowerFileType);
     
     return (
-      <div className="h-full overflow-auto bg-white">
-        <pre className={`p-6 text-sm ${isCode ? 'bg-gray-900 text-green-400' : 'bg-white text-gray-900'} whitespace-pre-wrap`}>
+      <div className="h-full overflow-auto bg-white dark:bg-gray-900">
+        <pre className={`p-6 text-sm ${isCode ? 'bg-gray-900 text-green-400' : 'bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100'} whitespace-pre-wrap`}>
           {content}
         </pre>
       </div>
@@ -222,7 +234,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   };
 
   const renderImagePreview = () => (
-    <div className="h-full flex items-center justify-center bg-gray-50 p-4">
+    <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
       <img 
         src={documentUrl} 
         alt={fileName}
@@ -246,14 +258,14 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   );
 
   const renderAudioPreview = () => (
-    <div className="h-full flex items-center justify-center bg-gray-50">
+    <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
       <div className="text-center">
         <div className="mb-8">
-          <svg className="w-24 h-24 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="w-24 h-24 mx-auto text-gray-400 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM15.657 6.343a1 1 0 011.414 0A9.972 9.972 0 0119 12a9.972 9.972 0 01-1.929 5.657 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 12a7.971 7.971 0 00-1.343-4.243 1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
         </div>
-        <h3 className="text-lg font-medium mb-4">{fileName}</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{fileName}</h3>
         <audio 
           controls 
           className="w-full max-w-md"
@@ -267,13 +279,13 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   );
 
   const renderUnsupportedPreview = () => (
-    <div className="h-full flex items-center justify-center bg-gray-50">
+    <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
       <div className="text-center p-8">
-        <AlertCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">
+        <AlertCircle className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
           Preview não disponível
         </h3>
-        <p className="text-gray-500 mb-4">
+        <p className="text-gray-500 dark:text-gray-400 mb-4">
           Formato .{fileType} não suportado para visualização
         </p>
         <div className="space-y-2">
@@ -285,7 +297,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             <Download className="w-4 h-4 inline mr-2" />
             Baixar Arquivo
           </button>
-          <p className="text-xs text-gray-400 mt-2">
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
             Baixe o arquivo para visualizá-lo em um aplicativo apropriado
           </p>
         </div>
@@ -340,13 +352,13 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   if (error) {
     return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div className="bg-white rounded-xl shadow-xl p-6 max-w-md w-full mx-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 max-w-md w-full mx-4">
           <div className="text-center">
             <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
               Erro ao carregar arquivo
             </h3>
-            <p className="text-gray-500 mb-4">{error}</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">{error}</p>
             <div className="flex space-x-3">
               <button 
                 onClick={onClose}
@@ -371,16 +383,16 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-xl w-full h-full max-w-7xl max-h-[95vh] m-4 flex flex-col">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full h-full max-w-7xl max-h-[95vh] m-4 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-white rounded-t-lg">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-t-lg">
           <div className="flex-1 min-w-0 flex items-center space-x-3">
-            <FileText className="w-5 h-5 text-gray-400" />
+            <FileText className="w-5 h-5 text-gray-400 dark:text-gray-500" />
             <div>
-              <h2 className="text-lg font-medium text-gray-900 truncate">
+              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 truncate">
                 {fileName}
               </h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 {fileType.toUpperCase()} • Preview com bibliotecas nativas
               </p>
             </div>
@@ -397,7 +409,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             )}
             <button
               onClick={onClose}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -410,7 +422,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
                 <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
-                <p className="text-gray-600">Carregando documento...</p>
+                <p className="text-gray-600 dark:text-gray-400">Carregando documento...</p>
               </div>
             </div>
           ) : (

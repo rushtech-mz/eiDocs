@@ -46,6 +46,7 @@ const FeaturesSection = () => {
         {/* Header */}
         <div className="flex flex-col items-center justify-center mb-20">
           <span className="inline-block px-4 py-2 bg-gradient-primary/10 text-primary-blue rounded-full text-sm font-bold mb-4">
+            FUNCIONALIDADES
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
             Funcionalidades

@@ -26,7 +26,7 @@ export default function SuperadminLayout({ children }: SuperadminLayoutProps) {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 shadow-lg">
         <div className="flex h-16 items-center justify-center border-b border-gray-700">
           <div className="flex items-center space-x-2">
@@ -60,11 +60,11 @@ export default function SuperadminLayout({ children }: SuperadminLayoutProps) {
       </div>
 
       <div className="ml-64">
-        <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6">
-          <span className="text-lg font-semibold text-gray-900">Superadmin — Gestão de Empresas</span>
+        <header className="flex h-16 items-center justify-between border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6">
+          <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">Superadmin — Gestão de Empresas</span>
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">{user?.nome || user?.username}</span>
-            <Button variant="outline" size="sm" onClick={logout} className="text-red-600 hover:text-red-700">
+            <span className="text-sm text-gray-600 dark:text-gray-400">{user?.nome || user?.username}</span>
+            <Button variant="outline" size="sm" onClick={logout} className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300">
               Sair
             </Button>
           </div>

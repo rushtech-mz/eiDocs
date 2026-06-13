@@ -375,7 +375,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Título */}
         <div>
-          <label htmlFor="titulo" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Título *
           </label>
           <input
@@ -384,12 +384,12 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             name="titulo"
             value={formData.titulo}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.titulo ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.titulo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
             placeholder="Digite o título do documento"
             disabled={loading}
           />
           {errors.titulo && (
-            <p className="mt-1 text-sm text-red-600">{errors.titulo}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.titulo}</p>
           )}
         </div>
 
@@ -397,7 +397,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Departamento */}
           <div>
-            <label htmlFor="departamento" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="departamento" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Departamento *
             </label>
             <select
@@ -405,7 +405,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               name="departamento"
               value={formData.departamento}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+              className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
               disabled={loading}
             >
               <option value="">Selecione um departamento</option>
@@ -416,13 +416,13 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               ))}
             </select>
             {errors.departamento && (
-              <p className="mt-1 text-sm text-red-600">{errors.departamento}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.departamento}</p>
             )}
           </div>
 
           {/* Categoria */}
           <div>
-            <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="categoria" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Categoria *
             </label>
             <select
@@ -430,7 +430,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               name="categoria"
               value={formData.categoria}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border ${errors.categoria ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+              className={`mt-1 block w-full rounded-md border ${errors.categoria ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
               disabled={loading || !formData.departamento}
             >
               <option value="">Selecione uma categoria</option>
@@ -441,21 +441,21 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               ))}
             </select>
             {errors.categoria && (
-              <p className="mt-1 text-sm text-red-600">{errors.categoria}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.categoria}</p>
             )}
           </div>
 
           {/* Tipo */}
           <div>
-            <label htmlFor="tipo" className="block text-sm font-medium text-gray-700">
-              Tipo <span className="text-gray-400 text-xs">(opcional)</span>
+            <label htmlFor="tipo" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Tipo <span className="text-gray-400 dark:text-gray-500 text-xs">(opcional)</span>
             </label>
             <select
               id="tipo"
               name="tipo"
               value={formData.tipo}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border ${errors.tipo ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+              className={`mt-1 block w-full rounded-md border ${errors.tipo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
               disabled={loading || !formData.categoria}
             >
               <option value="">
@@ -472,19 +472,19 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               ))}
             </select>
             {formData.categoria && tiposFiltrados.length === 0 && (
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 Esta categoria não possui tipos específicos cadastrados.
               </p>
             )}
             {errors.tipo && (
-              <p className="mt-1 text-sm text-red-600">{errors.tipo}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.tipo}</p>
             )}
           </div>
         </div>
 
         {/* Tipo de Movimento */}
         <div>
-          <label htmlFor="tipoMovimento" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="tipoMovimento" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Tipo de Movimento *
           </label>
           <select
@@ -492,7 +492,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             name="tipoMovimento"
             value={formData.tipoMovimento}
             onChange={handleInputChange}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             disabled={loading}
           >
             <option value="interno">Interno</option>
@@ -505,7 +505,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         {formData.tipoMovimento === 'enviado' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="destinatario" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="destinatario" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Destinatário *
               </label>
               <input
@@ -514,16 +514,16 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                 name="destinatario"
                 value={formData.destinatario}
                 onChange={handleInputChange}
-                className={`mt-1 block w-full rounded-md border ${errors.destinatario ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+                className={`mt-1 block w-full rounded-md border ${errors.destinatario ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
                 placeholder="Nome do destinatário"
                 disabled={loading}
               />
               {errors.destinatario && (
-                <p className="mt-1 text-sm text-red-600">{errors.destinatario}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.destinatario}</p>
               )}
             </div>
             <div>
-              <label htmlFor="dataEnvio" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="dataEnvio" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Data de Envio
               </label>
               <input
@@ -532,7 +532,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                 name="dataEnvio"
                 value={formData.dataEnvio}
                 onChange={handleInputChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 disabled={loading}
               />
             </div>
@@ -542,7 +542,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         {formData.tipoMovimento === 'recebido' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="remetente" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="remetente" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Remetente *
               </label>
               <input
@@ -551,16 +551,16 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                 name="remetente"
                 value={formData.remetente}
                 onChange={handleInputChange}
-                className={`mt-1 block w-full rounded-md border ${errors.remetente ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+                className={`mt-1 block w-full rounded-md border ${errors.remetente ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
                 placeholder="Nome do remetente"
                 disabled={loading}
               />
               {errors.remetente && (
-                <p className="mt-1 text-sm text-red-600">{errors.remetente}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.remetente}</p>
               )}
             </div>
             <div>
-              <label htmlFor="dataRecebimento" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="dataRecebimento" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Data de Recebimento
               </label>
               <input
@@ -569,7 +569,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                 name="dataRecebimento"
                 value={formData.dataRecebimento}
                 onChange={handleInputChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 disabled={loading}
               />
             </div>
@@ -578,7 +578,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
 
         {formData.tipoMovimento === 'interno' && (
           <div>
-            <label htmlFor="responsavel" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="responsavel" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Responsável *
             </label>
             <input
@@ -587,19 +587,19 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               name="responsavel"
               value={formData.responsavel}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border ${errors.responsavel ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+              className={`mt-1 block w-full rounded-md border ${errors.responsavel ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
               placeholder="Nome do responsável pelo documento"
               disabled={loading}
             />
             {errors.responsavel && (
-              <p className="mt-1 text-sm text-red-600">{errors.responsavel}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.responsavel}</p>
             )}
           </div>
         )}
 
         {/* Descrição */}
         <div>
-          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Descrição
           </label>
           <textarea
@@ -608,7 +608,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             value={formData.descricao}
             onChange={handleInputChange}
             rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Descrição opcional do documento"
             disabled={loading}
           />
@@ -616,7 +616,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
 
         {/* Tags */}
         <div>
-          <label htmlFor="tags" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Tags
           </label>
           <input
@@ -625,11 +625,11 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             name="tags"
             value={(formData.tags || []).join(', ')}
             onChange={handleTagsChange}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Digite as tags separadas por vírgula"
             disabled={loading}
           />
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Separe as tags com vírgulas (ex: relatório, mensal, financeiro)
           </p>
         </div>
@@ -637,7 +637,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         {/* Upload de Arquivo - Apenas na criação */}
         {!isEditing && (
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Arquivo *
             </label>
             <div
@@ -645,20 +645,20 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               className={`mt-1 flex justify-center px-6 py-10 border-2 border-dashed rounded-md ${
-                dragActive ? 'border-indigo-400 bg-indigo-50' : 'border-gray-300'
-              } ${errors.arquivo ? 'border-red-300' : ''}`}
+                dragActive ? 'border-indigo-400 dark:border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600'
+              } ${errors.arquivo ? 'border-red-300 dark:border-red-700' : ''}`}
             >
               <div className="space-y-1 text-center">
                 {selectedFile ? (
                   <div className="flex items-center justify-center space-x-2">
-                    <FileText className="w-8 h-8 text-gray-400" />
+                    <FileText className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>
-                      <p className="text-sm text-gray-500">{formatFileSize(selectedFile.size)}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{selectedFile.name}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{formatFileSize(selectedFile.size)}</p>
                       <button
                         type="button"
                         onClick={() => setSelectedFile(null)}
-                        className="mt-2 text-sm text-red-600 hover:text-red-500"
+                        className="mt-2 text-sm text-red-600 dark:text-red-400 hover:text-red-500 dark:hover:text-red-300"
                       >
                         Remover arquivo
                       </button>
@@ -666,11 +666,11 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                   </div>
                 ) : (
                   <>
-                    <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                    <div className="flex text-sm text-gray-600">
+                    <Upload className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" />
+                    <div className="flex text-sm text-gray-600 dark:text-gray-400">
                       <label
                         htmlFor="file-upload"
-                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                        className="relative cursor-pointer rounded-md bg-white dark:bg-gray-800 font-medium text-indigo-600 dark:text-indigo-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500 dark:hover:text-indigo-300"
                       >
                         <span>Faça upload de um arquivo</span>
                         <input
@@ -685,7 +685,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                       </label>
                       <p className="pl-1">ou arraste e solte</p>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, GIF, TXT até 50MB
                     </p>
                   </>
@@ -693,7 +693,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               </div>
             </div>
             {errors.arquivo && (
-              <p className="mt-1 text-sm text-red-600">{errors.arquivo}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.arquivo}</p>
             )}
           </div>
         )}
@@ -701,7 +701,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         {/* Status e Ativo */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Status
             </label>
             <select
@@ -709,7 +709,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               name="status"
               value={formData.status}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               disabled={loading}
             >
               <option value="ativo">Ativo</option>
@@ -724,10 +724,10 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                 name="ativo"
                 checked={formData.ativo}
                 onChange={handleInputChange}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
                 disabled={loading}
               />
-              <span className="ml-2 text-sm font-medium text-gray-700">
+              <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Documento ativo
               </span>
             </label>
@@ -740,7 +740,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             type="button"
             onClick={handleClose}
             disabled={loading}
-            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+            className="rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
           >
             Cancelar
           </button>

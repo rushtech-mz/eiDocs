@@ -50,10 +50,10 @@ const ResetPasswordPage = () => {
 
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center space-y-4">
-          <p className="text-red-600 font-medium">Link inválido ou expirado.</p>
-          <Link href="/forgot-password" className="text-blue-600 hover:underline text-sm">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 max-w-md w-full text-center space-y-4">
+          <p className="text-red-600 dark:text-red-400 font-medium">Link inválido ou expirado.</p>
+          <Link href="/forgot-password" className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
             Solicitar novo link
           </Link>
         </div>
@@ -62,46 +62,46 @@ const ResetPasswordPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white shadow-xl rounded-2xl p-8 space-y-6">
+        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6">
           <div className="text-center space-y-2">
-            <h1 className="text-2xl font-bold text-gray-900">Nova senha</h1>
-            <p className="text-gray-600 text-sm">Escolha uma senha com pelo menos 6 caracteres.</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Nova senha</h1>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">Escolha uma senha com pelo menos 6 caracteres.</p>
           </div>
 
           {success ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-green-800 text-sm text-center">
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-green-800 dark:text-green-300 text-sm text-center">
               Senha redefinida com sucesso! A redirecionar para o login...
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 text-red-700 dark:text-red-300 text-sm">
                   {error}
                 </div>
               )}
 
               <div className="space-y-2">
-                <label htmlFor="novaSenha" className="text-sm font-medium text-gray-700">
+                <label htmlFor="novaSenha" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Nova senha
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                   <input
                     id="novaSenha"
                     type={showPassword ? "text" : "password"}
                     value={novaSenha}
                     onChange={(e) => setNovaSenha(e.target.value)}
                     placeholder="Mínimo 6 caracteres"
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
                     disabled={loading}
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -109,18 +109,18 @@ const ResetPasswordPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="confirmar" className="text-sm font-medium text-gray-700">
+                <label htmlFor="confirmar" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Confirmar senha
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                   <input
                     id="confirmar"
                     type={showPassword ? "text" : "password"}
                     value={confirmar}
                     onChange={(e) => setConfirmar(e.target.value)}
                     placeholder="Repita a nova senha"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
                     disabled={loading}
                     required
                   />
@@ -144,7 +144,7 @@ const ResetPasswordPage = () => {
 
               <Link
                 href={`/forgot-password${slug ? `?slug=${slug}` : ""}`}
-                className="block text-center text-gray-500 hover:text-gray-700 text-sm"
+                className="block text-center text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm"
               >
                 Solicitar novo link
               </Link>

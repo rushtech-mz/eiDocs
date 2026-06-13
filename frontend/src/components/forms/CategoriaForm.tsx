@@ -167,7 +167,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-6">
         {/* Nome */}
         <div>
-          <label htmlFor="nome" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="nome" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Nome *
           </label>
           <input
@@ -176,18 +176,18 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
             name="nome"
             value={formData.nome}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
             placeholder="Digite o nome da categoria"
             disabled={loading}
           />
           {errors.nome && (
-            <p className="mt-1 text-sm text-red-600">{errors.nome}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.nome}</p>
           )}
         </div>
 
         {/* Código */}
         <div>
-          <label htmlFor="codigo" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="codigo" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Código *
           </label>
           <input
@@ -196,21 +196,21 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
             name="codigo"
             value={formData.codigo}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
             placeholder="cat_001"
             disabled={loading}
           />
           {errors.codigo && (
-            <p className="mt-1 text-sm text-red-600">{errors.codigo}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.codigo}</p>
           )}
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Use apenas letras, números, hífen ou underscore
           </p>
         </div>
 
         {/* Departamento */}
         <div>
-          <label htmlFor="departamento" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="departamento" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Departamento *
           </label>
           <select
@@ -218,7 +218,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
             name="departamento"
             value={formData.departamento}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm ${isEditor ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+            className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm ${isEditor ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : ''}`}
             disabled={loading || isEditor}
           >
             <option value="">Selecione um departamento</option>
@@ -229,10 +229,10 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
             ))}
           </select>
           {errors.departamento && (
-            <p className="mt-1 text-sm text-red-600">{errors.departamento}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.departamento}</p>
           )}
           {isEditor && (
-            <p className="mt-1 text-sm text-blue-600">
+            <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
               🔒 Editores só podem criar categorias no seu próprio departamento
             </p>
           )}
@@ -240,7 +240,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
 
         {/* Cor */}
         <div>
-          <label htmlFor="cor" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="cor" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Cor
           </label>
           <div className="mt-1 flex flex-wrap gap-2">
@@ -249,7 +249,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
                 key={cor.value}
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, cor: cor.value }))}
-                className={`w-8 h-8 rounded-full border-2 ${formData.cor === cor.value ? 'border-gray-800' : 'border-gray-300'} ${cor.class}`}
+                className={`w-8 h-8 rounded-full border-2 ${formData.cor === cor.value ? 'border-gray-800 dark:border-gray-200' : 'border-gray-300 dark:border-gray-600'} ${cor.class}`}
                 title={cor.label}
                 disabled={loading}
               />
@@ -264,7 +264,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
 
         {/* Descrição */}
         <div>
-          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Descrição
           </label>
           <textarea
@@ -273,7 +273,7 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
             value={formData.descricao}
             onChange={handleInputChange}
             rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Descrição opcional da categoria"
             disabled={loading}
           />
@@ -287,14 +287,14 @@ const CategoriaForm: React.FC<CategoriaFormProps> = ({
               name="ativo"
               checked={formData.ativo}
               onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
               disabled={loading}
             />
-            <span className="ml-2 text-sm font-medium text-gray-700">
+            <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
               Categoria ativa
             </span>
           </label>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Categorias inativas não aparecerão nas opções de seleção
           </p>
         </div>

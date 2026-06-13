@@ -143,9 +143,9 @@ const MeusDocumentosPage = () => {
 
   const getMovementBadge = (tipoMovimento: string, record: any) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      'recebido': { bg: 'bg-blue-100', text: 'text-blue-800', label: 'Recebido' },
-      'enviado': { bg: 'bg-green-100', text: 'text-green-800', label: 'Enviado' },
-      'interno': { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Interno' }
+      'recebido': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      'enviado': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
+      'interno': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' }
     };
     
     const config = movementConfig[tipoMovimento] || movementConfig.interno;
@@ -171,8 +171,8 @@ const MeusDocumentosPage = () => {
         </span>
         {person && (
           <div className="text-sm">
-            <div className="text-xs text-gray-500">{personLabel}</div>
-            <div className="text-gray-900 font-medium truncate">{person}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{personLabel}</div>
+            <div className="text-gray-900 dark:text-gray-100 font-medium truncate">{person}</div>
           </div>
         )}
       </div>
@@ -181,9 +181,9 @@ const MeusDocumentosPage = () => {
 
   const getStatusBadge = (status: string) => {
     const statusConfig: Record<string, { bg: string; text: string; label: string }> = {
-      'ativo': { bg: 'bg-green-100', text: 'text-green-800', label: 'Ativo' },
-      'arquivado': { bg: 'bg-yellow-100', text: 'text-yellow-800', label: 'Arquivado' },
-      'rascunho': { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Rascunho' }
+      'ativo': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Ativo' },
+      'arquivado': { bg: 'bg-yellow-100 dark:bg-yellow-900/40', text: 'text-yellow-800 dark:text-yellow-300', label: 'Arquivado' },
+      'rascunho': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Rascunho' }
     };
     
     const config = statusConfig[status] || statusConfig.ativo;
@@ -203,14 +203,14 @@ const MeusDocumentosPage = () => {
       render: (value, record: any) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
-            <FileText className="w-5 h-5 text-gray-400" />
+            <FileText className="w-5 h-5 text-gray-400 dark:text-gray-500" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="font-medium text-gray-900 truncate">{value}</div>
+            <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{value}</div>
             {record.descricao && (
-              <div className="text-sm text-gray-500 truncate">{record.descricao}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.descricao}</div>
             )}
-            <div className="text-xs text-gray-400 mt-1 flex items-center space-x-2">
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 flex items-center space-x-2">
               <span>{record.arquivo?.originalName || 'Arquivo não encontrado'}</span>
               <span>•</span>
               <span>{formatFileSize(record.arquivo?.size || 0)}</span>
@@ -225,7 +225,7 @@ const MeusDocumentosPage = () => {
       width: 'w-32',
       render: (value: any) => (
         <div className="flex items-center space-x-2">
-          <div className={`w-3 h-3 rounded-full bg-${value?.cor || 'gray'}-500`}></div>
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value?.cor || '#6B7280' }}></div>
           <span className="text-sm font-medium">{value?.nome || 'N/A'}</span>
         </div>
       ),
@@ -246,14 +246,14 @@ const MeusDocumentosPage = () => {
           {value?.slice(0, 2).map((tag: string, index: number) => (
             <span
               key={index}
-              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full"
+              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
             >
               <Tag className="w-3 h-3 mr-1" />
               {tag}
             </span>
           )) || []}
           {value?.length > 2 && (
-            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">
+            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
               +{value.length - 2}
             </span>
           )}
@@ -266,7 +266,7 @@ const MeusDocumentosPage = () => {
       sortable: true,
       width: 'w-32',
       render: (value) => (
-        <div className="flex items-center space-x-1 text-sm text-gray-600">
+        <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
           <Calendar className="w-4 h-4" />
           <span>{formatDate(value)}</span>
         </div>
@@ -335,11 +335,11 @@ const MeusDocumentosPage = () => {
           loading={loading}
           emptyMessage={
             <div className="text-center py-12">
-              <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <FileText className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
                 Nenhum documento encontrado
               </h3>
-              <p className="text-gray-500 mb-6">
+              <p className="text-gray-500 dark:text-gray-400 mb-6">
                 Você ainda não criou nenhum documento. Comece criando seu primeiro documento.
               </p>
               <Link

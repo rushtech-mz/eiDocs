@@ -171,7 +171,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
               <div className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                 {user.nome || user.username}
               </div>
-              <div className="text-xs text-red-500 font-medium">
+              <div className="text-xs text-red-500 dark:text-red-400 font-medium">
                 {user.role === 'superadmin' && 'Super Admin'}
                 {user.role === 'org_admin' && 'Org Admin'}
                 {user.role === 'admin' && 'Administrador'}

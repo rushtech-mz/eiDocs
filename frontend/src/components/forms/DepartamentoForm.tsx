@@ -121,7 +121,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-6">
         {/* Nome */}
         <div>
-          <label htmlFor="nome" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="nome" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Nome *
           </label>
           <input
@@ -130,18 +130,18 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             name="nome"
             value={formData.nome}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
             placeholder="Digite o nome do departamento"
             disabled={loading}
           />
           {errors.nome && (
-            <p className="mt-1 text-sm text-red-600">{errors.nome}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.nome}</p>
           )}
         </div>
 
         {/* Código */}
         <div>
-          <label htmlFor="codigo" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="codigo" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Código *
           </label>
           <input
@@ -150,22 +150,22 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             name="codigo"
             value={formData.codigo}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm uppercase`}
+            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm uppercase`}
             placeholder="DEPTO_001"
             disabled={loading}
             style={{ textTransform: 'uppercase' }}
           />
           {errors.codigo && (
-            <p className="mt-1 text-sm text-red-600">{errors.codigo}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.codigo}</p>
           )}
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Use apenas letras maiúsculas, números, hífen ou underscore
           </p>
         </div>
 
         {/* Descrição */}
         <div>
-          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Descrição
           </label>
           <textarea
@@ -174,7 +174,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             value={formData.descricao}
             onChange={handleInputChange}
             rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             placeholder="Descrição opcional do departamento"
             disabled={loading}
           />
@@ -188,14 +188,14 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
               name="ativo"
               checked={formData.ativo}
               onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
               disabled={loading}
             />
-            <span className="ml-2 text-sm font-medium text-gray-700">
+            <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
               Departamento ativo
             </span>
           </label>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Departamentos inativos não aparecerão nas opções de seleção
           </p>
         </div>

@@ -136,7 +136,7 @@ const DepartamentosPage = () => {
       sortable: true,
       width: 'w-24',
       render: (value) => (
-        <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">
+        <span className="font-mono text-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 px-2 py-1 rounded">
           {value}
         </span>
       ),
@@ -150,12 +150,12 @@ const DepartamentosPage = () => {
       render: (value, record) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
-            <Building2 className="w-5 h-5 text-gray-400" />
+            <Building2 className="w-5 h-5 text-gray-400 dark:text-gray-500" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="font-medium text-gray-900">{value}</div>
+            <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
             {record.descricao && (
-              <div className="text-sm text-gray-500 overflow-hidden text-ellipsis whitespace-nowrap">
+              <div className="text-sm text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap">
                 {record.descricao}
               </div>
             )}
@@ -172,8 +172,8 @@ const DepartamentosPage = () => {
         <span
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
             value
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
+              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+              : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
           }`}
         >
           {value ? 'Ativo' : 'Inativo'}
@@ -186,7 +186,7 @@ const DepartamentosPage = () => {
       sortable: true,
       width: 'w-32',
       render: (value) => (
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-gray-600 dark:text-gray-400">
           {new Date(value).toLocaleDateString('pt-BR')}
         </span>
       ),

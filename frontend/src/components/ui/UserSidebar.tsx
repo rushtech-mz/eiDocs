@@ -62,36 +62,36 @@ const UserSidebar: React.FC<UserSidebarProps> = ({ className = '' }) => {
   return (
     <div className={`
       ${isCollapsed ? 'w-16' : 'w-64'} 
-      h-screen bg-white border-r border-gray-200 
+      h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700
       transition-all duration-300 ease-in-out
       flex flex-col
       ${className}
     `}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
         {!isCollapsed ? (
           <div className="flex items-center space-x-2">
-            <img 
-              src="/logo.jpg" 
-              alt="Contratuz Logo" 
+            <img
+              src="/logo.jpg"
+              alt="eiDocs Logo"
               className="w-8 h-8 rounded-lg object-cover"
             />
-            <span className="text-xl font-bold text-gray-800">eiDocuments</span>
+            <span className="text-xl font-bold text-gray-800 dark:text-gray-100">eiDocuments</span>
           </div>
         ) : (
           <div className="flex items-center justify-center w-full">
-            <img 
-              src="/logo.jpg" 
-              alt="Contratuz Logo" 
+            <img
+              src="/logo.jpg"
+              alt="eiDocs Logo"
               className="w-8 h-8 rounded-lg object-cover"
             />
           </div>
         )}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
         >
-          {isCollapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
+          {isCollapsed ? <Menu className="w-5 h-5 dark:text-gray-300" /> : <X className="w-5 h-5 dark:text-gray-300" />}
         </button>
       </div>
 
@@ -107,9 +107,9 @@ const UserSidebar: React.FC<UserSidebarProps> = ({ className = '' }) => {
               href={item.href}
               className={`
                 flex items-center space-x-3 p-3 rounded-lg transition-colors
-                ${active 
-                  ? 'bg-blue-100 text-blue-700 border border-blue-200' 
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                ${active
+                  ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'
+                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100'
                 }
               `}
             >
@@ -118,7 +118,7 @@ const UserSidebar: React.FC<UserSidebarProps> = ({ className = '' }) => {
                 <>
                   <div className="flex-1">
                     <div className="font-medium">{item.title}</div>
-                    <div className="text-xs text-gray-400">{item.description}</div>
+                    <div className="text-xs text-gray-400 dark:text-gray-500">{item.description}</div>
                   </div>
                 </>
               )}
@@ -128,29 +128,29 @@ const UserSidebar: React.FC<UserSidebarProps> = ({ className = '' }) => {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-200 space-y-2">
+      <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
         {/* User Info */}
         {!isCollapsed && user && (
-          <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg mb-2">
+          <div className="flex items-center space-x-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg mb-2">
             <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
               <span className="text-xs font-medium text-white">
                 {user.nome?.charAt(0) || user.username?.charAt(0) || 'U'}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-gray-900 truncate">
+              <div className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                 {user.nome || user.username}
               </div>
-              <div className="text-xs text-gray-500 truncate">
+              <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
                 {user.departamento?.nome || 'Usuário'}
               </div>
             </div>
           </div>
         )}
-        
-        <button 
+
+        <button
           onClick={logout}
-          className="w-full flex items-center space-x-3 p-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+          className="w-full flex items-center space-x-3 p-3 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
         >
           <LogOut className="w-5 h-5" />
           {!isCollapsed && <span>Sair</span>}

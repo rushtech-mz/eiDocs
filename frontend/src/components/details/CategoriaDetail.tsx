@@ -84,7 +84,7 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
     >
       <div className="space-y-6">
         {/* Informações Básicas */}
-        <div className="bg-gray-50 rounded-lg p-4">
+        <div className="bg-gray-50 dark:bg-gray-900/40 rounded-lg p-4">
           <div className="flex items-start space-x-4">
             <div 
               className="w-12 h-12 rounded-lg flex items-center justify-center"
@@ -94,11 +94,11 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-3 mb-2">
-                <h3 className="text-lg font-semibold text-gray-900">{categoria.nome}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{categoria.nome}</h3>
                 <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                  categoria.ativo 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
+                  categoria.ativo
+                    ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300'
+                    : 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-300'
                 }`}>
                   {categoria.ativo ? (
                     <>
@@ -114,9 +114,9 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
                 </span>
               </div>
               {categoria.descricao && (
-                <p className="text-gray-600 mb-3">{categoria.descricao}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-3">{categoria.descricao}</p>
               )}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-500">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex items-center space-x-1">
                   <Code className="w-4 h-4" />
                   <span>Código: {categoria.codigo}</span>
@@ -129,12 +129,12 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
                   <Palette className="w-4 h-4" />
                   <span>Cor: {categoria.cor || '#6b7280'}</span>
                   <div 
-                    className="w-3 h-3 rounded-full border border-gray-300"
+                    className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600"
                     style={{ backgroundColor: colorStyle.bg }}
                   ></div>
                 </div>
               </div>
-              <div className="mt-2 text-sm text-gray-500">
+              <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex items-center space-x-1">
                   <Calendar className="w-4 h-4" />
                   <span>Criado em {formatDate(categoria.dataCriacao)}</span>
@@ -148,35 +148,35 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
         {loading ? (
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <span className="ml-2 text-gray-600">Carregando estatísticas...</span>
+            <span className="ml-2 text-gray-600 dark:text-gray-400">Carregando estatísticas...</span>
           </div>
         ) : stats && categoria && (
           <>
             {/* Totais da Categoria */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-blue-600">Total de Categorias</p>
-                <p className="text-2xl font-bold text-blue-900">{stats.totais?.total ?? 0}</p>
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Total de Categorias</p>
+                <p className="text-2xl font-bold text-blue-900 dark:text-blue-200">{stats.totais?.total ?? 0}</p>
               </div>
-              <div className="bg-green-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-green-600">Ativas</p>
-                <p className="text-2xl font-bold text-green-900">{stats.totais?.ativas ?? 0}</p>
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-green-600 dark:text-green-400">Ativas</p>
+                <p className="text-2xl font-bold text-green-900 dark:text-green-200">{stats.totais?.ativas ?? 0}</p>
               </div>
-              <div className="bg-orange-50 rounded-lg p-4">
-                <p className="text-sm font-medium text-orange-600">Inativas</p>
-                <p className="text-2xl font-bold text-orange-900">{stats.totais?.inativas ?? 0}</p>
+              <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Inativas</p>
+                <p className="text-2xl font-bold text-orange-900 dark:text-orange-200">{stats.totais?.inativas ?? 0}</p>
               </div>
             </div>
 
             {/* Uso por Categoria */}
             {stats.distribuicoes?.usoPorCategoria?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Uso por Categoria</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Uso por Categoria</h4>
                 <div className="space-y-2">
                   {stats.distribuicoes.usoPorCategoria.filter(cat => cat.categoria === categoria.nome).map((cat, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium text-gray-900">{cat.categoria}</span>
-                      <span className="text-sm text-gray-600">{cat.quantidade} docs</span>
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{cat.categoria}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{cat.quantidade} docs</span>
                     </div>
                   ))}
                 </div>
@@ -186,12 +186,12 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
             {/* Distribuição por Departamento */}
             {stats.distribuicoes?.porDepartamento?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Distribuição por Departamento</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Distribuição por Departamento</h4>
                 <div className="space-y-2">
                   {stats.distribuicoes.porDepartamento.map((dep, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium text-gray-900">{dep.departamento}</span>
-                      <span className="text-sm text-gray-600">{dep.quantidade} docs</span>
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{dep.departamento}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{dep.quantidade} docs</span>
                     </div>
                   ))}
                 </div>
@@ -201,12 +201,12 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
             {/* Recentes */}
             {stats.recentes?.length > 0 && (
               <div>
-                <h4 className="text-md font-medium text-gray-900 mt-6 mb-3">Categorias Recentes</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mt-6 mb-3">Categorias Recentes</h4>
                 <div className="space-y-2">
                   {stats.recentes.filter(cat => cat.nome === categoria.nome).map((cat, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className="text-sm font-medium text-gray-900">{cat.nome}</span>
-                      <span className="text-xs text-gray-500">{formatDate(cat.dataCriacao)}</span>
+                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{cat.nome}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{formatDate(cat.dataCriacao)}</span>
                     </div>
                   ))}
                 </div>
@@ -217,11 +217,11 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
 
         {/* Metadados */}
         <div className="border-t pt-4">
-          <h4 className="text-md font-medium text-gray-900 mb-3">Informações do Sistema</h4>
+          <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3">Informações do Sistema</h4>
           <div className="text-sm">
             <div>
-              <span className="text-gray-500">Última Atualização:</span>
-              <span className="ml-2 text-gray-900">{formatDate(categoria.dataAtualizacao)}</span>
+              <span className="text-gray-500 dark:text-gray-400">Última Atualização:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100">{formatDate(categoria.dataAtualizacao)}</span>
             </div>
           </div>
         </div>

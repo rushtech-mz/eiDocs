@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { Check, Star, Zap, Building2 } from 'lucide-react';
 
 const PricingSection = () => {
@@ -122,15 +123,16 @@ const PricingSection = () => {
               </ul>
 
               {/* CTA */}
-              <button 
-                className={`w-full py-4 rounded-xl font-bold transition-all ${
+              <Link
+                href="/register"
+                className={`block w-full py-4 rounded-xl font-bold text-center transition-all ${
                   plan.popular
                     ? `bg-gradient-to-r ${plan.gradient} text-white shadow-lg hover:shadow-xl hover:scale-105`
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
               >
                 Começar
-              </button>
+              </Link>
             </div>
           ))}
         </div>

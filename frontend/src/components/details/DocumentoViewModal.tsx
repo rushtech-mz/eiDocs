@@ -40,9 +40,9 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
 
   const getMovementBadge = (tipoMovimento: string, record: Documento) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      recebido: { bg: 'bg-blue-100', text: 'text-blue-800', label: 'Recebido' },
-      enviado: { bg: 'bg-green-100', text: 'text-green-800', label: 'Enviado' },
-      interno: { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Interno' },
+      recebido: { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      enviado: { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
+      interno: { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' },
     };
     const config = movementConfig[tipoMovimento] ?? movementConfig.interno;
 
@@ -66,8 +66,8 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
         </span>
         {person && (
           <div className="text-sm">
-            <div className="text-gray-500 font-medium">{personLabel}</div>
-            <div className="text-gray-900">{person}</div>
+            <div className="text-gray-500 dark:text-gray-400 font-medium">{personLabel}</div>
+            <div className="text-gray-900 dark:text-gray-100">{person}</div>
           </div>
         )}
       </div>
@@ -76,9 +76,9 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
 
   const getStatusBadge = (status: string) => {
     const statusConfig: Record<string, { bg: string; text: string; label: string }> = {
-      ativo: { bg: 'bg-green-100', text: 'text-green-800', label: 'Ativo' },
-      arquivado: { bg: 'bg-yellow-100', text: 'text-yellow-800', label: 'Arquivado' },
-      rascunho: { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Rascunho' },
+      ativo: { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Ativo' },
+      arquivado: { bg: 'bg-yellow-100 dark:bg-yellow-900/40', text: 'text-yellow-800 dark:text-yellow-300', label: 'Arquivado' },
+      rascunho: { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Rascunho' },
     };
     const config = statusConfig[status] ?? statusConfig.ativo;
     return (
@@ -92,7 +92,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
     <>
       <button
         onClick={onClose}
-        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+        className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
       >
         Fechar
       </button>
@@ -126,15 +126,15 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
         <div className="lg:col-span-2 space-y-6">
           {documento.descricao && (
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Descrição</h3>
-              <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{documento.descricao}</p>
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Descrição</h3>
+              <p className="text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900/40 p-4 rounded-lg">{documento.descricao}</p>
             </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Categoria</h3>
-              <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Categoria</h3>
+              <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
                 <div
                   className="w-3 h-3 rounded-full flex-shrink-0"
                   style={{
@@ -152,8 +152,8 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
               </div>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Tipo</h3>
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Tipo</h3>
+              <div className="p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
                 <span className="text-sm font-medium">
                   {typeof documento.tipo === 'object' && documento.tipo?.nome
                     ? documento.tipo.nome
@@ -164,20 +164,20 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Tipo de Movimento</h3>
-            <div className="p-3 bg-gray-50 rounded-lg">
+            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Tipo de Movimento</h3>
+            <div className="p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
               {getMovementBadge(documento.tipoMovimento, documento)}
             </div>
           </div>
 
           {documento.tags && documento.tags.length > 0 && (
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Tags</h3>
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {documento.tags.map((tag: string, index: number) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full"
+                    className="inline-flex items-center gap-1 px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
                   >
                     <Tag className="w-3 h-3" />
                     {tag}
@@ -191,29 +191,29 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
         {/* Sidebar Info */}
         <div className="space-y-5">
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Status</h3>
+            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Status</h3>
             {getStatusBadge(documento.status || 'ativo')}
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Arquivo</h3>
-            <div className="p-3 bg-gray-50 rounded-lg space-y-1">
-              <div className="text-sm font-medium text-gray-900">
+            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Arquivo</h3>
+            <div className="p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg space-y-1">
+              <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 {documento.arquivo?.originalName || 'Arquivo não encontrado'}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-gray-500 dark:text-gray-400">
                 {formatFileSize(documento.arquivo?.size || 0)}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-gray-500 dark:text-gray-400">
                 {documento.arquivo?.format?.toUpperCase() || 'Tipo não identificado'}
               </div>
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Departamento</h3>
-            <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-              <Building2 className="w-4 h-4 text-gray-400 flex-shrink-0" />
+            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Departamento</h3>
+            <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+              <Building2 className="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
               <span className="text-sm font-medium">
                 {typeof documento.departamento === 'object' && documento.departamento?.nome
                   ? documento.departamento.nome
@@ -224,9 +224,9 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
 
               {/* Criado por */}
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-2">Criado por</h3>
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <User className="w-4 h-4 text-gray-400" />
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Criado por</h3>
+                <div className="flex items-center space-x-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                  <User className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                   <span className="text-sm font-medium">
                     {documento.usuario && typeof documento.usuario === 'object' && documento.usuario?.nome 
                       ? documento.usuario.nome 
@@ -237,35 +237,35 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
 
           <div className="space-y-3">
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Data de Criação</h3>
-              <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Data de Criação</h3>
+              <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                 <span className="text-sm">{formatDate(documento.dataCriacao)}</span>
               </div>
             </div>
             {documento.dataAtualizacao && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-2">Última Atualização</h3>
-                <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                  <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Última Atualização</h3>
+                <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                  <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{formatDate(documento.dataAtualizacao)}</span>
                 </div>
               </div>
             )}
             {documento.dataEnvio && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-2">Data de Envio</h3>
-                <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                  <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Data de Envio</h3>
+                <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                  <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{formatDate(documento.dataEnvio)}</span>
                 </div>
               </div>
             )}
             {documento.dataRecebimento && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 mb-2">Data de Recebimento</h3>
-                <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                  <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Data de Recebimento</h3>
+                <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg">
+                  <Calendar className="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                   <span className="text-sm">{formatDate(documento.dataRecebimento)}</span>
                 </div>
               </div>

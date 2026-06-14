@@ -61,16 +61,23 @@ export interface DocumentoUpdateData {
   ativo?: boolean;
 }
 
-// Faz fetch de um endpoint que responde com redirect (302) para o ficheiro
-// (local/R2/self-hosted, conforme a storageConfig do tenant) e devolve o
-// conteúdo como Blob. Tenta renovar o access token uma vez em caso de 401.
-async function fetchFileBlob(url: string, errorPrefix: string): Promise<Blob> {
-  let response = await fetch(url, { credentials: 'include' });
+// Faz fetch a um endpoint que devolve { url } (URL assinada para o ficheiro,
+// conforme a storageConfig do tenant: local/R2/self-hosted) e depois faz
+// fetch a essa URL para obter o conteúdo como Blob. Tenta renovar o access
+// token uma vez em caso de 401.
+//
+// O segundo fetch (à URL assinada) é feito sem credentials: a URL já contém
+// o token de autorização, e para destinos cross-origin (R2/self-hosted) o
+// CORS dessas origens não inclui Access-Control-Allow-Credentials — um fetch
+// com credentials: 'include' que seguisse um redirect cross-origin para lá
+// falharia com "Failed to fetch".
+async function fetchFileBlob(jsonUrl: string, errorPrefix: string): Promise<Blob> {
+  let response = await fetch(jsonUrl, { credentials: 'include' });
 
   if (response.status === 401) {
     const refreshed = await refreshAccessToken();
     if (refreshed) {
-      response = await fetch(url, { credentials: 'include' });
+      response = await fetch(jsonUrl, { credentials: 'include' });
     } else if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('auth:unauthorized'));
     }
@@ -82,12 +89,18 @@ async function fetchFileBlob(url: string, errorPrefix: string): Promise<Blob> {
       const data = await response.json();
       if (data?.message) message = data.message;
     } catch {
-      // resposta sem corpo JSON (ex: erro do storage provider)
+      // resposta sem corpo JSON
     }
     throw new Error(message);
   }
 
-  return response.blob();
+  const { data } = await response.json();
+
+  const fileResponse = await fetch(data.url);
+  if (!fileResponse.ok) {
+    throw new Error(`${errorPrefix}: ${fileResponse.status}`);
+  }
+  return fileResponse.blob();
 }
 
 export class DocumentosService {
@@ -175,8 +188,8 @@ export class DocumentosService {
     return apiGet<ApiPaginatedResponse<Documento>>(`/documentos/usuario/${usuarioId}`, params as Record<string, string | number | boolean>);
   }
 
-  // Download de documento (anexo) — o backend redireciona para o storage
-  // provider configurado no tenant (local/R2/self-hosted).
+  // Download de documento (anexo) — o backend devolve uma URL assinada para
+  // o storage provider configurado no tenant (local/R2/self-hosted).
   static async download(id: string): Promise<Blob> {
     return fetchFileBlob(`${API_BASE_URL}/documentos/${id}/download`, 'Erro no download');
   }

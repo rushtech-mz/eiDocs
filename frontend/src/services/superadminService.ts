@@ -106,7 +106,7 @@ const superadminService = {
   },
 
   getExportUrl(id: string): string {
-    const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+    const base = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000/api';
     return `${base}/admin/tenants/${id}/export`;
   },
 };

@@ -1,6 +1,6 @@
 // Configuração base da API
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000/api';
 
 // Tipos base para respostas da API
 export interface ApiResponse<T> {

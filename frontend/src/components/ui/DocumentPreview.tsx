@@ -8,9 +8,10 @@ import * as XLSX from 'xlsx';
 import { DocumentosService } from '@/services/documentosService';
 import { Documento } from '@/types';
 
-// Configurar worker do PDF.js
+// Configurar worker do PDF.js (servido localmente via public/, ver
+// scripts/copy-pdf-worker.mjs — evita depender de um CDN externo)
 if (typeof window !== 'undefined') {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+  pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
 interface DocumentPreviewProps {
@@ -33,6 +34,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   const [pageNumber, setPageNumber] = useState(1);
   const [documentBlob, setDocumentBlob] = useState<Blob | null>(null);
   const [documentUrl, setDocumentUrl] = useState<string>('');
+  // Formato a renderizar, devolvido pelo backend. Normalmente igual a
+  // `fileType`, mas pode ser 'pdf' quando o backend converteu o ficheiro
+  // original (ex.: docx/pptx) via LibreOffice num tenant self-hosted.
+  const [previewFormat, setPreviewFormat] = useState<string>('');
 
   // Extrair informações do documento
   const fileName = documento?.titulo || documento?.arquivo?.originalName || 'documento';
@@ -59,16 +64,20 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
 
     try {
       // Carregar o documento como blob (inline/preview) usando o service
-      const blob = await DocumentosService.preview(documento._id);
+      const { blob, format } = await DocumentosService.preview(documento._id);
       setDocumentBlob(blob);
 
       // Criar URL temporária para o blob
       const blobUrl = URL.createObjectURL(blob);
       setDocumentUrl(blobUrl);
 
-      // Processar baseado no tipo de arquivo
-      await processDocument(blob, fileType);
-      
+      // Formato a renderizar (pode ser 'pdf' se o backend converteu o ficheiro)
+      const resolvedFormat = (format || fileType).toLowerCase();
+      setPreviewFormat(resolvedFormat);
+
+      // Processar baseado no formato a renderizar
+      await processDocument(blob, resolvedFormat);
+
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao carregar documento');
     } finally {
@@ -306,40 +315,40 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   );
 
   const getPreviewComponent = () => {
-    const lowerFileType = fileType.toLowerCase();
+    const lowerFormat = (previewFormat || fileType).toLowerCase();
 
-    // PDF
-    if (lowerFileType === 'pdf') {
+    // PDF (inclui ficheiros office convertidos pelo backend)
+    if (lowerFormat === 'pdf') {
       return renderPDFPreview();
     }
 
     // Documentos Word
-    if (['docx', 'doc'].includes(lowerFileType)) {
+    if (['docx', 'doc'].includes(lowerFormat)) {
       return renderWordPreview();
     }
 
     // Planilhas Excel
-    if (['xlsx', 'xls', 'csv'].includes(lowerFileType)) {
+    if (['xlsx', 'xls', 'csv'].includes(lowerFormat)) {
       return renderExcelPreview();
     }
 
     // Imagens
-    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'ico', 'tiff', 'tif'].includes(lowerFileType)) {
+    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'ico', 'tiff', 'tif'].includes(lowerFormat)) {
       return renderImagePreview();
     }
 
     // Arquivos de texto e código
-    if (['txt', 'json', 'xml', 'html', 'css', 'js', 'ts', 'md', 'yaml', 'yml', 'log', 'ini', 'conf', 'config'].includes(lowerFileType)) {
+    if (['txt', 'json', 'xml', 'html', 'css', 'js', 'ts', 'md', 'yaml', 'yml', 'log', 'ini', 'conf', 'config'].includes(lowerFormat)) {
       return renderTextPreview();
     }
 
     // Vídeos
-    if (['mp4', 'webm', 'ogg', 'avi', 'mov', 'wmv', 'flv', 'mkv', '3gp'].includes(lowerFileType)) {
+    if (['mp4', 'webm', 'ogg', 'avi', 'mov', 'wmv', 'flv', 'mkv', '3gp'].includes(lowerFormat)) {
       return renderVideoPreview();
     }
 
     // Áudios
-    if (['mp3', 'wav', 'ogg', 'aac', 'm4a', 'flac', 'wma'].includes(lowerFileType)) {
+    if (['mp3', 'wav', 'ogg', 'aac', 'm4a', 'flac', 'wma'].includes(lowerFormat)) {
       return renderAudioPreview();
     }
 
@@ -393,7 +402,9 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                 {fileName}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {fileType.toUpperCase()} • Preview com bibliotecas nativas
+                {fileType.toUpperCase()} • {previewFormat === 'pdf' && fileType.toLowerCase() !== 'pdf'
+                  ? 'Pré-visualização convertida para PDF'
+                  : 'Preview com bibliotecas nativas'}
               </p>
             </div>
           </div>

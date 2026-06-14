@@ -61,17 +61,17 @@ export interface DocumentoUpdateData {
   ativo?: boolean;
 }
 
-// Faz fetch a um endpoint que devolve { url } (URL assinada para o ficheiro,
-// conforme a storageConfig do tenant: local/R2/self-hosted) e depois faz
-// fetch a essa URL para obter o conteúdo como Blob. Tenta renovar o access
-// token uma vez em caso de 401.
+// Faz fetch a um endpoint que devolve { url, ... } (URL assinada para o
+// ficheiro, conforme a storageConfig do tenant: local/R2/self-hosted) e
+// depois faz fetch a essa URL para obter o conteúdo como Blob. Tenta renovar
+// o access token uma vez em caso de 401.
 //
 // O segundo fetch (à URL assinada) é feito sem credentials: a URL já contém
 // o token de autorização, e para destinos cross-origin (R2/self-hosted) o
 // CORS dessas origens não inclui Access-Control-Allow-Credentials — um fetch
 // com credentials: 'include' que seguisse um redirect cross-origin para lá
 // falharia com "Failed to fetch".
-async function fetchFileBlob(jsonUrl: string, errorPrefix: string): Promise<Blob> {
+async function fetchFileBlob(jsonUrl: string, errorPrefix: string): Promise<{ blob: Blob; data: any }> {
   let response = await fetch(jsonUrl, { credentials: 'include' });
 
   if (response.status === 401) {
@@ -98,9 +98,19 @@ async function fetchFileBlob(jsonUrl: string, errorPrefix: string): Promise<Blob
 
   const fileResponse = await fetch(data.url);
   if (!fileResponse.ok) {
-    throw new Error(`${errorPrefix}: ${fileResponse.status}`);
+    let message = `${errorPrefix}: ${fileResponse.status}`;
+    try {
+      const errorData = await fileResponse.json();
+      if (errorData?.message) message = errorData.message;
+      else if (errorData?.error) message = errorData.error;
+    } catch {
+      // resposta sem corpo JSON (ex.: ficheiro binário)
+    }
+    throw new Error(message);
   }
-  return fileResponse.blob();
+
+  const blob = await fileResponse.blob();
+  return { blob, data };
 }
 
 export class DocumentosService {
@@ -191,13 +201,17 @@ export class DocumentosService {
   // Download de documento (anexo) — o backend devolve uma URL assinada para
   // o storage provider configurado no tenant (local/R2/self-hosted).
   static async download(id: string): Promise<Blob> {
-    return fetchFileBlob(`${API_BASE_URL}/documentos/${id}/download`, 'Erro no download');
+    const { blob } = await fetchFileBlob(`${API_BASE_URL}/documentos/${id}/download`, 'Erro no download');
+    return blob;
   }
 
   // Preview de documento (inline) — usado pelo DocumentPreview para
-  // visualização sem forçar o download como anexo.
-  static async preview(id: string): Promise<Blob> {
-    return fetchFileBlob(`${API_BASE_URL}/files/preview/${id}`, 'Erro ao carregar preview');
+  // visualização sem forçar o download como anexo. `format` reflete o
+  // formato a renderizar (pode ser 'pdf' se o backend converteu o ficheiro
+  // original via LibreOffice, em tenants self-hosted).
+  static async preview(id: string): Promise<{ blob: Blob; format: string }> {
+    const { blob, data } = await fetchFileBlob(`${API_BASE_URL}/files/preview/${id}`, 'Erro ao carregar preview');
+    return { blob, format: data.format };
   }
 
   // Obter estatísticas de documentos

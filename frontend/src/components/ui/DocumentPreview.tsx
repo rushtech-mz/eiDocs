@@ -44,11 +44,21 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   const fileType = documento?.arquivo?.originalName?.split('.').pop()?.toLowerCase() || 'unknown';
 
   useEffect(() => {
+    // O React Strict Mode (dev) invoca este efeito duas vezes (montar →
+    // limpar → montar). Sem esta flag, ambas as invocações chamariam
+    // loadDocumentFromService, criando duas URLs de blob distintas e
+    // montando <Document> com `file` a mudar em sucessão rápida — o que faz
+    // o pdf.js falhar com "Cannot read properties of null (reading
+    // 'sendWithPromise')". A invocação cancelada simplesmente não aplica o
+    // resultado do seu fetch.
+    let cancelled = false;
+
     if (isOpen && documento?._id) {
-      loadDocumentFromService();
+      loadDocumentFromService(() => cancelled);
     }
-    
+
     return () => {
+      cancelled = true;
       // Limpar URL do blob ao fechar
       if (documentUrl) {
         URL.revokeObjectURL(documentUrl);
@@ -57,7 +67,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     };
   }, [isOpen, documento?._id]);
 
-  const loadDocumentFromService = async () => {
+  const loadDocumentFromService = async (isCancelled: () => boolean = () => false) => {
     setLoading(true);
     setError(null);
     setContent(null);
@@ -65,6 +75,8 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     try {
       // Carregar o documento como blob (inline/preview) usando o service
       const { blob, format } = await DocumentosService.preview(documento._id);
+      if (isCancelled()) return;
+
       setDocumentBlob(blob);
 
       // Criar URL temporária para o blob
@@ -79,9 +91,13 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
       await processDocument(blob, resolvedFormat);
 
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao carregar documento');
+      if (!isCancelled()) {
+        setError(err instanceof Error ? err.message : 'Erro ao carregar documento');
+      }
     } finally {
-      setLoading(false);
+      if (!isCancelled()) {
+        setLoading(false);
+      }
     }
   };
 

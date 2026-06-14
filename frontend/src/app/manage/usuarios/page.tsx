@@ -132,6 +132,8 @@ const UsuariosPage = () => {
       key: 'nome',
       title: 'Usuário',
       sortable: true,
+      ellipsis: true,
+      maxWidth: '300px',
       render: (value, record) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
@@ -139,10 +141,12 @@ const UsuariosPage = () => {
               <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
-          <div>
-            <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">@{record.username}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">{record.apelido}</div>
+          <div className="min-w-0 flex-1">
+            <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{value}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400 truncate">@{record.username}</div>
+            {record.apelido && (
+              <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.apelido}</div>
+            )}
           </div>
         </div>
       ),

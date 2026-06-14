@@ -123,7 +123,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Info */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 min-w-0">
           {documento.descricao && (
             <div>
               <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Descrição</h3>
@@ -189,7 +189,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
         </div>
 
         {/* Sidebar Info */}
-        <div className="space-y-5">
+        <div className="space-y-5 min-w-0">
           <div>
             <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Status</h3>
             {getStatusBadge(documento.status || 'ativo')}
@@ -198,7 +198,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
           <div>
             <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Arquivo</h3>
             <div className="p-3 bg-gray-50 dark:bg-gray-900/40 rounded-lg space-y-1">
-              <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <div className="text-sm font-medium text-gray-900 dark:text-gray-100 break-all">
                 {documento.arquivo?.originalName || 'Arquivo não encontrado'}
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">

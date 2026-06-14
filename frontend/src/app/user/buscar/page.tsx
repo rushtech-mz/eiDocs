@@ -129,6 +129,8 @@ const BuscarDocumentosPage = () => {
       key: 'titulo',
       title: 'Documento',
       sortable: true,
+      ellipsis: true,
+      maxWidth: '350px',
       render: (value, record: any) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
@@ -139,10 +141,10 @@ const BuscarDocumentosPage = () => {
             {record.descricao && (
               <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.descricao}</div>
             )}
-            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 flex items-center space-x-2">
-              <span>{record.arquivo?.originalName || 'Arquivo não encontrado'}</span>
-              <span>•</span>
-              <span>{formatFileSize(record.arquivo?.size || 0)}</span>
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 flex items-center space-x-2 min-w-0">
+              <span className="truncate">{record.arquivo?.originalName || 'Arquivo não encontrado'}</span>
+              <span className="flex-shrink-0">•</span>
+              <span className="flex-shrink-0">{formatFileSize(record.arquivo?.size || 0)}</span>
             </div>
           </div>
         </div>

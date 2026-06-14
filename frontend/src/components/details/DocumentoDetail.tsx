@@ -142,10 +142,10 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
               <FileText className="w-12 h-12" />
             </div>
           </div>
-          <div className="flex flex-col justify-between space-y-2">
+          <div className="flex flex-col justify-between space-y-2 min-w-0">
             <div>
               <h4 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-1 flex items-center"><File className="w-4 h-4 mr-2" />Arquivo</h4>
-              <p className="font-medium text-gray-900 dark:text-gray-100">{documento.arquivo?.originalName || 'Nome não disponível'}</p>
+              <p className="font-medium text-gray-900 dark:text-gray-100 break-all">{documento.arquivo?.originalName || 'Nome não disponível'}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">{documento.arquivo?.format?.toUpperCase() || 'Formato desconhecido'} • {formatFileSize(documento.arquivo?.size || 0)}</p>
             </div>
             <div className="flex gap-2 mt-2">

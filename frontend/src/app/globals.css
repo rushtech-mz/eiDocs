@@ -310,3 +310,43 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Scrollbars personalizadas (finas, arredondadas e adaptadas ao tema) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0 0 0 / 20%) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: oklch(0 0 0 / 20%);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(0 0 0 / 35%);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.dark * {
+  scrollbar-color: oklch(1 0 0 / 20%) transparent;
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background-color: oklch(1 0 0 / 20%);
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(1 0 0 / 35%);
+}

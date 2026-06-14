@@ -43,7 +43,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
   loading = false
 }) => {
   const CardContent = () => (
-    <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 transition-all duration-200 ${
+    <div className={`h-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 transition-all duration-200 ${
       (onClick || href) ? 'hover:shadow-lg hover:border-gray-200 dark:hover:border-gray-600 cursor-pointer transform hover:-translate-y-1' : ''
     } ${loading ? 'animate-pulse' : ''}`}>
       <div className="flex items-center justify-between">
@@ -96,7 +96,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
 
   if (href && !onClick) {
     return (
-      <a href={href} className="block group">
+      <a href={href} className="block group h-full">
         <CardContent />
       </a>
     );
@@ -104,7 +104,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
 
   if (onClick) {
     return (
-      <div onClick={onClick} className="group">
+      <div onClick={onClick} className="group h-full">
         <CardContent />
       </div>
     );

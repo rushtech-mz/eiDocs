@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
+import { useTheme } from '@/contexts/ThemeContext';
 import {
   FileText,
   Building2,
@@ -18,6 +19,8 @@ import {
   Users,
   Search,
   Upload,
+  Moon,
+  Sun,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -34,6 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const isAdminRole = user?.role === 'superadmin' || user?.role === 'org_admin' || user?.role === 'admin';
 
@@ -238,6 +242,20 @@ const Sidebar: React.FC<SidebarProps> = ({
           <Settings className="w-5 h-5 flex-shrink-0" />
           {!isCollapsed && <span className="text-sm">Configurações</span>}
         </Link>
+
+        <button
+          onClick={toggleTheme}
+          title={isCollapsed ? (theme === 'dark' ? 'Tema claro' : 'Tema escuro') : undefined}
+          className={`
+            w-full flex items-center rounded-lg text-gray-600 dark:text-gray-400
+            hover:bg-gray-50 dark:hover:bg-gray-800
+            hover:text-gray-900 dark:hover:text-gray-100 transition-colors
+            ${isCollapsed ? 'justify-center p-2' : 'gap-3 px-3 py-2'}
+          `}
+        >
+          {theme === 'dark' ? <Sun className="w-5 h-5 flex-shrink-0" /> : <Moon className="w-5 h-5 flex-shrink-0" />}
+          {!isCollapsed && <span className="text-sm">{theme === 'dark' ? 'Tema claro' : 'Tema escuro'}</span>}
+        </button>
 
         <button
           onClick={logout}

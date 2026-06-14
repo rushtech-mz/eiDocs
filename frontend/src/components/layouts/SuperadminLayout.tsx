@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
+import { Moon, Sun } from 'lucide-react';
 
 interface SuperadminLayoutProps {
   children: React.ReactNode;
@@ -24,6 +26,7 @@ const menuItems = [
 export default function SuperadminLayout({ children }: SuperadminLayoutProps) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
@@ -64,6 +67,13 @@ export default function SuperadminLayout({ children }: SuperadminLayoutProps) {
           <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">Superadmin — Gestão de Empresas</span>
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600 dark:text-gray-400">{user?.nome || user?.username}</span>
+            <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Tema claro' : 'Tema escuro'}
+              className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <Button variant="outline" size="sm" onClick={logout} className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300">
               Sair
             </Button>

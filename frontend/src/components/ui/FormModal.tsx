@@ -84,7 +84,7 @@ const FormModal: React.FC<FormModalProps> = ({
           </div>
 
           {/* Body */}
-          <div className="flex-1 overflow-y-auto px-6 py-5">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 py-5 break-words">
             {children}
           </div>
 

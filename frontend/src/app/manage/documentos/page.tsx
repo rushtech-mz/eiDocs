@@ -137,6 +137,8 @@ const DocumentosPage = () => {
       key: 'titulo',
       title: 'Documento',
       sortable: true,
+      ellipsis: true,
+      maxWidth: '350px',
       render: (value, record) => (
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
@@ -147,7 +149,7 @@ const DocumentosPage = () => {
             {record.descricao && (
               <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.descricao}</div>
             )}
-            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 truncate">
               {record.arquivo.originalName} • {formatFileSize(record.arquivo.size)}
             </div>
           </div>

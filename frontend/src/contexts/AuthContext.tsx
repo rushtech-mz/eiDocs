@@ -42,6 +42,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
     checkAuth();
   }, []);
 
+  // Sessão tornou-se inválida (access token e refresh token expirados/inválidos)
+  // — limpar estado local e voltar ao login.
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setUser(null);
+      router.push('/login');
+    };
+
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('auth:unauthorized', handleUnauthorized);
+  }, [router]);
+
   const checkAuth = async () => {
     try {
       const userData = await authService.getCurrentUser();
@@ -75,10 +87,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const logout = async () => {
     try {
       await authService.logout();
+    } catch (error: any) {
+      // Mesmo que o pedido falhe (ex: token já expirado), continuar o logout local
+      console.error('Logout error:', error);
+    } finally {
       setUser(null);
       router.push('/login');
-    } catch (error: any) {
-      console.error('Logout error:', error);
     }
   };
 

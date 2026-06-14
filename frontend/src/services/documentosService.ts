@@ -1,10 +1,12 @@
 // Service de Documentos - Implementação completa baseada no FRONTEND_REQUIREMENTS.md
 
-import { 
-  apiGet, 
-  apiPost, 
-  apiPut, 
+import {
+  apiGet,
+  apiPost,
+  apiPut,
   apiDelete,
+  API_BASE_URL,
+  refreshAccessToken,
   ApiResponse,
   ApiPaginatedResponse
 } from '@/lib/api';
@@ -57,6 +59,35 @@ export interface DocumentoUpdateData {
   dataRecebimento?: string;
   tags?: string[];
   ativo?: boolean;
+}
+
+// Faz fetch de um endpoint que responde com redirect (302) para o ficheiro
+// (local/R2/self-hosted, conforme a storageConfig do tenant) e devolve o
+// conteúdo como Blob. Tenta renovar o access token uma vez em caso de 401.
+async function fetchFileBlob(url: string, errorPrefix: string): Promise<Blob> {
+  let response = await fetch(url, { credentials: 'include' });
+
+  if (response.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      response = await fetch(url, { credentials: 'include' });
+    } else if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('auth:unauthorized'));
+    }
+  }
+
+  if (!response.ok) {
+    let message = `${errorPrefix}: ${response.status}`;
+    try {
+      const data = await response.json();
+      if (data?.message) message = data.message;
+    } catch {
+      // resposta sem corpo JSON (ex: erro do storage provider)
+    }
+    throw new Error(message);
+  }
+
+  return response.blob();
 }
 
 export class DocumentosService {
@@ -144,30 +175,16 @@ export class DocumentosService {
     return apiGet<ApiPaginatedResponse<Documento>>(`/documentos/usuario/${usuarioId}`, params as Record<string, string | number | boolean>);
   }
 
-  // Download de documento
+  // Download de documento (anexo) — o backend redireciona para o storage
+  // provider configurado no tenant (local/R2/self-hosted).
   static async download(id: string): Promise<Blob> {
-    // Opção 1: Usar endpoint do backend (atual - pode ter problemas de proxy)
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api'}/documentos/${id}/download`,
-    //   { credentials: 'include' }
-    // );
-    
-    // Opção 2 (MELHOR): Buscar a URL direta do Cloudinary e baixar de lá
-    const documentoResponse = await this.buscarPorId(id);
-    const secureUrl = documentoResponse.data?.arquivo?.secureUrl;
-    
-    if (!secureUrl) {
-      throw new Error('URL do arquivo não encontrada');
-    }
-    
-    // Baixar diretamente do Cloudinary (sem passar pelo backend)
-    const response = await fetch(secureUrl);
-    
-    if (!response.ok) {
-      throw new Error(`Erro no download: ${response.status}`);
-    }
-    
-    return response.blob();
+    return fetchFileBlob(`${API_BASE_URL}/documentos/${id}/download`, 'Erro no download');
+  }
+
+  // Preview de documento (inline) — usado pelo DocumentPreview para
+  // visualização sem forçar o download como anexo.
+  static async preview(id: string): Promise<Blob> {
+    return fetchFileBlob(`${API_BASE_URL}/files/preview/${id}`, 'Erro ao carregar preview');
   }
 
   // Obter estatísticas de documentos

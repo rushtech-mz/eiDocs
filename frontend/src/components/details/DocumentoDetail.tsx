@@ -41,7 +41,6 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
   documento,
   onDownload
 }) => {
-  const [imageError, setImageError] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
 
   if (!documento) return null;
@@ -110,8 +109,6 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
     }
   };
 
-  const isImage = documento.arquivo?.format && ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(documento.arquivo.format.toLowerCase());
-
   return (
     <>
       <DetailModal
@@ -141,18 +138,9 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
         {/* SEÇÃO ARQUIVO E PREVIEW */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 mb-6">
           <div className="md:col-span-2 flex flex-col items-center justify-center">
-            {isImage && documento.arquivo?.secureUrl && !imageError ? (
-              <img
-                src={documento.arquivo.secureUrl}
-                alt={documento.titulo}
-                className="max-w-full max-h-64 object-contain rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm mb-2"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <div className="w-full h-48 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500">
-                <FileText className="w-12 h-12" />
-              </div>
-            )}
+            <div className="w-full h-48 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500">
+              <FileText className="w-12 h-12" />
+            </div>
           </div>
           <div className="flex flex-col justify-between space-y-2">
             <div>
@@ -168,7 +156,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
               >
                 <Download className="w-4 h-4 mr-1" />Download
               </button>
-              {documento.arquivo?.secureUrl && isImage && (
+              {documento.arquivo && (
                 <button
                   onClick={() => setPreviewOpen(true)}
                   className="flex items-center px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors shadow"

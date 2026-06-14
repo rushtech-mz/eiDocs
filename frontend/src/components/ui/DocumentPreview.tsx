@@ -58,8 +58,8 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     setContent(null);
 
     try {
-                // Baixar o documento como blob usando o service
-      const blob = await DocumentosService.baixar(documento._id);
+      // Carregar o documento como blob (inline/preview) usando o service
+      const blob = await DocumentosService.preview(documento._id);
       setDocumentBlob(blob);
 
       // Criar URL temporária para o blob

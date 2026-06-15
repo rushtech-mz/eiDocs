@@ -7,6 +7,7 @@ export interface User {
   username: string;
   nome: string;
   apelido: string;
+  email?: string;
   tenantId?: string;
   departamento: {
     _id: string;

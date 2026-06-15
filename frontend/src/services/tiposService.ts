@@ -58,7 +58,7 @@ export class TiposService {
   static async listarAtivos(): Promise<ApiPaginatedResponse<TipoDocumento>> {
     const params: TipoQueryParams = {
       ativo: true,
-      limit: 1000
+      limit: 100
     };
     return this.listar(params);
   }
@@ -67,7 +67,7 @@ export class TiposService {
   static async listarAtivosPorDepartamento(departamentoId: string): Promise<ApiPaginatedResponse<TipoDocumento>> {
     const params: TipoQueryParams = {
       ativo: true,
-      limit: 1000
+      limit: 100
     };
     return this.listarPorDepartamento(departamentoId, params);
   }

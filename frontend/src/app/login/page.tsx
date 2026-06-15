@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { User, Lock, Eye, EyeOff, Building2 } from "lucide-react";
+import { User, Lock, Eye, EyeOff, Building2, ShieldCheck, FolderLock, History } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -25,6 +25,24 @@ function getSubdomainSlug(): string | null {
   }
   return null;
 }
+
+const features = [
+  {
+    icon: ShieldCheck,
+    title: "Segurança e controlo de acesso",
+    description: "Permissões por departamento e perfil de utilizador.",
+  },
+  {
+    icon: FolderLock,
+    title: "Organização centralizada",
+    description: "Categorias, tipos e departamentos para encontrar tudo rapidamente.",
+  },
+  {
+    icon: History,
+    title: "Auditoria e histórico",
+    description: "Acompanhe quem criou e editou cada documento.",
+  },
+];
 
 const LoginPage = () => {
   const searchParams = useSearchParams();
@@ -96,79 +114,119 @@ const LoginPage = () => {
   const slugParam = searchParams.get("slug") ?? getSubdomainSlug();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6">
-          {/* Header */}
-          <div className="text-center space-y-2">
-            <div className="w-16 h-16 mx-auto">
-              <img
-                src="/logo.jpg"
-                alt="eiDocs Logo"
-                className="w-16 h-16 rounded-xl object-cover shadow-lg"
-              />
-            </div>
+    <div className="min-h-screen flex bg-white dark:bg-gray-950">
+      {/* Painel institucional (desktop) */}
+      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12 bg-gradient-dark text-white overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-blue/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-24 w-96 h-96 bg-primary-purple/20 rounded-full blur-3xl" />
+
+        <div className="relative z-10 flex items-center gap-3">
+          <img src="/logo.jpg" alt="eiDocs Logo" className="w-10 h-10 rounded-lg object-cover shadow-lg" />
+          <span className="text-xl font-bold tracking-tight">eiDocs</span>
+        </div>
+
+        <div className="relative z-10 max-w-md space-y-10">
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold leading-tight">
+              Gestão documental, simplificada para a sua empresa.
+            </h1>
+            <p className="text-slate-300 text-base leading-relaxed">
+              Centralize, organize e controle o acesso a todos os documentos da sua organização num único lugar seguro.
+            </p>
+          </div>
+
+          <div className="space-y-5">
+            {features.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                  <Icon className="w-5 h-5 text-blue-300" />
+                </div>
+                <div>
+                  <p className="font-semibold text-sm text-white">{title}</p>
+                  <p className="text-sm text-slate-400 mt-0.5">{description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="relative z-10 text-xs text-slate-500">
+          © {new Date().getFullYear()} eiDocs. Todos os direitos reservados.
+        </p>
+      </div>
+
+      {/* Painel de autenticação */}
+      <div className="flex-1 flex items-center justify-center p-6 sm:p-12 bg-gray-50 dark:bg-gray-950">
+        <div className="w-full max-w-sm">
+          {/* Logo (mobile) */}
+          <div className="lg:hidden flex items-center gap-3 mb-8">
+            <img src="/logo.jpg" alt="eiDocs Logo" className="w-10 h-10 rounded-lg object-cover shadow-lg" />
+            <span className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">eiDocs</span>
+          </div>
+
+          {/* Cabeçalho */}
+          <div className="space-y-2 mb-8">
             {loadingTenant ? (
-              <div className="h-7 w-40 mx-auto bg-gray-100 dark:bg-gray-700 rounded animate-pulse" />
+              <div className="h-7 w-40 bg-gray-100 dark:bg-gray-800 rounded animate-pulse" />
             ) : tenantInfo ? (
               <>
-                <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 text-xs">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs font-medium uppercase tracking-wide">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>{tenantInfo.nome}</span>
                 </div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Entrar</h1>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Entre na conta da <strong>{tenantInfo.nome}</strong></p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Bem-vindo de volta</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">Entre na conta da <strong>{tenantInfo.nome}</strong></p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">eiDocuments</h1>
-                <p className="text-gray-600 dark:text-gray-400">Entre na sua conta</p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Bem-vindo de volta</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">Entre com as suas credenciais para aceder à plataforma</p>
               </>
             )}
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-1.5">
               <label htmlFor="username" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Username
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-gray-500" />
                 <input
                   id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Digite o seu username"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue transition-colors"
                   required
                   disabled={loading}
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label htmlFor="senha" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Senha
                 </label>
                 <Link
                   href={`/forgot-password${slugParam ? `?slug=${slugParam}` : ""}`}
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                  className="text-xs font-medium text-primary-blue hover:text-blue-700 dark:hover:text-blue-300"
                 >
                   Esqueceu a senha?
                 </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-gray-500" />
                 <input
                   id="senha"
                   type={showPassword ? "text" : "password"}
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   placeholder="Digite a sua senha"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-colors"
+                  className="w-full pl-10 pr-12 py-2.5 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-primary-blue transition-colors"
                   required
                   disabled={loading}
                 />
@@ -177,7 +235,7 @@ const LoginPage = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? <EyeOff className="w-4.5 h-4.5" /> : <Eye className="w-4.5 h-4.5" />}
                 </button>
               </div>
             </div>
@@ -185,7 +243,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={loading || !username.trim() || !senha.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-gradient-primary text-white font-semibold py-2.5 px-4 rounded-lg shadow-soft hover:shadow-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-soft flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -198,9 +256,9 @@ const LoginPage = () => {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
             Não tens conta?{" "}
-            <Link href="/register" className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
+            <Link href="/register" className="font-medium text-primary-blue hover:text-blue-700 dark:hover:text-blue-300">
               Criar empresa
             </Link>
           </p>

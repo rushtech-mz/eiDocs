@@ -48,7 +48,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
         apelido: usuario.apelido,
         username: usuario.username,
         senha: '', // Senha vazia no modo edição
-        departamento: typeof usuario.departamento === 'string' ? usuario.departamento : usuario.departamento._id,
+        departamento: typeof usuario.departamento === 'string' ? usuario.departamento : usuario.departamento?._id || '',
         role: usuario.role || 'user',
         ativo: usuario.ativo
       });

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import UserLayout from '@/components/ui/UserLayout';
 import PageHeader from '@/components/ui/PageHeader';
 import DataTable, { TableColumn, TableAction } from '@/components/ui/DataTable';
-import { FileText, Eye, Download, Building2, FolderOpen, Tag, Calendar, User, Edit } from 'lucide-react';
+import { FileText, Eye, Download, Calendar, Edit } from 'lucide-react';
 import { Documento } from '@/types';
 import { useDocumentos } from '@/hooks/useDocumentos';
 import { useAuth } from '@/hooks/useAuth';
@@ -114,7 +114,6 @@ const DocumentosDepartamentoPage = () => {
       if (formData.responsavel?.trim()) updateData.responsavel = formData.responsavel.trim();
       if (formData.dataEnvio) updateData.dataEnvio = formData.dataEnvio + 'T00:00:00.000Z';
       if (formData.dataRecebimento) updateData.dataRecebimento = formData.dataRecebimento + 'T00:00:00.000Z';
-      if (formData.tags && formData.tags.length > 0) updateData.tags = formData.tags;
       if (formData.status) updateData.ativo = formData.status === 'ativo';
 
       console.log('Dados preparados para atualização:', updateData);
@@ -223,29 +222,6 @@ const DocumentosDepartamentoPage = () => {
       sortable: false,
       width: 'w-40',
       render: (value, record: any) => getMovementBadge(value, record),
-    },
-    {
-      key: 'tags',
-      title: 'Tags',
-      width: 'w-32',
-      render: (value: string[]) => (
-        <div className="flex flex-wrap gap-1">
-          {value?.slice(0, 2).map((tag: string, index: number) => (
-            <span
-              key={index}
-              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
-            >
-              <Tag className="w-3 h-3 mr-1" />
-              {tag}
-            </span>
-          )) || []}
-          {value?.length > 2 && (
-            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
-              +{value.length - 2}
-            </span>
-          )}
-        </div>
-      ),
     },
     {
       key: 'dataCriacao',

@@ -4,15 +4,13 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import UserLayout from '@/components/ui/UserLayout';
 import DataTable, { TableColumn, TableAction } from '@/components/ui/DataTable';
-import { 
-  Search, 
-  FileText, 
-  Eye, 
-  Download, 
-  Building2, 
-  FolderOpen, 
-  Tag, 
-  Calendar, 
+import {
+  Search,
+  FileText,
+  Eye,
+  Download,
+  Building2,
+  Calendar,
   Filter,
   X
 } from 'lucide-react';
@@ -182,29 +180,6 @@ const BuscarDocumentosPage = () => {
       render: (value, record: any) => getMovementBadge(value, record),
     },
     {
-      key: 'tags',
-      title: 'Tags',
-      width: 'w-32',
-      render: (value: string[]) => (
-        <div className="flex flex-wrap gap-1">
-          {value?.slice(0, 2).map((tag: string, index: number) => (
-            <span
-              key={index}
-              className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
-            >
-              <Tag className="w-3 h-3 mr-1" />
-              {tag}
-            </span>
-          )) || []}
-          {value?.length > 2 && (
-            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
-              +{value.length - 2}
-            </span>
-          )}
-        </div>
-      ),
-    },
-    {
       key: 'dataCriacao',
       title: 'Data',
       sortable: true,
@@ -242,7 +217,7 @@ const BuscarDocumentosPage = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <div>
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">Buscar Documentos</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Encontre documentos por título, descrição, tags ou conteúdo</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Encontre documentos por título, descrição ou conteúdo</p>
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -389,7 +364,7 @@ const BuscarDocumentosPage = () => {
               Busque por documentos
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
-              Use a barra de busca acima para encontrar documentos por título, descrição, tags ou conteúdo.
+              Use a barra de busca acima para encontrar documentos por título, descrição ou conteúdo.
               Você também pode usar os filtros avançados para refinar sua busca.
             </p>
             <div className="text-sm text-gray-500 dark:text-gray-400">

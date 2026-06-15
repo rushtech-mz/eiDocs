@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import UserLayout from '@/components/ui/UserLayout';
-import { User, Lock, Bell, Settings, Eye, EyeOff, Save, Sun, Moon, Monitor } from 'lucide-react';
+import { User, Lock, Settings, Eye, EyeOff, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/hooks/useAuth';
+import { useToastContext } from '@/contexts/ToastContext';
+import { authService, UserRole } from '@/services/authService';
 
 const inputClass = "block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 const inputDisabledClass = "block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed";
@@ -11,20 +14,23 @@ const labelClass = "block text-sm font-medium text-gray-700 dark:text-gray-300 m
 const hintClass = "text-xs text-gray-500 dark:text-gray-400 mt-1";
 const sectionTitleClass = "text-lg font-medium text-gray-900 dark:text-gray-100 mb-4";
 
+const roleLabels: Record<UserRole, string> = {
+  superadmin: 'Super Administrador',
+  org_admin: 'Administrador da Organização',
+  admin: 'Administrador',
+  editor: 'Editor',
+  user: 'Utilizador',
+};
+
 const ConfiguracoesPage = () => {
   const { theme, setTheme } = useTheme();
+  const { user } = useAuth();
+  const { addToast } = useToastContext();
   const [activeTab, setActiveTab] = useState('perfil');
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const [perfilData, setPerfilData] = useState({
-    nome: 'João Silva',
-    apelido: 'João',
-    username: 'joao.silva',
-    email: 'joao.silva@empresa.com',
-    departamento: 'Recursos Humanos'
-  });
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const [senhaData, setSenhaData] = useState({
     senhaAtual: '',
@@ -32,110 +38,70 @@ const ConfiguracoesPage = () => {
     confirmarSenha: ''
   });
 
-  const [notificacoes, setNotificacoes] = useState({
-    emailNovoDocumento: true,
-    emailMovimento: false,
-    emailSemanal: true,
-    notificacoesPush: true
-  });
-
   const tabs = [
     { id: 'perfil', label: 'Perfil', icon: User },
     { id: 'senha', label: 'Senha', icon: Lock },
-    { id: 'notificacoes', label: 'Notificações', icon: Bell },
     { id: 'preferencias', label: 'Preferências', icon: Settings }
   ];
 
-  const handlePerfilSubmit = (e: React.FormEvent) => {
+  const handleSenhaSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Atualizar perfil:', perfilData);
-  };
 
-  const handleSenhaSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     if (senhaData.novaSenha !== senhaData.confirmarSenha) {
-      alert('As senhas não coincidem');
+      addToast('warning', 'As senhas não coincidem', 'A nova senha e a confirmação devem ser iguais.');
       return;
     }
-    console.log('Alterar senha');
-    setSenhaData({ senhaAtual: '', novaSenha: '', confirmarSenha: '' });
-  };
 
-  const handleNotificacoesSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Atualizar notificações:', notificacoes);
+    setChangingPassword(true);
+    try {
+      await authService.changePassword(senhaData.senhaAtual, senhaData.novaSenha);
+      addToast('success', 'Senha alterada com sucesso!');
+      setSenhaData({ senhaAtual: '', novaSenha: '', confirmarSenha: '' });
+    } catch (error: any) {
+      addToast('error', 'Erro ao alterar senha', error?.message || 'Ocorreu um erro inesperado. Tente novamente.');
+    } finally {
+      setChangingPassword(false);
+    }
   };
 
   const renderPerfilTab = () => (
-    <form onSubmit={handlePerfilSubmit} className="space-y-6">
+    <div className="space-y-6">
       <div>
         <h3 className={sectionTitleClass}>Informações Pessoais</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className={labelClass}>Nome Completo</label>
-            <input
-              type="text"
-              value={perfilData.nome}
-              onChange={(e) => setPerfilData({ ...perfilData, nome: e.target.value })}
-              className={inputClass}
-            />
+            <input type="text" value={user?.nome || ''} disabled className={inputDisabledClass} />
           </div>
 
           <div>
             <label className={labelClass}>Apelido</label>
-            <input
-              type="text"
-              value={perfilData.apelido}
-              onChange={(e) => setPerfilData({ ...perfilData, apelido: e.target.value })}
-              className={inputClass}
-            />
+            <input type="text" value={user?.apelido || ''} disabled className={inputDisabledClass} />
           </div>
 
           <div>
             <label className={labelClass}>Username</label>
-            <input
-              type="text"
-              value={perfilData.username}
-              disabled
-              className={inputDisabledClass}
-            />
-            <p className={hintClass}>O username não pode ser alterado</p>
+            <input type="text" value={user?.username || ''} disabled className={inputDisabledClass} />
           </div>
 
           <div>
             <label className={labelClass}>Email</label>
-            <input
-              type="email"
-              value={perfilData.email}
-              disabled
-              className={inputDisabledClass}
-            />
-            <p className={hintClass}>Entre em contato com o administrador para alterar o email</p>
+            <input type="email" value={user?.email || 'Não definido'} disabled className={inputDisabledClass} />
           </div>
 
-          <div className="md:col-span-2">
+          <div>
             <label className={labelClass}>Departamento</label>
-            <input
-              type="text"
-              value={perfilData.departamento}
-              disabled
-              className={inputDisabledClass}
-            />
-            <p className={hintClass}>Entre em contato com o administrador para alterar o departamento</p>
+            <input type="text" value={user?.departamento?.nome || 'Sem departamento'} disabled className={inputDisabledClass} />
+          </div>
+
+          <div>
+            <label className={labelClass}>Função</label>
+            <input type="text" value={user?.role ? roleLabels[user.role] : ''} disabled className={inputDisabledClass} />
           </div>
         </div>
+        <p className={hintClass}>Para alterar estas informações, contacte um administrador.</p>
       </div>
-
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-        >
-          <Save className="w-4 h-4 mr-2" />
-          Salvar Alterações
-        </button>
-      </div>
-    </form>
+    </div>
   );
 
   const renderSenhaTab = () => (
@@ -152,6 +118,7 @@ const ConfiguracoesPage = () => {
                 onChange={(e) => setSenhaData({ ...senhaData, senhaAtual: e.target.value })}
                 className={`${inputClass} pr-10`}
                 required
+                disabled={changingPassword}
               />
               <button
                 type="button"
@@ -176,6 +143,7 @@ const ConfiguracoesPage = () => {
                 className={`${inputClass} pr-10`}
                 required
                 minLength={6}
+                disabled={changingPassword}
               />
               <button
                 type="button"
@@ -200,6 +168,7 @@ const ConfiguracoesPage = () => {
                 onChange={(e) => setSenhaData({ ...senhaData, confirmarSenha: e.target.value })}
                 className={`${inputClass} pr-10`}
                 required
+                disabled={changingPassword}
               />
               <button
                 type="button"
@@ -219,52 +188,15 @@ const ConfiguracoesPage = () => {
       <div className="flex justify-end">
         <button
           type="submit"
-          className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+          disabled={changingPassword}
+          className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Lock className="w-4 h-4 mr-2" />
+          {changingPassword ? (
+            <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          ) : (
+            <Lock className="w-4 h-4 mr-2" />
+          )}
           Alterar Senha
-        </button>
-      </div>
-    </form>
-  );
-
-  const renderNotificacoesTab = () => (
-    <form onSubmit={handleNotificacoesSubmit} className="space-y-6">
-      <div>
-        <h3 className={sectionTitleClass}>Preferências de Notificação</h3>
-        <div className="space-y-4">
-          {[
-            { key: 'emailNovoDocumento', label: 'Novos documentos', desc: 'Receber email quando novos documentos forem adicionados' },
-            { key: 'emailMovimento', label: 'Movimentos de documentos', desc: 'Notificar sobre alterações de status dos documentos' },
-            { key: 'emailSemanal', label: 'Resumo semanal', desc: 'Receber resumo semanal de atividades' },
-            { key: 'notificacoesPush', label: 'Notificações push', desc: 'Receber notificações no navegador' },
-          ].map(({ key, label, desc }) => (
-            <div key={key} className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{label}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{desc}</p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={notificacoes[key as keyof typeof notificacoes]}
-                  onChange={(e) => setNotificacoes({ ...notificacoes, [key]: e.target.checked })}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 dark:bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-        >
-          <Bell className="w-4 h-4 mr-2" />
-          Salvar Preferências
         </button>
       </div>
     </form>
@@ -359,7 +291,6 @@ const ConfiguracoesPage = () => {
           <div className="p-6">
             {activeTab === 'perfil' && renderPerfilTab()}
             {activeTab === 'senha' && renderSenhaTab()}
-            {activeTab === 'notificacoes' && renderNotificacoesTab()}
             {activeTab === 'preferencias' && renderPreferenciasTab()}
           </div>
         </div>

@@ -94,7 +94,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   let menuItems = userMenuItems;
   
   if (isAdminRole) {
-    menuItems = [...userMenuItems, ...adminOnlyMenuItems];
+    // "Dashboard" (userMenuItems) já aponta para /dashboard/admin neste caso,
+    // então removemos o "Dashboard Admin" duplicado de adminOnlyMenuItems
+    menuItems = [...userMenuItems, ...adminOnlyMenuItems.filter((item) => item.href !== '/dashboard/admin')];
   } else if (user?.role === 'editor') {
     menuItems = [...userMenuItems, ...editorMenuItems];
   }

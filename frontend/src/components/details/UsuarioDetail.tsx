@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import DetailModal from '@/components/ui/DetailModal';
-import { Usuario, Departamento } from '@/types';
+import { Usuario, Departamento, UserRole } from '@/types';
 import { 
   User, 
   Calendar, 
@@ -114,20 +114,25 @@ const UsuarioDetail: React.FC<UsuarioDetailProps> = ({
     });
   };
 
-  const getDepartmentName = (departamento: string | Departamento): string => {
+  const getDepartmentName = (departamento: string | Departamento | null): string => {
+    if (!departamento) {
+      return 'Sem departamento';
+    }
     if (typeof departamento === 'string') {
       return 'Carregando...'; // TODO: Buscar nome do departamento
     }
     return departamento.nome;
   };
 
-  const getRoleBadge = (role: 'admin' | 'editor' | 'user') => {
-    const roleConfig: Record<'admin' | 'editor' | 'user', { bg: string; text: string; label: string }> = {
+  const getRoleBadge = (role: UserRole) => {
+    const roleConfig: Record<UserRole, { bg: string; text: string; label: string }> = {
+      'superadmin': { bg: 'bg-purple-100 dark:bg-purple-900/40', text: 'text-purple-800 dark:text-purple-300', label: 'Super Administrador' },
+      'org_admin': { bg: 'bg-indigo-100 dark:bg-indigo-900/40', text: 'text-indigo-800 dark:text-indigo-300', label: 'Administrador da Organização' },
       'admin': { bg: 'bg-red-100 dark:bg-red-900/40', text: 'text-red-800 dark:text-red-300', label: 'Administrador' },
       'editor': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Editor (Gerente)' },
       'user': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Usuário' }
     };
-    
+
     const config = roleConfig[role] || roleConfig.user;
     return (
       <span 

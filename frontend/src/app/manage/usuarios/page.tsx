@@ -235,7 +235,6 @@ const UsuariosPage = () => {
           onAdd={handleAdd}
           onSearch={handleSearch}
           onFilter={() => console.log('Filtrar usuários')}
-          onExport={() => console.log('Exportar usuários')}
           addButtonText="Novo Usuário"
           searchPlaceholder="Pesquisar usuários..."
         />

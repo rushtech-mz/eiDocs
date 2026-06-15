@@ -139,6 +139,7 @@ export interface DocumentoQueryParams extends BaseQueryParams {
 
 export interface UsuarioQueryParams extends BaseQueryParams {
   role?: UserRole;
+  departamento?: string;
 }
 
 // Tipos para criação/edição (omitindo campos automáticos)

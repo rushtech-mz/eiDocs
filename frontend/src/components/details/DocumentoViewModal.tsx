@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { FileText, Calendar, User, Building2, Tag, Download, Edit2 } from 'lucide-react';
+import { FileText, Calendar, User, Building2, Download, Edit2 } from 'lucide-react';
 import DetailModal from '@/components/ui/DetailModal';
 import { Documento } from '@/types';
 
@@ -170,22 +170,6 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
             </div>
           </div>
 
-          {documento.tags && documento.tags.length > 0 && (
-            <div>
-              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {documento.tags.map((tag: string, index: number) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center gap-1 px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
-                  >
-                    <Tag className="w-3 h-3" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Sidebar Info */}

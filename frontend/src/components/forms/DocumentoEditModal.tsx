@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Save, FileText, Upload } from 'lucide-react';
 import FormModal from '@/components/ui/FormModal';
+import { useAuth } from '@/hooks/useAuth';
 import { Documento } from '@/types';
 
 interface DocumentoEditModalProps {
@@ -23,7 +24,6 @@ export interface DocumentoEditData {
   responsavel: string;
   dataEnvio: string;
   dataRecebimento: string;
-  tags: string[];
   status: string;
   novoArquivo?: File;
 }
@@ -37,6 +37,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
   onClose,
   onSave,
 }) => {
+  const { user } = useAuth();
   const [formData, setFormData] = useState<DocumentoEditData>({
     titulo: '',
     descricao: '',
@@ -48,11 +49,9 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
     responsavel: '',
     dataEnvio: '',
     dataRecebimento: '',
-    tags: [],
     status: 'ativo',
   });
   const [loading, setLoading] = useState(false);
-  const [tagsInput, setTagsInput] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -60,8 +59,8 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
       setFormData({
         titulo: documento.titulo || '',
         descricao: documento.descricao || '',
-        categoria: documento.categoria?.nome || '',
-        tipo: documento.tipo?.nome || '',
+        categoria: typeof documento.categoria === 'object' ? documento.categoria.nome : documento.categoria || '',
+        tipo: typeof documento.tipo === 'object' ? documento.tipo?.nome || '' : documento.tipo || '',
         tipoMovimento: documento.tipoMovimento || 'interno',
         remetente: documento.remetente || '',
         destinatario: documento.destinatario || '',
@@ -70,13 +69,18 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
         dataRecebimento: documento.dataRecebimento
           ? documento.dataRecebimento.split('T')[0]
           : '',
-        tags: documento.tags || [],
         status: documento.status || 'ativo',
       });
-      setTagsInput((documento.tags || []).join(', '));
       setError(null);
     }
   }, [documento]);
+
+  // Para documentos internos, o responsável é sempre o utilizador autenticado
+  useEffect(() => {
+    if (formData.tipoMovimento === 'interno' && user?.nome && formData.responsavel !== user.nome) {
+      setFormData(prev => ({ ...prev, responsavel: user.nome }));
+    }
+  }, [formData.tipoMovimento, formData.responsavel, user]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -90,18 +94,6 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
     if (file) setFormData((prev) => ({ ...prev, novoArquivo: file }));
   };
 
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTagsInput(value);
-    setFormData((prev) => ({
-      ...prev,
-      tags: value
-        .split(',')
-        .map((t) => t.trim())
-        .filter((t) => t.length > 0),
-    }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!documento) return;
@@ -109,10 +101,6 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
     if (!formData.titulo.trim()) { setError('Título é obrigatório'); return; }
     if (!formData.categoria.trim()) { setError('Categoria é obrigatória'); return; }
     if (!formData.tipo.trim()) { setError('Tipo é obrigatório'); return; }
-    if (formData.tipoMovimento === 'interno' && !formData.responsavel.trim()) {
-      setError('Responsável é obrigatório para documentos internos');
-      return;
-    }
 
     setError(null);
     setLoading(true);
@@ -278,16 +266,19 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
             {formData.tipoMovimento === 'interno' && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Responsável <span className="text-red-500 dark:text-red-400">*</span>
+                  Responsável
                 </label>
                 <input
                   type="text"
                   name="responsavel"
                   value={formData.responsavel}
-                  onChange={handleInputChange}
-                  className={inputClass}
-                  required
+                  readOnly
+                  disabled
+                  className={`${inputClass} bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed`}
                 />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Preenchido automaticamente com o utilizador autenticado.
+                </p>
               </div>
             )}
             {formData.tipoMovimento === 'enviado' && (
@@ -318,31 +309,6 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                 />
               </div>
             )}
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                Tags <span className="text-gray-400 dark:text-gray-500 font-normal text-xs">(separadas por vírgula)</span>
-              </label>
-              <input
-                type="text"
-                value={tagsInput}
-                onChange={handleTagsChange}
-                placeholder="urgente, relatório, mensal"
-                className={inputClass}
-              />
-              {formData.tags.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {formData.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex px-2 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">

@@ -13,7 +13,8 @@ export interface TableColumn<T = any> {
   sortable?: boolean;
   width?: string;
   ellipsis?: boolean; // Nova propriedade para truncar texto com ...
-  maxWidth?: string; // Largura máxima para ellipsis
+  wrap?: boolean; // Permite quebrar o texto em várias linhas em vez de truncar
+  maxWidth?: string; // Largura máxima para ellipsis/wrap
 }
 
 export interface TableAction<T = any> {
@@ -207,8 +208,8 @@ const DataTable = <T extends Record<string, any>>({
                 {columns.map((column) => (
                   <td
                     key={column.key}
-                    className={`px-6 py-4 text-gray-900 dark:text-gray-100 ${column.ellipsis ? '' : 'whitespace-nowrap'}`}
-                    style={column.ellipsis ? { maxWidth: column.maxWidth || '300px' } : undefined}
+                    className={`px-6 py-4 text-gray-900 dark:text-gray-100 ${column.ellipsis || column.wrap ? '' : 'whitespace-nowrap'}`}
+                    style={column.ellipsis || column.wrap ? { maxWidth: column.maxWidth || '300px' } : undefined}
                   >
                     {column.ellipsis ? (
                       <div

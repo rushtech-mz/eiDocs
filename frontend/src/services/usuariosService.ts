@@ -6,19 +6,20 @@ import {
   apiPut, 
   apiDelete 
 } from '@/lib/api';
-import { 
-  ApiResponse, 
+import {
+  ApiResponse,
   ApiPaginatedResponse,
   Usuario,
   UsuarioQueryParams,
+  UserRole,
   CreateUsuario,
   UpdateUsuario
 } from '@/types';
 
 export class UsuariosService {
   // Listar todos os usuários (com paginação e filtros)
-  static async listar(params?: UsuarioQueryParams): Promise<any> {
-    return apiGet<any>('/usuarios', params as Record<string, string | number | boolean>);
+  static async listar(params?: UsuarioQueryParams): Promise<ApiPaginatedResponse<Usuario>> {
+    return apiGet<ApiPaginatedResponse<Usuario>>('/usuarios', params as Record<string, string | number | boolean>);
   }
 
   // Buscar usuário por ID
@@ -42,7 +43,7 @@ export class UsuariosService {
   }
 
   // Buscar usuários por texto (busca em nome, apelido e username)
-  static async buscarPorTexto(texto: string, filtros?: Partial<UsuarioQueryParams>): Promise<any> {
+  static async buscarPorTexto(texto: string, filtros?: Partial<UsuarioQueryParams>): Promise<ApiPaginatedResponse<Usuario>> {
     const params: UsuarioQueryParams = {
       q: texto,
       limit: 100,
@@ -52,7 +53,7 @@ export class UsuariosService {
   }
 
   // Buscar usuários por departamento
-  static async buscarPorDepartamento(departamentoId: string, params?: UsuarioQueryParams): Promise<any> {
+  static async buscarPorDepartamento(departamentoId: string, params?: UsuarioQueryParams): Promise<ApiPaginatedResponse<Usuario>> {
     return this.listar({
       ...params,
       departamento: departamentoId
@@ -60,10 +61,10 @@ export class UsuariosService {
   }
 
   // Buscar usuários por role
-  static async buscarPorRole(role: string, params?: UsuarioQueryParams): Promise<any> {
+  static async buscarPorRole(role: string, params?: UsuarioQueryParams): Promise<ApiPaginatedResponse<Usuario>> {
     return this.listar({
       ...params,
-      role: role
+      role: role as UserRole
     });
   }
 
@@ -80,7 +81,7 @@ export class UsuariosService {
 
   // Listar apenas usuários ativos
   static async listarAtivos(): Promise<ApiResponse<Usuario[]>> {
-    const response = await this.listar({ ativo: true, limit: 1000 });
+    const response = await this.listar({ ativo: true, limit: 100 });
     return {
       success: response.success,
       data: response.data
@@ -109,17 +110,15 @@ export class UsuariosService {
     porRole: Record<string, number>;
   }> {
     try {
-      const response = await this.listar({ limit: 1000 });
+      const response = await this.listar({ limit: 100 });
       const usuarios = response.data;
       
       const ativos = usuarios.filter(u => u.ativo).length;
       const inativos = usuarios.length - ativos;
-      
+
       const porRole: Record<string, number> = {};
       usuarios.forEach(usuario => {
-        usuario.roles.forEach(role => {
-          porRole[role] = (porRole[role] || 0) + 1;
-        });
+        porRole[usuario.role] = (porRole[usuario.role] || 0) + 1;
       });
 
       return {

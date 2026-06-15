@@ -17,7 +17,6 @@ import {
   User, 
   File,
   Download,
-  Tag,
   Clock,
   Send,
   Inbox,
@@ -256,22 +255,6 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
             </div>
           </div>
         </div>
-        {/* TAGS */}
-        {documento.tags && documento.tags.length > 0 && (
-          <div className="px-6 mb-6">
-            <h4 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center"><Tag className="w-4 h-4 mr-2" />Tags</h4>
-            <div className="flex flex-wrap gap-2">
-              {documento.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 rounded-full shadow"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
         {/* METADADOS DO SISTEMA */}
         <div className="border-t pt-4 px-6">
           <h4 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center"><Clock className="w-4 h-4 mr-2" />Informações do Sistema</h4>

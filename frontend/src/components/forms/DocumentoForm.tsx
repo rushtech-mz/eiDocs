@@ -51,9 +51,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
     responsavel: '',
     dataEnvio: '',
     dataRecebimento: '',
-    tags: [],
-    status: 'ativo',
-    ativo: true
+    status: 'ativo'
   });
 
   const isEditing = !!documento;
@@ -85,9 +83,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
           responsavel: documento.responsavel || '',
           dataEnvio: formatDateForInput(documento.dataEnvio),
           dataRecebimento: formatDateForInput(documento.dataRecebimento),
-          tags: documento.tags || [],
-          status: documento.status,
-          ativo: documento.ativo
+          status: documento.status
         });
         setSelectedFile(null); // Não permite alterar arquivo na edição
       } else {
@@ -104,9 +100,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
           responsavel: '',
           dataEnvio: '',
           dataRecebimento: '',
-          tags: [],
-          status: 'ativo',
-          ativo: true
+          status: 'ativo'
         });
         setSelectedFile(null);
       }
@@ -125,9 +119,10 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
       setDepartamentos(depsData);
       
       // Se editor/user, pré-selecionar departamento e carregar categorias
-      if (!isAdmin() && user?.departamento?._id) {
-        setFormData(prev => ({ ...prev, departamento: user.departamento._id }));
-        loadCategorias(user.departamento._id);
+      if (!isAdmin() && user?.departamento && typeof user.departamento === 'object') {
+        const departamentoId = user.departamento._id;
+        setFormData(prev => ({ ...prev, departamento: departamentoId }));
+        loadCategorias(departamentoId);
       }
     } catch (error) {
       console.error('Erro ao carregar dados para selects:', error);
@@ -186,6 +181,13 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
     }
   }, [formData.categoria, tipos]);
 
+  // Para documentos internos, o responsável é sempre o utilizador autenticado
+  useEffect(() => {
+    if (formData.tipoMovimento === 'interno' && user?.nome && formData.responsavel !== user.nome) {
+      setFormData(prev => ({ ...prev, responsavel: user.nome }));
+    }
+  }, [formData.tipoMovimento, formData.responsavel, user]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     setFormData(prev => ({
@@ -197,12 +199,6 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
-  };
-
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tagsString = e.target.value;
-    const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
-    setFormData(prev => ({ ...prev, tags: tagsArray }));
   };
 
   const handleFileSelect = (file: File) => {
@@ -279,10 +275,6 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
       if (!formData.remetente?.trim()) {
         newErrors.remetente = 'Remetente é obrigatório para documentos recebidos';
       }
-    } else if (formData.tipoMovimento === 'interno') {
-      if (!formData.responsavel?.trim()) {
-        newErrors.responsavel = 'Responsável é obrigatório para documentos internos';
-      }
     }
 
     // Arquivo obrigatório apenas na criação
@@ -317,9 +309,8 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
           // Converter datas para formato ISO se preenchidas
           dataEnvio: formData.dataEnvio ? new Date(formData.dataEnvio + 'T00:00:00').toISOString() : undefined,
           dataRecebimento: formData.dataRecebimento ? new Date(formData.dataRecebimento + 'T00:00:00').toISOString() : undefined,
-          tags: formData.tags,
           status: formData.status,
-          ativo: formData.ativo
+          ativo: formData.status === 'ativo'
         };
 
         // Remover campos undefined
@@ -337,6 +328,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
           // Converter datas para formato ISO se preenchidas
           dataEnvio: formData.dataEnvio ? new Date(formData.dataEnvio + 'T00:00:00').toISOString() : undefined,
           dataRecebimento: formData.dataRecebimento ? new Date(formData.dataRecebimento + 'T00:00:00').toISOString() : undefined,
+          ativo: formData.status === 'ativo',
           arquivo: selectedFile!
         };
         await criar(documentoData as any);
@@ -579,21 +571,20 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         {formData.tipoMovimento === 'interno' && (
           <div>
             <label htmlFor="responsavel" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Responsável *
+              Responsável
             </label>
             <input
               type="text"
               id="responsavel"
               name="responsavel"
               value={formData.responsavel}
-              onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border ${errors.responsavel ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
-              placeholder="Nome do responsável pelo documento"
-              disabled={loading}
+              readOnly
+              disabled
+              className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed sm:text-sm"
             />
-            {errors.responsavel && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.responsavel}</p>
-            )}
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Preenchido automaticamente com o utilizador autenticado.
+            </p>
           </div>
         )}
 
@@ -612,26 +603,6 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
             placeholder="Descrição opcional do documento"
             disabled={loading}
           />
-        </div>
-
-        {/* Tags */}
-        <div>
-          <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Tags
-          </label>
-          <input
-            type="text"
-            id="tags"
-            name="tags"
-            value={(formData.tags || []).join(', ')}
-            onChange={handleTagsChange}
-            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            placeholder="Digite as tags separadas por vírgula"
-            disabled={loading}
-          />
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Separe as tags com vírgulas (ex: relatório, mensal, financeiro)
-          </p>
         </div>
 
         {/* Upload de Arquivo - Apenas na criação */}
@@ -698,8 +669,8 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
           </div>
         )}
 
-        {/* Status e Ativo */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Status - apenas na edição (na criação o documento é sempre ativo) */}
+        {isEditing && (
           <div>
             <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Status
@@ -716,23 +687,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
               <option value="arquivado">Arquivado</option>
             </select>
           </div>
-
-          <div className="flex items-center justify-center">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                name="ativo"
-                checked={formData.ativo}
-                onChange={handleInputChange}
-                className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
-                disabled={loading}
-              />
-              <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                Documento ativo
-              </span>
-            </label>
-          </div>
-        </div>
+        )}
 
         {/* Botões */}
         <div className="flex justify-end space-x-3 pt-4">

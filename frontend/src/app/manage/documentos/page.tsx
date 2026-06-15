@@ -137,15 +137,15 @@ const DocumentosPage = () => {
       key: 'titulo',
       title: 'Documento',
       sortable: true,
-      ellipsis: true,
+      wrap: true,
       maxWidth: '350px',
       render: (value, record) => (
-        <div className="flex items-center space-x-3">
-          <div className="flex-shrink-0">
+        <div className="flex items-start space-x-3">
+          <div className="flex-shrink-0 mt-0.5">
             <FileText className="w-5 h-5 text-gray-400 dark:text-gray-500" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{value}</div>
+            <div className="font-medium text-gray-900 dark:text-gray-100 break-words">{value}</div>
             {record.descricao && (
               <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{record.descricao}</div>
             )}
@@ -179,28 +179,6 @@ const DocumentosPage = () => {
         <div className="flex items-center space-x-2">
           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value.cor || '#6B7280' }}></div>
           <span className="text-sm">{value.nome}</span>
-        </div>
-      ),
-    },
-    {
-      key: 'tags',
-      title: 'Tags',
-      width: 'w-40',
-      render: (value) => (
-        <div className="flex flex-wrap gap-1">
-          {value.slice(0, 2).map((tag: string, index: number) => (
-            <span
-              key={index}
-              className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-          {value.length > 2 && (
-            <span className="inline-flex px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full">
-              +{value.length - 2}
-            </span>
-          )}
         </div>
       ),
     },

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { User, Lock, Eye, EyeOff, Building2, ShieldCheck, FolderLock, History } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToastContext } from "@/contexts/ToastContext";
@@ -44,7 +44,7 @@ const features = [
   },
 ];
 
-const LoginPage = () => {
+const LoginForm = () => {
   const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
@@ -267,5 +267,11 @@ const LoginPage = () => {
     </div>
   );
 };
+
+const LoginPage = () => (
+  <Suspense fallback={null}>
+    <LoginForm />
+  </Suspense>
+);
 
 export default LoginPage;

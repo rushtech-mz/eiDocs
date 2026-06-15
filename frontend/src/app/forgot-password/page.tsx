@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { User, Building2, ArrowLeft } from "lucide-react";
 import { authService } from "@/services/authService";
 import Link from "next/link";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordForm = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -133,5 +133,11 @@ const ForgotPasswordPage = () => {
     </div>
   );
 };
+
+const ForgotPasswordPage = () => (
+  <Suspense fallback={null}>
+    <ForgotPasswordForm />
+  </Suspense>
+);
 
 export default ForgotPasswordPage;

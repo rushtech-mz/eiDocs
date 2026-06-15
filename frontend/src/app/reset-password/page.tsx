@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff } from "lucide-react";
 import { authService } from "@/services/authService";
 import Link from "next/link";
 
-const ResetPasswordPage = () => {
+const ResetPasswordForm = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get("token") ?? "";
@@ -155,5 +155,11 @@ const ResetPasswordPage = () => {
     </div>
   );
 };
+
+const ResetPasswordPage = () => (
+  <Suspense fallback={null}>
+    <ResetPasswordForm />
+  </Suspense>
+);
 
 export default ResetPasswordPage;

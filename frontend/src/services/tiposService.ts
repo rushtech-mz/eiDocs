@@ -54,20 +54,22 @@ export class TiposService {
     return this.listar(params);
   }
 
-  // Listar apenas tipos ativos
-  static async listarAtivos(): Promise<ApiPaginatedResponse<TipoDocumento>> {
+  // Listar apenas tipos ativos (opcionalmente filtrados por categoria)
+  static async listarAtivos(categoriaId?: string): Promise<ApiPaginatedResponse<TipoDocumento>> {
     const params: TipoQueryParams = {
       ativo: true,
-      limit: 100
+      limit: 100,
+      ...(categoriaId ? { categoria: categoriaId } : {})
     };
     return this.listar(params);
   }
 
-  // Listar apenas tipos ativos de um departamento específico
-  static async listarAtivosPorDepartamento(departamentoId: string): Promise<ApiPaginatedResponse<TipoDocumento>> {
+  // Listar apenas tipos ativos de um departamento específico (opcionalmente filtrados por categoria)
+  static async listarAtivosPorDepartamento(departamentoId: string, categoriaId?: string): Promise<ApiPaginatedResponse<TipoDocumento>> {
     const params: TipoQueryParams = {
       ativo: true,
-      limit: 100
+      limit: 100,
+      ...(categoriaId ? { categoria: categoriaId } : {})
     };
     return this.listarPorDepartamento(departamentoId, params);
   }
@@ -94,10 +96,10 @@ export class TiposService {
     }
   }
 
-  // Obter tipos para select/dropdown (admin - todos os tipos)
-  static async obterParaSelect(): Promise<{ value: string; label: string }[]> {
+  // Obter tipos para select/dropdown (admin - todos os tipos, opcionalmente por categoria)
+  static async obterParaSelect(categoriaId?: string): Promise<{ value: string; label: string }[]> {
     try {
-      const response = await this.listarAtivos();
+      const response = await this.listarAtivos(categoriaId);
       return response.data.map(tipo => ({
         value: tipo._id,
         label: tipo.nome
@@ -108,10 +110,10 @@ export class TiposService {
     }
   }
 
-  // Obter tipos para select/dropdown (editor/user - por departamento)
-  static async obterParaSelectPorDepartamento(departamentoId: string): Promise<{ value: string; label: string }[]> {
+  // Obter tipos para select/dropdown (editor/user - por departamento, opcionalmente por categoria)
+  static async obterParaSelectPorDepartamento(departamentoId: string, categoriaId?: string): Promise<{ value: string; label: string }[]> {
     try {
-      const response = await this.listarAtivosPorDepartamento(departamentoId);
+      const response = await this.listarAtivosPorDepartamento(departamentoId, categoriaId);
       return response.data.map(tipo => ({
         value: tipo._id,
         label: tipo.nome

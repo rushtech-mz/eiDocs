@@ -36,7 +36,6 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
   
   const [departamentos, setDepartamentos] = useState<{ value: string; label: string }[]>([]);
   const [categorias, setCategorias] = useState<{ value: string; label: string }[]>([]);
-  const [tipos, setTipos] = useState<{ value: string; label: string }[]>([]);
   const [tiposFiltrados, setTiposFiltrados] = useState<{ value: string; label: string }[]>([]);
   
   const [formData, setFormData] = useState<CreateDocumento>({
@@ -143,43 +142,39 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
     try {
       const categoriesData = await obterCategorias(departamentoId);
       setCategorias(categoriesData);
-      
-      // Também carregar tipos desse departamento
-      await loadTiposDoDepartamento(departamentoId);
     } catch (error) {
       console.error('Erro ao carregar categorias:', error);
       setCategorias([]);
     }
   };
 
-  const loadTiposDoDepartamento = async (departamentoId: string) => {
-    try {
-      // Se for admin, buscar todos os tipos
-      // Se for editor/user, buscar apenas tipos do departamento
-      const tiposData = isAdmin() 
-        ? await obterTipos() 
-        : await obterTiposPorDep(departamentoId);
-      
-      setTipos(tiposData);
-    } catch (error) {
-      console.error('Erro ao carregar tipos:', error);
-      setTipos([]);
-    }
-  };
-
-  // Filtrar tipos por categoria selecionada
+  // Carregar tipos da categoria selecionada (filtrados no backend por categoria)
   useEffect(() => {
-    if (formData.categoria && tipos.length > 0) {
-      // Mostrar todos os tipos disponíveis quando uma categoria é selecionada
-      setTiposFiltrados(tipos);
-    } else {
-      setTiposFiltrados([]);
-      // Limpar tipo selecionado se categoria mudar
-      if (formData.tipo && !formData.categoria) {
-        setFormData(prev => ({ ...prev, tipo: '' }));
+    const loadTiposDaCategoria = async () => {
+      if (!formData.categoria || !formData.departamento) {
+        setTiposFiltrados([]);
+        return;
       }
-    }
-  }, [formData.categoria, tipos]);
+
+      try {
+        const tiposData = isAdmin()
+          ? await obterTipos(formData.categoria)
+          : await obterTiposPorDep(formData.departamento, formData.categoria);
+
+        setTiposFiltrados(tiposData);
+
+        // Limpar tipo selecionado se não pertencer à categoria atual
+        if (formData.tipo && !tiposData.some(t => t.value === formData.tipo)) {
+          setFormData(prev => ({ ...prev, tipo: '' }));
+        }
+      } catch (error) {
+        console.error('Erro ao carregar tipos da categoria:', error);
+        setTiposFiltrados([]);
+      }
+    };
+
+    loadTiposDaCategoria();
+  }, [formData.categoria, formData.departamento]);
 
   // Para documentos internos, o responsável é sempre o utilizador autenticado
   useEffect(() => {

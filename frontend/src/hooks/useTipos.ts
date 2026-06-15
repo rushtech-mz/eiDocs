@@ -161,10 +161,10 @@ export const useTipos = () => {
     }
   }, [showError]);
 
-  // Obter para select
-  const obterParaSelect = useCallback(async () => {
+  // Obter para select (opcionalmente filtrado por categoria)
+  const obterParaSelect = useCallback(async (categoriaId?: string) => {
     try {
-      return await TiposService.obterParaSelect();
+      return await TiposService.obterParaSelect(categoriaId);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro ao obter tipos para seleção';
       showError(errorMessage);
@@ -172,10 +172,10 @@ export const useTipos = () => {
     }
   }, [showError]);
 
-  // Obter para select por departamento (editor/user)
-  const obterParaSelectPorDepartamento = useCallback(async (departamentoId: string) => {
+  // Obter para select por departamento (editor/user, opcionalmente filtrado por categoria)
+  const obterParaSelectPorDepartamento = useCallback(async (departamentoId: string, categoriaId?: string) => {
     try {
-      return await TiposService.obterParaSelectPorDepartamento(departamentoId);
+      return await TiposService.obterParaSelectPorDepartamento(departamentoId, categoriaId);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro ao obter tipos para seleção';
       showError(errorMessage);

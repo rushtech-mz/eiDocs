@@ -21,11 +21,11 @@ const config: Config = {
     extend: {
       // ===== CORES PERSONALIZADAS DA RUSH TECH =====
       colors: {
-        // Cores primárias (do logo)
-        'primary-blue': '#1E90FF',
-        'primary-purple': '#9D4EDD',
+        // Cores primárias
+        'primary-blue': '#16A34A',
+        'primary-purple': '#059669',
         'primary-dark': '#0A1628',
-        
+
         // Cores de estado
         'success': '#10B981',
         'error': '#EF4444',
@@ -39,14 +39,14 @@ const config: Config = {
 
       // ===== GRADIENTES =====
       backgroundImage: {
-        // Gradiente principal (azul → roxo) como no logo
-        'gradient-primary': 'linear-gradient(135deg, #1E90FF 0%, #9D4EDD 100%)',
-        
+        // Gradiente principal (verde → esmeralda)
+        'gradient-primary': 'linear-gradient(135deg, #16A34A 0%, #059669 100%)',
+
         // Gradiente invertido
-        'gradient-primary-reverse': 'linear-gradient(135deg, #9D4EDD 0%, #1E90FF 100%)',
-        
+        'gradient-primary-reverse': 'linear-gradient(135deg, #059669 0%, #16A34A 100%)',
+
         // Gradiente sutil para seções
-        'gradient-subtle': 'linear-gradient(135deg, rgba(30, 144, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%)',
+        'gradient-subtle': 'linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%)',
         
         // Gradiente escuro para hero
         'gradient-dark': 'linear-gradient(135deg, #0A1628 0%, #1E293B 100%)',
@@ -139,16 +139,16 @@ const config: Config = {
       // ===== SOMBRAS PERSONALIZADAS =====
       boxShadow: {
         // Sombra suave
-        'soft': '0 2px 15px rgba(30, 144, 255, 0.1)',
-        
+        'soft': '0 2px 15px rgba(22, 163, 74, 0.1)',
+
         // Sombra média
-        'medium': '0 4px 20px rgba(30, 144, 255, 0.15)',
-        
+        'medium': '0 4px 20px rgba(22, 163, 74, 0.15)',
+
         // Sombra forte
-        'strong': '0 8px 30px rgba(30, 144, 255, 0.2)',
-        
+        'strong': '0 8px 30px rgba(22, 163, 74, 0.2)',
+
         // Sombra com cor do gradiente
-        'gradient': '0 10px 40px rgba(30, 144, 255, 0.3)',
+        'gradient': '0 10px 40px rgba(22, 163, 74, 0.3)',
         
         // Sombra interna
         'inner-soft': 'inset 0 2px 4px rgba(0, 0, 0, 0.06)',

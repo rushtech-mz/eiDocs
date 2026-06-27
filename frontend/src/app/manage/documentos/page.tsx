@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -189,7 +189,7 @@ const DocumentosPage = () => {
       width: 'w-40',
       render: (value, record: any) => {
         const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-          'recebido': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+          'recebido': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Recebido' },
           'enviado': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
           'interno': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' }
         };

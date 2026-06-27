@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ModernInput from "@/components/ui/ModernInput";
@@ -15,11 +15,11 @@ const DemoPage = () => {
   const [inputValue, setInputValue] = React.useState("");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center py-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-indigo-600 bg-clip-text text-transparent mb-4">
             Demonstração dos Componentes
           </h1>
           <p className="text-gray-600 text-lg">
@@ -58,7 +58,7 @@ const DemoPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Digite sua senha"
-                  className="w-full px-4 py-3 pl-10 pr-12 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300"
+                  className="w-full px-4 py-3 pl-10 pr-12 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-4 focus:ring-green-200 transition-all duration-300"
                 />
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                   <Lock className="h-5 w-5" />

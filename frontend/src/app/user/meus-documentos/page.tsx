@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -142,7 +142,7 @@ const MeusDocumentosPage = () => {
 
   const getMovementBadge = (tipoMovimento: string, record: any) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      'recebido': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      'recebido': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Recebido' },
       'enviado': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
       'interno': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' }
     };
@@ -322,7 +322,7 @@ const MeusDocumentosPage = () => {
               </p>
               <Link
                 href="/user/upload"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Criar Primeiro Documento

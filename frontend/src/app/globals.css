@@ -197,8 +197,8 @@
 
 /* Tokens da marca Rush Tech (gradiente azul -> roxo do logo), usados na landing page */
 @theme {
-  --color-primary-blue: #1E90FF;
-  --color-primary-purple: #9D4EDD;
+  --color-primary-blue: #16A34A;
+  --color-primary-purple: #059669;
   --color-primary-dark: #0A1628;
 
   --color-success: #10B981;
@@ -206,16 +206,16 @@
   --color-warning: #F59E0B;
   --color-info: #06B6D4;
 
-  --background-image-gradient-primary: linear-gradient(135deg, #1E90FF 0%, #9D4EDD 100%);
-  --background-image-gradient-primary-reverse: linear-gradient(135deg, #9D4EDD 0%, #1E90FF 100%);
-  --background-image-gradient-subtle: linear-gradient(135deg, rgba(30, 144, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
+  --background-image-gradient-primary: linear-gradient(135deg, #16A34A 0%, #059669 100%);
+  --background-image-gradient-primary-reverse: linear-gradient(135deg, #059669 0%, #16A34A 100%);
+  --background-image-gradient-subtle: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
   --background-image-gradient-dark: linear-gradient(135deg, #0A1628 0%, #1E293B 100%);
   --background-image-gradient-overlay: linear-gradient(180deg, rgba(10, 22, 40, 0) 0%, rgba(10, 22, 40, 0.8) 100%);
 
-  --shadow-soft: 0 2px 15px rgba(30, 144, 255, 0.1);
-  --shadow-medium: 0 4px 20px rgba(30, 144, 255, 0.15);
-  --shadow-strong: 0 8px 30px rgba(30, 144, 255, 0.2);
-  --shadow-gradient: 0 10px 40px rgba(30, 144, 255, 0.3);
+  --shadow-soft: 0 2px 15px rgba(22, 163, 74, 0.1);
+  --shadow-medium: 0 4px 20px rgba(22, 163, 74, 0.15);
+  --shadow-strong: 0 8px 30px rgba(22, 163, 74, 0.2);
+  --shadow-gradient: 0 10px 40px rgba(22, 163, 74, 0.3);
   --shadow-inner-soft: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;

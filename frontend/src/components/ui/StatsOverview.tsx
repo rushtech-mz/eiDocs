@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -37,7 +37,7 @@ const StatCard: React.FC<StatCardProps> = ({
   color = 'blue' 
 }) => {
   const colorClasses = {
-    blue: 'text-blue-600 bg-blue-50',
+    blue: 'text-green-600 bg-green-50',
     green: 'text-green-600 bg-green-50',
     red: 'text-red-600 bg-red-50',
     yellow: 'text-yellow-600 bg-yellow-50',

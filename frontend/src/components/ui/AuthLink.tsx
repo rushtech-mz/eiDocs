@@ -24,7 +24,7 @@ const AuthLink: React.FC<AuthLinkProps> = ({
       href={href}
       className={`
         inline-flex items-center space-x-2 text-sm font-medium text-gray-600 
-        hover:text-blue-600 transition-all duration-300 group
+        hover:text-green-600 transition-all duration-300 group
         ${variant === "backward" ? "hover:-translate-x-1" : "hover:translate-x-1"}
         ${className}
       `}

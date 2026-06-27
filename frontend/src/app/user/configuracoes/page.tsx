@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import UserLayout from '@/components/ui/UserLayout';
@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToastContext } from '@/contexts/ToastContext';
 import { authService, UserRole } from '@/services/authService';
 
-const inputClass = "block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
+const inputClass = "block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500";
 const inputDisabledClass = "block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed";
 const labelClass = "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2";
 const hintClass = "text-xs text-gray-500 dark:text-gray-400 mt-1";
@@ -189,7 +189,7 @@ const ConfiguracoesPage = () => {
         <button
           type="submit"
           disabled={changingPassword}
-          className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {changingPassword ? (
             <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -226,22 +226,22 @@ const ConfiguracoesPage = () => {
                   className={`
                     flex items-center gap-4 p-4 rounded-lg border-2 text-left transition-colors
                     ${active
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
                       : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-800'
                     }
                   `}
                 >
-                  <div className={`p-2 rounded-lg ${active ? 'bg-blue-100 dark:bg-blue-800/50' : 'bg-gray-100 dark:bg-gray-700'}`}>
-                    <Icon className={`w-5 h-5 ${active ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`} />
+                  <div className={`p-2 rounded-lg ${active ? 'bg-green-100 dark:bg-green-800/50' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                    <Icon className={`w-5 h-5 ${active ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`} />
                   </div>
                   <div>
-                    <p className={`text-sm font-medium ${active ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100'}`}>
+                    <p className={`text-sm font-medium ${active ? 'text-green-700 dark:text-green-300' : 'text-gray-900 dark:text-gray-100'}`}>
                       {label}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">{desc}</p>
                   </div>
                   {active && (
-                    <div className="ml-auto w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400" />
+                    <div className="ml-auto w-2 h-2 rounded-full bg-green-500 dark:bg-blue-400" />
                   )}
                 </button>
               );
@@ -275,7 +275,7 @@ const ConfiguracoesPage = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 whitespace-nowrap transition-colors ${
                       activeTab === tab.id
-                        ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                        ? 'border-green-500 text-green-600 dark:text-green-400'
                         : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}
                   >

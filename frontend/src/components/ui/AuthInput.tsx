@@ -16,7 +16,7 @@ const AuthInput: React.FC<AuthInputProps> = ({ type = "text", placeholder, value
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
     />
   );
 };

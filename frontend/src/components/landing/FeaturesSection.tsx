@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { FolderOpen, Search, Shield, BarChart3 } from 'lucide-react';
@@ -10,8 +10,8 @@ const FeaturesSection = () => {
       title: "Organização Inteligente",
       description: "Departamentos, categorias e tipos personalizáveis",
       gradient: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50",
-      textColor: "text-blue-900"
+      bgColor: "bg-green-50",
+      textColor: "text-green-900"
     },
     {
       icon: Search,

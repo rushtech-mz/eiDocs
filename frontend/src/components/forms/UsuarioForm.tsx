@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { CreateUsuario, UpdateUsuario, Usuario, Departamento } from '@/types';
@@ -186,7 +186,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="nome"
           value={formData.nome}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
           placeholder="Digite o nome completo"
           disabled={loading}
           maxLength={100}
@@ -207,7 +207,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="apelido"
           value={formData.apelido}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.apelido ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.apelido ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
           placeholder="Como prefere ser chamado"
           disabled={loading}
           maxLength={50}
@@ -228,7 +228,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="username"
           value={formData.username}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.username ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm lowercase`}
+          className={`mt-1 block w-full rounded-md border ${errors.username ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm lowercase`}
           placeholder="usuario.nome"
           disabled={loading}
           maxLength={30}
@@ -253,7 +253,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="senha"
           value={formData.senha}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.senha ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.senha ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
           placeholder={isEditing ? "Deixe vazio para manter a senha atual" : "Digite a senha"}
           disabled={loading}
         />
@@ -275,7 +275,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="departamento"
           value={formData.departamento}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm ${isEditor ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : ''}`}
+          className={`mt-1 block w-full rounded-md border ${errors.departamento ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm ${isEditor ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : ''}`}
           disabled={loading || isEditor}
         >
           <option value="">Selecione um departamento</option>
@@ -289,7 +289,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.departamento}</p>
         )}
         {isEditor && (
-          <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
+          <p className="mt-1 text-sm text-green-600 dark:text-green-400">
             🔒 Editores só podem criar usuários no seu próprio departamento
           </p>
         )}
@@ -305,7 +305,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
           name="role"
           value={formData.role}
           onChange={handleInputChange}
-          className={`mt-1 block w-full rounded-md border ${errors.role ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+          className={`mt-1 block w-full rounded-md border ${errors.role ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
           disabled={loading}
         >
           <option value="user">Usuário (Nível Básico)</option>
@@ -330,7 +330,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
             name="ativo"
             checked={formData.ativo}
             onChange={handleInputChange}
-            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
+            className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-green-600 focus:ring-green-500"
             disabled={loading}
           />
           <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -347,7 +347,7 @@ const UsuarioForm: React.FC<UsuarioFormProps> = ({
         <button
           type="submit"
           disabled={loading}
-          className="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+          className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
         >
           {loading ? 'Salvando...' : isEditing ? 'Atualizar' : 'Criar'}
         </button>

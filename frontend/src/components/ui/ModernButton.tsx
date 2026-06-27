@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { Loader2 } from "lucide-react";
@@ -37,10 +37,10 @@ const ModernButton: React.FC<ModernButtonProps> = ({
   };
   
   const variantClasses = {
-    primary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl focus:ring-blue-300",
+    primary: "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-lg hover:shadow-xl focus:ring-green-300",
     secondary: "bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white shadow-lg hover:shadow-xl focus:ring-gray-300",
-    outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white focus:ring-blue-300",
-    ghost: "text-blue-600 hover:bg-blue-50 focus:ring-blue-300"
+    outline: "border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white focus:ring-green-300",
+    ghost: "text-green-600 hover:bg-green-50 focus:ring-green-300"
   };
   
   const widthClass = fullWidth ? "w-full" : "";

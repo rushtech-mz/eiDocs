@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -149,7 +149,7 @@ const DocumentosDepartamentoPage = () => {
 
   const getMovementBadge = (tipoMovimento: string, record: any) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      'recebido': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      'recebido': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Recebido' },
       'enviado': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
       'interno': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' }
     };
@@ -272,7 +272,7 @@ const DocumentosDepartamentoPage = () => {
           </button>
           <button
             onClick={() => handleDownload(record)}
-            className="p-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded transition-colors"
+            className="p-1 text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 hover:bg-green-50 dark:hover:bg-blue-900/30 rounded transition-colors"
             title="Download"
           >
             <Download className="w-4 h-4" />

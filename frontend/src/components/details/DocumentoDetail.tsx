@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
@@ -73,7 +73,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
   const getMovementColor = (tipoMovimento: string) => {
     switch (tipoMovimento) {
       case 'enviado': return 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300';
-      case 'recebido': return 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300';
+      case 'recebido': return 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300';
       case 'interno': return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
       default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
@@ -117,7 +117,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
         size="xl"
       >
         {/* HEADER DESTACADO */}
-        <div className="rounded-t-lg bg-gradient-to-r from-blue-600 to-blue-400 p-6 flex items-center space-x-4 mb-4">
+        <div className="rounded-t-lg bg-gradient-to-r from-green-600 to-green-400 p-6 flex items-center space-x-4 mb-4">
           <div className="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center shadow-lg">
             <FileText className="w-8 h-8 text-white" />
           </div>
@@ -158,7 +158,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
               {documento.arquivo && (
                 <button
                   onClick={() => setPreviewOpen(true)}
-                  className="flex items-center px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors shadow"
+                  className="flex items-center px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700 transition-colors shadow"
                   title="Visualizar em tela cheia"
                 >
                   <Eye className="w-4 h-4 mr-1" />Visualizar
@@ -173,7 +173,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
             <h4 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-3">Classificação</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Building2 className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                <Building2 className="w-4 h-4 text-blue-500 dark:text-green-400" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Departamento</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{getEntityName(documento.departamento)}</p>
@@ -220,7 +220,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
               )}
               {documento.tipoMovimento === 'recebido' && documento.remetente && (
                 <div className="flex items-center space-x-3">
-                  <Inbox className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <Inbox className="w-4 h-4 text-green-600 dark:text-green-400" />
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Remetente</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{documento.remetente}</p>
@@ -229,7 +229,7 @@ const DocumentoDetail: React.FC<DocumentoDetailProps> = ({
               )}
               {documento.tipoMovimento === 'recebido' && documento.dataRecebimento && (
                 <div className="flex items-center space-x-3">
-                  <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <Calendar className="w-4 h-4 text-green-600 dark:text-green-400" />
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Data de Recebimento</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{formatDate(documento.dataRecebimento)}</p>

@@ -8,7 +8,40 @@ import FormModal from '@/components/ui/FormModal';
 import FilterPanel, { FilterField } from '@/components/ui/FilterPanel';
 import CategoriaForm from '@/components/forms/CategoriaForm';
 import CategoriaDetail from '@/components/details/CategoriaDetail';
-import { FolderOpen, Edit, Trash2, Eye } from 'lucide-react';
+import {
+  FolderOpen, Edit, Trash2, Eye,
+  FileText, Mail, BarChart3, Calculator, Receipt, FileCheck,
+  Table2, Banknote, Scale, Tag, Folder, type LucideIcon,
+} from 'lucide-react';
+
+const ICONE_MAP: Record<string, LucideIcon> = {
+  'file-contract':   FileText,
+  'envelope':        Mail,
+  'chart-bar':       BarChart3,
+  'calculator':      Calculator,
+  'receipt':         Receipt,
+  'document-check':  FileCheck,
+  'table':           Table2,
+  'currency':        Banknote,
+  'scale':           Scale,
+  'tag':             Tag,
+  'folder':          Folder,
+};
+
+function CategoriaIcone({ icone, cor }: { icone?: string; cor?: string }) {
+  const Icon = icone ? (ICONE_MAP[icone] ?? FolderOpen) : null;
+  const bg = cor ?? '#6b7280';
+  if (!Icon) return (
+    <div className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-600 flex-shrink-0"
+      style={{ backgroundColor: bg }} />
+  );
+  return (
+    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+      style={{ backgroundColor: bg }}>
+      <Icon className="w-4 h-4 text-white" />
+    </div>
+  );
+}
 import { CategoriaDocumento } from '@/types';
 import { useCategorias } from '@/hooks/useCategorias';
 import { useDepartamentos } from '@/hooks/useDepartamentos';
@@ -193,46 +226,19 @@ const CategoriasPage = () => {
       sortable: true,
       ellipsis: true,
       maxWidth: '350px',
-      render: (value, record) => {
-        const color = getColorDisplay(record.cor);
-        return (
-          <div className="flex items-center space-x-3">
-            <div className="flex-shrink-0">
-              <div
-                className="w-3 h-3 rounded-full border border-gray-200 dark:border-gray-600"
-                style={{ backgroundColor: color.bg }}
-              ></div>
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
-              {record.descricao && (
-                <div className="text-sm text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap">
-                  {record.descricao}
-                </div>
-              )}
-            </div>
+      render: (value, record) => (
+        <div className="flex items-center space-x-3">
+          <CategoriaIcone icone={record.icone} cor={record.cor} />
+          <div className="min-w-0 flex-1">
+            <div className="font-medium text-gray-900 dark:text-gray-100">{value}</div>
+            {record.descricao && (
+              <div className="text-sm text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap">
+                {record.descricao}
+              </div>
+            )}
           </div>
-        );
-      },
-    },
-    {
-      key: 'cor',
-      title: 'Cor',
-      width: 'w-20',
-      render: (value) => {
-        const color = getColorDisplay(value);
-        return (
-          <div className="flex items-center space-x-2">
-            <div
-              className="w-4 h-4 rounded-full border border-gray-200 dark:border-gray-600"
-              style={{ backgroundColor: color.bg }}
-            ></div>
-            <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
-              {value || '#6b7280'}
-            </span>
-          </div>
-        );
-      },
+        </div>
+      ),
     },
     {
       key: 'ativo',

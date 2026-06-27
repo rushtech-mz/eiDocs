@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { CreateDepartamento, UpdateDepartamento, Departamento } from '@/types';
@@ -130,7 +130,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             name="nome"
             value={formData.nome}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
             placeholder="Digite o nome do departamento"
             disabled={loading}
           />
@@ -150,7 +150,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             name="codigo"
             value={formData.codigo}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm uppercase`}
+            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm uppercase`}
             placeholder="DEPTO_001"
             disabled={loading}
             style={{ textTransform: 'uppercase' }}
@@ -174,7 +174,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
             value={formData.descricao}
             onChange={handleInputChange}
             rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm"
             placeholder="Descrição opcional do departamento"
             disabled={loading}
           />
@@ -188,7 +188,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
               name="ativo"
               checked={formData.ativo}
               onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-green-600 focus:ring-green-500"
               disabled={loading}
             />
             <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -205,7 +205,7 @@ const DepartamentoForm: React.FC<DepartamentoFormProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+            className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
           >
             {loading ? 'Salvando...' : isEditing ? 'Atualizar' : 'Criar'}
           </button>

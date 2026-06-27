@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import Link from 'next/link';
@@ -9,10 +9,10 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       
       {/* Background com gradiente e elementos decorativos */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50/30 to-white" />
       
       {/* Círculos coloridos decorativos */}
-      <div className="absolute top-20 right-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" />
+      <div className="absolute top-20 right-20 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" />
       <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" />
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
@@ -43,9 +43,9 @@ const HeroSection = () => {
             <CheckCircle className="w-5 h-5 text-green-600" />
             <span className="font-semibold text-green-900">Organização Total</span>
           </div>
-          <div className="flex items-center space-x-2 px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl">
-            <CheckCircle className="w-5 h-5 text-blue-600" />
-            <span className="font-semibold text-blue-900">Busca Instantânea</span>
+          <div className="flex items-center space-x-2 px-4 py-3 bg-green-50 border border-green-200 rounded-xl">
+            <CheckCircle className="w-5 h-5 text-green-600" />
+            <span className="font-semibold text-green-900">Busca Instantânea</span>
           </div>
           <div className="flex items-center space-x-2 px-4 py-3 bg-purple-50 border border-purple-200 rounded-xl">
             <CheckCircle className="w-5 h-5 text-purple-600" />

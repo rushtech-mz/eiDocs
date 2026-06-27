@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -137,7 +137,7 @@ const DataTable = <T extends Record<string, any>>({
     return (
       <div className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`}>
         <div className="p-8 text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
           <p className="mt-2 text-gray-500 dark:text-gray-400">Carregando...</p>
         </div>
       </div>
@@ -182,12 +182,12 @@ const DataTable = <T extends Record<string, any>>({
                       <div className="flex flex-col">
                         <span className={`text-xs ${
                           sortColumn === column.key && sortDirection === 'asc'
-                            ? 'text-blue-600 dark:text-blue-400'
+                            ? 'text-green-600 dark:text-green-400'
                             : 'text-gray-400 dark:text-gray-600'
                         }`}>▲</span>
                         <span className={`text-xs ${
                           sortColumn === column.key && sortDirection === 'desc'
-                            ? 'text-blue-600 dark:text-blue-400'
+                            ? 'text-green-600 dark:text-green-400'
                             : 'text-gray-400 dark:text-gray-600'
                         }`}>▼</span>
                       </div>

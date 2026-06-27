@@ -6,7 +6,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { authService } from "@/services/authService";
-import Link from "next/link";
 
 interface TenantInfo {
   id: string;
@@ -111,8 +110,6 @@ const LoginForm = () => {
     }
   };
 
-  const slugParam = searchParams.get("slug") ?? getSubdomainSlug();
-
   return (
     <div className="min-h-screen flex bg-white dark:bg-gray-950">
       {/* Painel institucional (desktop) */}
@@ -139,7 +136,7 @@ const LoginForm = () => {
             {features.map(({ icon: Icon, title, description }) => (
               <div key={title} className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-blue-300" />
+                  <Icon className="w-5 h-5 text-green-300" />
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-white">{title}</p>
@@ -211,12 +208,6 @@ const LoginForm = () => {
                 <label htmlFor="senha" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Senha
                 </label>
-                <Link
-                  href={`/forgot-password${slugParam ? `?slug=${slugParam}` : ""}`}
-                  className="text-xs font-medium text-primary-blue hover:text-blue-700 dark:hover:text-blue-300"
-                >
-                  Esqueceu a senha?
-                </Link>
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400 dark:text-gray-500" />
@@ -256,12 +247,6 @@ const LoginForm = () => {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            Não tens conta?{" "}
-            <Link href="/register" className="font-medium text-primary-blue hover:text-blue-700 dark:hover:text-blue-300">
-              Criar empresa
-            </Link>
-          </p>
         </div>
       </div>
     </div>

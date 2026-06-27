@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect } from 'react';
 import { X, CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react';
@@ -54,7 +54,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       case 'warning':
         return 'bg-yellow-50 border-yellow-200';
       case 'info':
-        return 'bg-blue-50 border-blue-200';
+        return 'bg-green-50 border-green-200';
       default:
         return 'bg-gray-50 border-gray-200';
     }
@@ -69,7 +69,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       case 'warning':
         return 'text-yellow-800';
       case 'info':
-        return 'text-blue-800';
+        return 'text-green-800';
       default:
         return 'text-gray-800';
     }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { FileText, Calendar, User, Building2, Download, Edit2 } from 'lucide-react';
@@ -40,7 +40,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
 
   const getMovementBadge = (tipoMovimento: string, record: Documento) => {
     const movementConfig: Record<string, { bg: string; text: string; label: string }> = {
-      recebido: { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Recebido' },
+      recebido: { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Recebido' },
       enviado: { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Enviado' },
       interno: { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Interno' },
     };
@@ -105,7 +105,7 @@ const DocumentoViewModal: React.FC<DocumentoViewModalProps> = ({
       </button>
       <button
         onClick={() => onEdit(documento)}
-        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
       >
         <Edit2 className="w-4 h-4" />
         Editar

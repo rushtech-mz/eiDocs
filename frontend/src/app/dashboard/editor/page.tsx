@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo } from "react";
 import { formatNumber, formatPercent } from "@/lib/formatters";
@@ -130,8 +130,8 @@ const EditorDashboardPage = () => {
                   {loading ? "-" : formatNumber(stats?.documentos?.total || 0)}
                 </p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-full">
-                <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/40 rounded-full">
+                <FileText className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
             </div>
           </div>
@@ -192,12 +192,12 @@ const EditorDashboardPage = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Tipos de Documento</p>
-                <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mt-2">
+                <p className="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">
                   {loading ? "-" : formatNumber(stats?.tipos?.total || 0)}
                 </p>
               </div>
-              <div className="p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-full">
-                <File className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/40 rounded-full">
+                <File className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Tipos disponíveis no departamento</p>
@@ -211,7 +211,7 @@ const EditorDashboardPage = () => {
           {/* Documentos por Categoria */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-              <BarChart3 className="w-5 h-5 mr-2 text-blue-600 dark:text-blue-400" />
+              <BarChart3 className="w-5 h-5 mr-2 text-green-600 dark:text-green-400" />
               Documentos por Categoria
             </h3>
             
@@ -225,7 +225,7 @@ const EditorDashboardPage = () => {
               <div className="space-y-3">
                 {stats.documentos.porCategoria.map((item: any, idx: number) => {
                   const percentage = ((item.quantidade / (stats.documentos?.total || 1)) * 100).toFixed(1);
-                  const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-yellow-500', 'bg-pink-500'];
+                  const colors = ['bg-green-500', 'bg-teal-500', 'bg-purple-500', 'bg-yellow-500', 'bg-pink-500'];
                   const color = colors[idx % colors.length];
                   
                   return (
@@ -266,7 +266,7 @@ const EditorDashboardPage = () => {
               <div className="space-y-3">
                 {stats.documentos.porTipo.slice(0, 5).map((item: any, idx: number) => {
                   const percentage = ((item.quantidade / (stats.documentos?.total || 1)) * 100).toFixed(1);
-                  const colors = ['bg-indigo-500', 'bg-cyan-500', 'bg-teal-500', 'bg-orange-500', 'bg-red-500'];
+                  const colors = ['bg-violet-500', 'bg-cyan-500', 'bg-teal-500', 'bg-orange-500', 'bg-red-500'];
                   const color = colors[idx % colors.length];
                   
                   return (
@@ -302,7 +302,7 @@ const EditorDashboardPage = () => {
             </h3>
             <Link 
               href="/manage/documentos"
-              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+              className="text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
             >
               Ver todos →
             </Link>
@@ -322,8 +322,8 @@ const EditorDashboardPage = () => {
                   className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
-                      <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className="p-2 bg-green-100 dark:bg-green-900/40 rounded-lg">
+                      <FileText className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
                       <p className="font-medium text-gray-900 dark:text-gray-100">{doc.title}</p>
@@ -354,9 +354,9 @@ const EditorDashboardPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link
             href="/manage/documentos"
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition-all group"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-green-500 hover:shadow-md transition-all group"
           >
-            <FileText className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-3 group-hover:scale-110 transition-transform" />
+            <FileText className="w-8 h-8 text-green-600 dark:text-green-400 mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Gerenciar Documentos</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">Visualizar e editar documentos do departamento</p>
           </Link>

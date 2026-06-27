@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Save, FileText, Upload } from 'lucide-react';
@@ -29,7 +29,7 @@ export interface DocumentoEditData {
 }
 
 const inputClass =
-  'w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors';
+  'w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:border-transparent transition-colors';
 
 const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
   documento,
@@ -125,13 +125,13 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
     >
       <form id="documento-edit-form" onSubmit={handleSubmit} className="space-y-0">
         {/* Sub-header informativo */}
-        <div className="flex items-center gap-3 p-4 mb-5 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <div className="w-9 h-9 flex-shrink-0 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
-            <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+        <div className="flex items-center gap-3 p-4 mb-5 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <div className="w-9 h-9 flex-shrink-0 bg-green-100 dark:bg-green-900/40 rounded-lg flex items-center justify-center">
+            <FileText className="w-4 h-4 text-green-600 dark:text-green-400" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-medium text-blue-900 dark:text-blue-200 truncate">{documento.titulo}</p>
-            <p className="text-xs text-blue-600 dark:text-blue-400">Editando metadados do documento</p>
+            <p className="text-sm font-medium text-green-900 dark:text-green-200 truncate">{documento.titulo}</p>
+            <p className="text-xs text-green-600 dark:text-green-400">Editando metadados do documento</p>
           </div>
         </div>
 
@@ -315,7 +315,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                 Substituir Arquivo{' '}
                 <span className="text-gray-400 dark:text-gray-500 font-normal text-xs">(opcional)</span>
               </label>
-              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 hover:border-blue-400 dark:hover:border-blue-500 transition-colors text-center">
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 hover:border-green-400 dark:hover:border-green-500 transition-colors text-center">
                 <Upload className="mx-auto h-7 w-7 text-gray-400 dark:text-gray-500 mb-1.5" />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Clique para selecionar um novo arquivo</p>
                 <input
@@ -327,7 +327,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
                 />
                 <label
                   htmlFor="novo-arquivo"
-                  className="cursor-pointer inline-flex px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="cursor-pointer inline-flex px-3 py-1.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   Escolher Arquivo
                 </label>
@@ -354,7 +354,7 @@ const DocumentoEditModal: React.FC<DocumentoEditModalProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
           >
             {loading ? (
               <>

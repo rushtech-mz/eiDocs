@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from 'react';
 import statsService from '@/services/statsService';
@@ -71,8 +71,8 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
         {/* Informações Básicas */}
         <div className="bg-gray-50 dark:bg-gray-900/40 rounded-lg p-4">
           <div className="flex items-start space-x-4">
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
-              <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-lg flex items-center justify-center">
+              <Building2 className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-3 mb-2">
@@ -115,16 +115,16 @@ const DepartamentoDetail: React.FC<DepartamentoDetailProps> = ({
         {/* Estatísticas do Departamento */}
         {loading ? (
           <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
             <span className="ml-2 text-gray-600 dark:text-gray-400">Carregando estatísticas...</span>
           </div>
         ) : stats && (
           <>
             {/* Cards de Totais */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Total de Documentos</p>
-                <p className="text-2xl font-bold text-blue-900 dark:text-blue-200">{stats.documentos?.total ?? 0}</p>
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-green-600 dark:text-green-400">Total de Documentos</p>
+                <p className="text-2xl font-bold text-green-900 dark:text-green-200">{stats.documentos?.total ?? 0}</p>
               </div>
               <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
                 <p className="text-sm font-medium text-green-600 dark:text-green-400">Ativos</p>

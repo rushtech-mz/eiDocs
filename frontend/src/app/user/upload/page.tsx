@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useCallback, useEffect } from "react";
 import { 
@@ -474,7 +474,7 @@ const UploadPage = () => {
           <div
             className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 ${
               isDragOver
-                ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                 : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
             }`}
             onDragOver={handleDragOver}
@@ -500,7 +500,7 @@ const UploadPage = () => {
             
             <label 
               htmlFor="file-input"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer"
+              className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors cursor-pointer"
             >
               <Plus className="w-4 h-4 mr-2" />
               Selecionar Arquivos
@@ -534,7 +534,7 @@ const UploadPage = () => {
 
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {file.status === 'ready' && (
-                      <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
+                      <div className="flex items-center gap-1 text-green-600 dark:text-green-400">
                         <FileText className="h-4 w-4" />
                         <span className="text-xs font-medium hidden sm:inline">Pronto</span>
                       </div>
@@ -544,7 +544,7 @@ const UploadPage = () => {
                       <div className="flex items-center gap-2">
                         <div className="w-12 sm:w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                           <div
-                            className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
+                            className="bg-green-600 h-1.5 rounded-full transition-all duration-300"
                             style={{ width: `${file.progress}%` }}
                           ></div>
                         </div>
@@ -595,7 +595,7 @@ const UploadPage = () => {
                 type="text"
                 value={formData.titulo}
                 onChange={(e) => handleInputChange('titulo', e.target.value)}
-                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 placeholder="Digite o título do documento"
                 required
               />
@@ -621,7 +621,7 @@ const UploadPage = () => {
               <select
                 value={formData.categoria}
                 onChange={(e) => handleInputChange('categoria', e.target.value)}
-                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 required
               >
                 <option value="">Selecione uma categoria...</option>
@@ -632,7 +632,7 @@ const UploadPage = () => {
                 ))}
               </select>
               {loadingCategorias && (
-                <p className="text-xs text-blue-500 dark:text-blue-400 mt-1">Carregando categorias...</p>
+                <p className="text-xs text-blue-500 dark:text-green-400 mt-1">Carregando categorias...</p>
               )}
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Selecione a categoria do documento</p>
             </div>
@@ -645,7 +645,7 @@ const UploadPage = () => {
               <select
                 value={formData.tipo}
                 onChange={(e) => handleInputChange('tipo', e.target.value)}
-                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 disabled={!formData.categoria || loadingTipos}
               >
                 <option value="">
@@ -662,7 +662,7 @@ const UploadPage = () => {
                 ))}
               </select>
               {loadingTipos && (
-                <p className="text-xs text-blue-500 dark:text-blue-400 mt-1">Carregando tipos...</p>
+                <p className="text-xs text-blue-500 dark:text-green-400 mt-1">Carregando tipos...</p>
               )}
               {formData.categoria && tiposFiltrados.length === 0 && !loadingTipos && (
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -682,7 +682,7 @@ const UploadPage = () => {
               <select
                 value={formData.tipoMovimento}
                 onChange={(e) => handleInputChange('tipoMovimento', e.target.value as 'recebido' | 'enviado' | 'interno')}
-                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
               >
                 <option value="interno">Interno</option>
                 <option value="recebido">Recebido</option>
@@ -703,7 +703,7 @@ const UploadPage = () => {
                       type="text"
                       value={formData.destinatario}
                       onChange={(e) => handleInputChange('destinatario', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       placeholder="Nome do destinatário"
                       required
                     />
@@ -719,7 +719,7 @@ const UploadPage = () => {
                       type="date"
                       value={formData.dataEnvio}
                       onChange={(e) => handleInputChange('dataEnvio', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
                   </div>
@@ -739,7 +739,7 @@ const UploadPage = () => {
                       type="text"
                       value={formData.remetente}
                       onChange={(e) => handleInputChange('remetente', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       placeholder="Nome do remetente"
                       required
                     />
@@ -755,7 +755,7 @@ const UploadPage = () => {
                       type="date"
                       value={formData.dataRecebimento}
                       onChange={(e) => handleInputChange('dataRecebimento', e.target.value)}
-                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full pl-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
                   </div>
@@ -792,7 +792,7 @@ const UploadPage = () => {
                 onChange={(e) => handleInputChange('descricao', e.target.value)}
                 placeholder="Descreva o conteúdo do documento..."
                 rows={3}
-                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                className="block w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none"
               />
             </div>
 
@@ -812,7 +812,7 @@ const UploadPage = () => {
           <button
             onClick={handleUpload}
             disabled={!isFormValid()}
-            className="flex items-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isUploading ? (
               <>

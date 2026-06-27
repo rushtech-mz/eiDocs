@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from 'react';
 import statsService from '@/services/statsService';
@@ -147,16 +147,16 @@ const CategoriaDetail: React.FC<CategoriaDetailProps> = ({
         {/* Estatísticas */}
         {loading ? (
           <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
             <span className="ml-2 text-gray-600 dark:text-gray-400">Carregando estatísticas...</span>
           </div>
         ) : stats && categoria && (
           <>
             {/* Totais da Categoria */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
-                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">Total de Categorias</p>
-                <p className="text-2xl font-bold text-blue-900 dark:text-blue-200">{stats.totais?.total ?? 0}</p>
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                <p className="text-sm font-medium text-green-600 dark:text-green-400">Total de Categorias</p>
+                <p className="text-2xl font-bold text-green-900 dark:text-green-200">{stats.totais?.total ?? 0}</p>
               </div>
               <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
                 <p className="text-sm font-medium text-green-600 dark:text-green-400">Ativas</p>

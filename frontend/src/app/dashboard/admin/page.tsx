@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo } from "react";
 import { formatNumber, formatPercent } from "@/lib/formatters";
@@ -176,7 +176,7 @@ const AdminDashboardPage = () => {
       return {
         id: dept.departamento?.toLowerCase() || dept.departamento || String(idx),
         name: dept.departamento || "Departamento",
-        color: "bg-blue-500",
+        color: "bg-green-500",
         documentCount: dept.quantidade || 0,
         activeUsers: usuariosDept ? usuariosDept.quantidade : 0,
         lastActivity: "-"
@@ -319,8 +319,8 @@ const AdminDashboardPage = () => {
                   </span>
                 </div>
               </div>
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
-                <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-lg flex items-center justify-center">
+                <FileText className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
             </div>
           </div>
@@ -463,7 +463,7 @@ const AdminDashboardPage = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600 dark:text-gray-400">Total de Documentos</span>
-                  <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                  <span className="text-sm font-medium text-green-600 dark:text-green-400">
                     {formatNumber(documentStats?.data?.totais?.total || 0)}
                   </span>
                 </div>

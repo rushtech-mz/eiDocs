@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState } from "react";
 import { CheckCircle, XCircle, AlertCircle, X, Info } from "lucide-react";
@@ -65,9 +65,9 @@ const Notification: React.FC<NotificationProps> = ({
       case "warning":
         return "border-yellow-200 bg-yellow-50 text-yellow-800";
       case "info":
-        return "border-blue-200 bg-blue-50 text-blue-800";
+        return "border-green-200 bg-green-50 text-green-800";
       default:
-        return "border-blue-200 bg-blue-50 text-blue-800";
+        return "border-green-200 bg-green-50 text-green-800";
     }
   };
 

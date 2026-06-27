@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { X, Download, ExternalLink, AlertCircle, FileText, Loader2 } from 'lucide-react';
@@ -316,7 +316,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         <div className="space-y-2">
           <button 
             onClick={onDownload}
-            className="block w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            className="block w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
             disabled={!onDownload}
           >
             <Download className="w-4 h-4 inline mr-2" />
@@ -394,7 +394,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
               {onDownload && (
                 <button 
                   onClick={onDownload}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
                 >
                   Baixar
                 </button>
@@ -448,7 +448,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           {loading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+                <Loader2 className="w-12 h-12 animate-spin text-green-600 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400">Carregando documento...</p>
               </div>
             </div>

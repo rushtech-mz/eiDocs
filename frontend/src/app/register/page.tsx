@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -54,13 +54,13 @@ function StepIndicator({ current }: { current: Step }) {
                 current > s.n
                   ? "bg-green-500 text-white"
                   : current === s.n
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-green-600 text-white"
                   : "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
               }`}
             >
               {current > s.n ? <Check className="w-4 h-4" /> : s.n}
             </div>
-            <span className={`text-xs mt-1 ${current === s.n ? "text-indigo-600 dark:text-indigo-400 font-medium" : "text-gray-400 dark:text-gray-500"}`}>
+            <span className={`text-xs mt-1 ${current === s.n ? "text-green-600 dark:text-green-400 font-medium" : "text-gray-400 dark:text-gray-500"}`}>
               {s.label}
             </span>
           </div>
@@ -151,7 +151,7 @@ export default function RegisterPage() {
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome da empresa</label>
         <input
-          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.nome ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.nome ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
           placeholder="Acme Lda."
           value={empresa.nome}
           onChange={e => {
@@ -164,7 +164,7 @@ export default function RegisterPage() {
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subdomínio</label>
-        <div className="flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-400">
+        <div className="flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden focus-within:ring-2 focus-within:ring-green-500 dark:focus-within:ring-green-400">
           <input
             className={`flex-1 px-4 py-2.5 text-sm outline-none font-mono bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.slug ? "border-red-400 dark:border-red-500" : ""}`}
             placeholder="acme"
@@ -184,7 +184,7 @@ export default function RegisterPage() {
         )}
       </div>
       <button
-        className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors"
+        className="w-full flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
         onClick={() => { if (validateStep1()) setStep(2); }}
       >
         Continuar <ArrowRight className="w-4 h-4" />
@@ -199,7 +199,7 @@ export default function RegisterPage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
           <input
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.nome ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+            className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.nome ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
             placeholder="João"
             value={admin.nome}
             onChange={e => { setAdmin(f => ({ ...f, nome: e.target.value })); setErrors(ev => ({ ...ev, nome: undefined })); }}
@@ -209,7 +209,7 @@ export default function RegisterPage() {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Apelido</label>
           <input
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.apelido ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+            className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.apelido ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
             placeholder="Silva"
             value={admin.apelido}
             onChange={e => { setAdmin(f => ({ ...f, apelido: e.target.value })); setErrors(ev => ({ ...ev, apelido: undefined })); }}
@@ -220,7 +220,7 @@ export default function RegisterPage() {
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
         <input
-          className={`w-full rounded-lg border px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.username ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.username ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
           placeholder="joaosilva"
           value={admin.username}
           onChange={e => { setAdmin(f => ({ ...f, username: e.target.value.toLowerCase() })); setErrors(ev => ({ ...ev, username: undefined })); }}
@@ -231,7 +231,7 @@ export default function RegisterPage() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email <span className="text-gray-400 dark:text-gray-500 font-normal">(opcional)</span></label>
         <input
           type="email"
-          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.email ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.email ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
           placeholder="joao@acme.pt"
           value={admin.email}
           onChange={e => { setAdmin(f => ({ ...f, email: e.target.value })); setErrors(ev => ({ ...ev, email: undefined })); }}
@@ -243,7 +243,7 @@ export default function RegisterPage() {
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
-            className={`w-full rounded-lg border px-4 py-2.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.senha ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+            className={`w-full rounded-lg border px-4 py-2.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.senha ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
             placeholder="Mínimo 6 caracteres"
             value={admin.senha}
             onChange={e => { setAdmin(f => ({ ...f, senha: e.target.value })); setErrors(ev => ({ ...ev, senha: undefined })); }}
@@ -258,7 +258,7 @@ export default function RegisterPage() {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirmar senha</label>
         <input
           type="password"
-          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.confirmarSenha ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${errors.confirmarSenha ? "border-red-400 dark:border-red-500" : "border-gray-300 dark:border-gray-600"}`}
           placeholder="Repete a senha"
           value={admin.confirmarSenha}
           onChange={e => { setAdmin(f => ({ ...f, confirmarSenha: e.target.value })); setErrors(ev => ({ ...ev, confirmarSenha: undefined })); }}
@@ -278,7 +278,7 @@ export default function RegisterPage() {
           <ArrowLeft className="w-4 h-4" /> Voltar
         </button>
         <button
-          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50 transition-colors"
           onClick={handleSubmit}
           disabled={loading}
         >
@@ -298,7 +298,7 @@ export default function RegisterPage() {
         <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Conta criada com sucesso!</h3>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           O teu espaço de trabalho está pronto em{" "}
-          <strong className="text-indigo-600 dark:text-indigo-400">{registeredSlug}.eidocs.pt</strong>.
+          <strong className="text-green-600 dark:text-green-400">{registeredSlug}.eidocs.pt</strong>.
         </p>
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Tens <strong>14 dias de trial</strong> para experimentar gratuitamente.
@@ -306,7 +306,7 @@ export default function RegisterPage() {
       </div>
       <div className="space-y-3">
         <button
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors"
+          className="w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
           onClick={() => router.push(`/dashboard`)}
         >
           Ir para o dashboard
@@ -327,12 +327,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center">
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">eiDocs</span>
@@ -352,7 +352,7 @@ export default function RegisterPage() {
         {step < 3 && (
           <p className="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">
             Já tens conta?{" "}
-            <Link href="/login" className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+            <Link href="/login" className="font-medium text-green-600 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300">
               Iniciar sessão
             </Link>
           </p>

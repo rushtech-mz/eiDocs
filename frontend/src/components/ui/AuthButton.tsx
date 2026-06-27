@@ -11,7 +11,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+      className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700 transition"
     >
       {text}
     </button>

@@ -21,7 +21,7 @@ const AuthCard: React.FC<AuthCardProps> = ({
   const getIcon = () => {
     switch (type) {
       case "login":
-        return <Shield className="h-8 w-8 text-blue-600" />;
+        return <Shield className="h-8 w-8 text-green-600" />;
       case "register":
         return <Database className="h-8 w-8 text-green-600" />;
       default:
@@ -32,7 +32,7 @@ const AuthCard: React.FC<AuthCardProps> = ({
   const getGradient = () => {
     switch (type) {
       case "login":
-        return "from-blue-50 to-indigo-50";
+        return "from-green-50 to-emerald-50";
       case "register":
         return "from-green-50 to-emerald-50";
       default:
@@ -51,7 +51,7 @@ const AuthCard: React.FC<AuthCardProps> = ({
         `}>
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl mb-4">
               {getIcon()}
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">

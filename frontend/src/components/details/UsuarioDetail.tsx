@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import DetailModal from '@/components/ui/DetailModal';
@@ -127,9 +127,9 @@ const UsuarioDetail: React.FC<UsuarioDetailProps> = ({
   const getRoleBadge = (role: UserRole) => {
     const roleConfig: Record<UserRole, { bg: string; text: string; label: string }> = {
       'superadmin': { bg: 'bg-purple-100 dark:bg-purple-900/40', text: 'text-purple-800 dark:text-purple-300', label: 'Super Administrador' },
-      'org_admin': { bg: 'bg-indigo-100 dark:bg-indigo-900/40', text: 'text-indigo-800 dark:text-indigo-300', label: 'Administrador da Organização' },
+      'org_admin': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Administrador da Organização' },
       'admin': { bg: 'bg-red-100 dark:bg-red-900/40', text: 'text-red-800 dark:text-red-300', label: 'Administrador' },
-      'editor': { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-800 dark:text-blue-300', label: 'Editor (Gerente)' },
+      'editor': { bg: 'bg-green-100 dark:bg-green-900/40', text: 'text-green-800 dark:text-green-300', label: 'Editor (Gerente)' },
       'user': { bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-800 dark:text-gray-300', label: 'Usuário' }
     };
 
@@ -163,8 +163,8 @@ const UsuarioDetail: React.FC<UsuarioDetailProps> = ({
         {/* Informações Básicas */}
         <div className="bg-gray-50 dark:bg-gray-900/40 rounded-lg p-4">
           <div className="flex items-start space-x-4">
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-lg flex items-center justify-center">
-              <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-lg flex items-center justify-center">
+              <User className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-3 mb-2">
@@ -226,7 +226,7 @@ const UsuarioDetail: React.FC<UsuarioDetailProps> = ({
         {/* Estatísticas */}
         {loading ? (
           <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
             <span className="ml-2 text-gray-600 dark:text-gray-400">Carregando estatísticas...</span>
           </div>
         ) : null}

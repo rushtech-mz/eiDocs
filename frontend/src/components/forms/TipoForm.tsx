@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import { CreateTipoDocumento, UpdateTipoDocumento, TipoDocumento, CategoriaDocumento } from '@/types';
@@ -179,7 +179,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
               id="departamento"
               value={selectedDepartamento}
               onChange={(e) => setSelectedDepartamento(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm"
               disabled={loading || isEditing}
             >
               <option value="">Selecione um departamento</option>
@@ -190,7 +190,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
               ))}
             </select>
             {!selectedDepartamento && (
-              <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
+              <p className="mt-1 text-sm text-green-600 dark:text-green-400">
                 ℹ️ Selecione um departamento para filtrar as categorias
               </p>
             )}
@@ -207,7 +207,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
             name="categoria"
             value={formData.categoria}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.categoria ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.categoria ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
             disabled={loading || loadingCategorias || (isAdmin() && !selectedDepartamento)}
           >
             <option value="">
@@ -242,7 +242,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
             name="nome"
             value={formData.nome}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.nome ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
             placeholder="Digite o nome do tipo"
             disabled={loading}
           />
@@ -262,14 +262,14 @@ const TipoForm: React.FC<TipoFormProps> = ({
             name="codigo"
             value={formData.codigo}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm`}
+            className={`mt-1 block w-full rounded-md border ${errors.codigo ? 'border-red-300 dark:border-red-700' : 'border-gray-300 dark:border-gray-600'} px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm`}
             placeholder="pdf_doc"
             disabled={loading}
           />
           {errors.codigo && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.codigo}</p>
           )}
-          <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
+          <p className="mt-1 text-sm text-green-600 dark:text-green-400">
             ℹ️ O código do departamento será adicionado automaticamente como prefixo (ex: DTL-pdf_doc)
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -288,7 +288,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
             value={formData.descricao}
             onChange={handleInputChange}
             rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:border-green-500 dark:focus:border-green-400 focus:outline-none focus:ring-green-500 sm:text-sm"
             placeholder="Descrição opcional do tipo de documento"
             disabled={loading}
           />
@@ -302,7 +302,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
               name="ativo"
               checked={formData.ativo}
               onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-green-600 focus:ring-green-500"
               disabled={loading}
             />
             <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -319,7 +319,7 @@ const TipoForm: React.FC<TipoFormProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+            className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
           >
             {loading ? 'Salvando...' : isEditing ? 'Atualizar' : 'Criar'}
           </button>

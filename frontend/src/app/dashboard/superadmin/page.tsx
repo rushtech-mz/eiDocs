@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import SuperadminLayout from '@/components/layouts/SuperadminLayout';
@@ -16,7 +16,7 @@ const PLAN_LABELS: Record<string, string> = {
 
 const PLAN_COLORS: Record<string, string> = {
   trial: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300',
-  starter: 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300',
+  starter: 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300',
   pro: 'bg-purple-100 dark:bg-purple-900/40 text-purple-800 dark:text-purple-300',
   enterprise: 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300',
 };
@@ -84,7 +84,7 @@ function CreateTenantModal({ onClose, onCreated }: CreateTenantModalProps) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
             <input
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
               value={form.nome}
               onChange={e => handleNomeChange(e.target.value)}
               required
@@ -93,7 +93,7 @@ function CreateTenantModal({ onClose, onCreated }: CreateTenantModalProps) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Slug</label>
             <input
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm font-mono focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm font-mono focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
               value={form.slug}
               onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))}
               required
@@ -103,7 +103,7 @@ function CreateTenantModal({ onClose, onCreated }: CreateTenantModalProps) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Plano</label>
             <select
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
               value={form.plano}
               onChange={e => setForm(f => ({ ...f, plano: e.target.value as any }))}
             >
@@ -118,7 +118,7 @@ function CreateTenantModal({ onClose, onCreated }: CreateTenantModalProps) {
             <Button type="button" variant="outline" className="flex-1" onClick={onClose} disabled={loading}>
               Cancelar
             </Button>
-            <Button type="submit" className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white" disabled={loading}>
+            <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white" disabled={loading}>
               {loading ? 'A criar…' : 'Criar Empresa'}
             </Button>
           </div>
@@ -210,7 +210,7 @@ export default function SuperadminPage() {
               <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               Atualizar
             </Button>
-            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700 text-white" onClick={() => setShowCreateModal(true)}>
+            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white" onClick={() => setShowCreateModal(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Nova Empresa
             </Button>
@@ -220,13 +220,13 @@ export default function SuperadminPage() {
         {/* Filters */}
         <div className="flex flex-wrap gap-3">
           <input
-            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm w-64 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm w-64 focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
             placeholder="Pesquisar por nome ou slug…"
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
           />
           <select
-            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
             value={filterAtivo}
             onChange={e => { setFilterAtivo(e.target.value as any); setPage(1); }}
           >
@@ -235,7 +235,7 @@ export default function SuperadminPage() {
             <option value="false">Inativas</option>
           </select>
           <select
-            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none"
+            className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm focus:border-green-500 dark:focus:border-green-400 focus:outline-none"
             value={filterPlano}
             onChange={e => { setFilterPlano(e.target.value); setPage(1); }}
           >
@@ -313,7 +313,7 @@ export default function SuperadminPage() {
                         <a
                           href={superadminService.getExportUrl(tenant._id)}
                           title="Exportar dados (ZIP)"
-                          className="rounded p-1.5 text-blue-500 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+                          className="rounded p-1.5 text-blue-500 dark:text-green-400 hover:bg-green-50 dark:hover:bg-blue-900/30 transition-colors"
                         >
                           <Download className="h-4 w-4" />
                         </a>

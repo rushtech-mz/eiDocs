@@ -8,9 +8,9 @@
 export const colors = {
     // ===== CORES PRIMÁRIAS (do logo) =====
     primary: {
-      blue: '#1E90FF',      // Azul vibrante (início do degradê)
-      purple: '#9D4EDD',    // Roxo/Lilás (fim do degradê)
-      dark: '#0A1628',      // Azul escuro (fundo do logo)
+      blue: '#16A34A',      // Verde primário
+      purple: '#059669',    // Esmeralda (fim do degradê)
+      dark: '#0A1628',      // Fundo escuro
     },
   
     // ===== CORES NEUTRAS =====
@@ -40,14 +40,14 @@ export const colors = {
   
     // ===== GRADIENTES =====
     gradients: {
-      // Gradiente principal (azul → roxo) como no logo
-      primary: 'linear-gradient(135deg, #1E90FF 0%, #9D4EDD 100%)',
-      
-      // Gradiente invertido (roxo → azul)
-      primaryReverse: 'linear-gradient(135deg, #9D4EDD 0%, #1E90FF 100%)',
-      
+      // Gradiente principal (verde → esmeralda)
+      primary: 'linear-gradient(135deg, #16A34A 0%, #059669 100%)',
+
+      // Gradiente invertido (esmeralda → verde)
+      primaryReverse: 'linear-gradient(135deg, #059669 0%, #16A34A 100%)',
+
       // Gradiente sutil para backgrounds
-      subtle: 'linear-gradient(135deg, rgba(30, 144, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%)',
+      subtle: 'linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%)',
       
       // Gradiente escuro para hero sections
       dark: 'linear-gradient(135deg, #0A1628 0%, #1E293B 100%)',

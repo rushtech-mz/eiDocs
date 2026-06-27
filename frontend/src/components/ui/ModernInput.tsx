@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
@@ -69,12 +69,12 @@ const ModernInput: React.FC<ModernInputProps> = ({
               ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-200' 
               : success 
                 ? 'border-green-300 bg-green-50 focus:border-green-500 focus:ring-green-200'
-                : 'border-gray-200 bg-white hover:border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                : 'border-gray-200 bg-white hover:border-gray-300 focus:border-green-500 focus:ring-green-200'
             }
             ${isFocused ? 'shadow-lg scale-[1.02]' : 'shadow-sm'}
             focus:outline-none focus:ring-4
             dark:bg-gray-800 dark:border-gray-600 dark:text-white
-            dark:focus:border-blue-400 dark:focus:ring-blue-900
+            dark:focus:border-green-400 dark:focus:ring-blue-900
           `}
         />
         

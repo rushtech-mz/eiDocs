@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -171,7 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 flex items-center rounded-lg transition-all duration-200 group
                 ${isCollapsed ? 'justify-center p-2' : 'gap-3 px-3 py-2.5'}
                 ${active
-                  ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
+                  ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800'
                   : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 border border-transparent'
                 }
               `}
@@ -180,7 +180,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className={`
                   w-5 h-5 flex-shrink-0
                   ${active
-                    ? 'text-blue-600 dark:text-blue-400'
+                    ? 'text-green-600 dark:text-green-400'
                     : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'
                   }
                 `}
@@ -191,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <div className="font-medium text-sm leading-tight truncate">{item.title}</div>
                     <div className="text-xs text-gray-400 dark:text-gray-500 truncate mt-0.5">{item.description}</div>
                   </div>
-                  {active && <ChevronRight className="w-4 h-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />}
+                  {active && <ChevronRight className="w-4 h-4 flex-shrink-0 text-green-600 dark:text-green-400" />}
                 </>
               )}
             </Link>
@@ -203,7 +203,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className={`border-t border-gray-200 dark:border-gray-700 py-3 space-y-1 flex-shrink-0 ${isCollapsed ? 'px-2' : 'px-3'}`}>
         {!isCollapsed && user && (
           <div className="flex items-center gap-3 px-3 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg mb-1">
-            <div className="w-8 h-8 flex-shrink-0 bg-blue-600 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 flex-shrink-0 bg-green-600 rounded-full flex items-center justify-center">
               <span className="text-xs font-medium text-white">
                 {user.nome?.charAt(0) || user.username?.charAt(0) || 'U'}
               </span>
@@ -221,7 +221,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {isCollapsed && user && (
           <div
-            className="mx-auto w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center mb-1"
+            className="mx-auto w-9 h-9 bg-green-600 rounded-full flex items-center justify-center mb-1"
             title={user.nome || user.username}
           >
             <span className="text-xs font-medium text-white">

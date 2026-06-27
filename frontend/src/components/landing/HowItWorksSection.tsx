@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import { UserPlus, Upload, Sparkles } from 'lucide-react';
@@ -11,7 +11,7 @@ const HowItWorksSection = () => {
       title: "Crie sua Conta",
       description: "Cadastro em 2 minutos",
       gradient: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50"
+      bgColor: "bg-green-50"
     },
     {
       number: "2",

@@ -31,6 +31,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
   
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [apiError, setApiError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   
@@ -104,6 +105,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
         setSelectedFile(null);
       }
       setErrors({});
+      setApiError(null);
     }
   }, [isOpen, documento]);
 
@@ -332,7 +334,8 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
       onSuccess?.();
       onClose();
     } catch (error) {
-      console.error('Erro ao salvar documento:', error);
+      const msg = error instanceof Error ? error.message : 'Erro ao salvar documento. Tente novamente.';
+      setApiError(msg);
     } finally {
       setLoading(false);
     }
@@ -360,6 +363,13 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
       size="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Erro de API (permissão, servidor, etc.) */}
+        {apiError && (
+          <div className="px-4 py-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-700 dark:text-red-400">
+            {apiError}
+          </div>
+        )}
+
         {/* Título */}
         <div>
           <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 dark:text-gray-300">

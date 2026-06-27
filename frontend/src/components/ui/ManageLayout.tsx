@@ -1,15 +1,34 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/ui/AdminSidebar';
 import { Menu } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
 interface ManageLayoutProps {
   children: React.ReactNode;
 }
 
+const ALLOWED_ROLES = ['admin', 'org_admin', 'superadmin', 'editor'];
+
 const ManageLayout: React.FC<ManageLayoutProps> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      router.replace('/login');
+      return;
+    }
+    if (!ALLOWED_ROLES.includes(user.role)) {
+      router.replace('/dashboard/user');
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user || !ALLOWED_ROLES.includes(user.role)) return null;
 
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-950 overflow-hidden">

@@ -87,10 +87,16 @@ const DocumentosDepartamentoPage = () => {
   };
 
   const canUserEditDocument = (documento: Documento): boolean => {
-    // Usuário pode editar apenas documentos que ele criou
-    const usuarioId = typeof documento.usuario === 'string' ? documento.usuario : documento.usuario?._id;
-    const usuarioNome = typeof documento.usuario === 'string' ? '' : documento.usuario?.nome;
-    return usuarioId === user?._id || usuarioNome === user?.nome;
+    if (!user) return false;
+    // Admins e org_admins podem editar qualquer documento
+    if (['admin', 'org_admin', 'superadmin'].includes(user.role)) return true;
+    // Editores (gerentes) podem editar qualquer documento do seu departamento
+    if (user.role === 'editor') return true;
+    // Utilizadores normais: apenas documentos que criaram
+    const docUserId = typeof documento.usuario === 'string'
+      ? documento.usuario
+      : documento.usuario?._id;
+    return docUserId === user._id;
   };
 
   const handleSaveEdit = async (documento: Documento, formData: any) => {

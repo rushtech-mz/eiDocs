@@ -199,21 +199,36 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
   };
 
   const handleFileSelect = (file: File) => {
-    const maxSize = 50 * 1024 * 1024; // 50MB
+    const maxSize = 500 * 1024 * 1024; // 500MB
     const allowedTypes = [
       'application/pdf',
       'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       'application/vnd.ms-excel',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
       'image/jpeg',
       'image/png',
       'image/gif',
-      'text/plain'
+      'image/webp',
+      'text/plain',
+      'text/csv',
+      'application/rtf',
+      'application/zip',
+      'application/x-zip-compressed',
+      'application/x-rar-compressed',
+      'application/vnd.rar',
+      'video/mp4',
+      'video/webm',
+      'video/ogg',
+      'video/quicktime',
+      'video/x-msvideo',
+      'video/x-ms-wmv',
     ];
 
     if (file.size > maxSize) {
-      setErrors(prev => ({ ...prev, arquivo: 'Arquivo muito grande. Tamanho máximo: 50MB' }));
+      setErrors(prev => ({ ...prev, arquivo: 'Arquivo muito grande. Tamanho máximo: 500 MB' }));
       return;
     }
 
@@ -654,7 +669,7 @@ const DocumentoForm: React.FC<DocumentoFormProps> = ({
                           name="file-upload"
                           type="file"
                           className="sr-only"
-                          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.txt"
+                          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv,.rtf,.zip,.rar,.mp4,.webm,.mov,.avi,.wmv"
                           onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
                           disabled={loading}
                         />

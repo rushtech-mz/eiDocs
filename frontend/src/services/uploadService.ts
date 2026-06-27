@@ -1,5 +1,5 @@
 // Service para upload de documentos com criação automática de categorias e tipos
-import { apiPost, apiGet, ApiResponse } from '@/lib/api';
+import { apiPost, apiGet, ApiResponse, API_BASE_URL } from '@/lib/api';
 import { DocumentosService, DocumentoCreateData } from './documentosService';
 
 interface CategoriaRequest {
@@ -194,6 +194,71 @@ export class UploadService {
       console.error('❌ Erro no upload completo:', error);
       throw error;
     }
+  }
+
+  // Upload directo ao R2 via URL pré-assinada com progresso real
+  static async uploadComPresign(data: {
+    titulo: string;
+    descricao?: string;
+    categoria: string;
+    tipo?: string;
+    departamento: string;
+    tipoMovimento: 'enviado' | 'recebido' | 'interno';
+    remetente?: string;
+    destinatario?: string;
+    responsavel?: string;
+    dataEnvio?: string;
+    dataRecebimento?: string;
+    tags?: string[];
+    arquivo: File;
+    onProgress?: (pct: number) => void;
+  }): Promise<any> {
+    const { arquivo, onProgress, ...meta } = data;
+
+    onProgress?.(5);
+
+    // 1. Obter URL pré-assinada do backend
+    const initRes = await apiPost<ApiResponse<{ uploadUrl: string; fileId: string; key: string; expiresIn: number }>>(
+      '/documentos/initiate-upload',
+      { originalName: arquivo.name, mimeType: arquivo.type, size: arquivo.size }
+    );
+    const { uploadUrl, fileId, key } = initRes.data;
+
+    onProgress?.(10);
+
+    // 2. PUT do ficheiro directamente ao R2 com tracking de progresso
+    await new Promise<void>((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('PUT', uploadUrl);
+      xhr.setRequestHeader('Content-Type', arquivo.type);
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const pct = 10 + Math.round((e.loaded / e.total) * 80);
+          onProgress?.(pct);
+        }
+      };
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) resolve();
+        else reject(new Error(`Upload R2 falhou: ${xhr.status} ${xhr.statusText}`));
+      };
+      xhr.onerror = () => reject(new Error('Erro de rede durante o upload'));
+      xhr.send(arquivo);
+    });
+
+    onProgress?.(92);
+
+    // 3. Registar documento no backend
+    const doc = await apiPost<ApiResponse<any>>('/documentos/complete-upload', {
+      fileId,
+      key,
+      originalName: arquivo.name,
+      mimeType: arquivo.type,
+      size: arquivo.size,
+      ...meta,
+    });
+
+    onProgress?.(100);
+    return doc.data;
   }
 
   // Upload usando IDs de categoria e tipo existentes

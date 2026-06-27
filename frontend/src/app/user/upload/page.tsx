@@ -171,23 +171,38 @@ const UploadPage = () => {
     'image/jpeg',
     'image/png',
     'image/gif',
-    'text/plain'
+    'image/webp',
+    'text/plain',
+    'text/csv',
+    'application/rtf',
+    // Arquivos comprimidos
+    'application/zip',
+    'application/x-zip-compressed',
+    'application/x-rar-compressed',
+    'application/vnd.rar',
+    // Vídeo
+    'video/mp4',
+    'video/webm',
+    'video/ogg',
+    'video/quicktime',
+    'video/x-msvideo',
+    'video/x-ms-wmv',
   ];
 
-  const maxFileSize = 50 * 1024 * 1024; // 50MB
+  const maxFileSize = 500 * 1024 * 1024; // 500 MB (limite exibido; enforcement real é no backend)
 
   const validateFile = (file: File): { isValid: boolean; error?: string } => {
     if (!allowedFileTypes.includes(file.type)) {
-      return { 
-        isValid: false, 
-        error: "Tipo de arquivo não suportado. Use PDF, Word, Excel, PowerPoint, imagens ou texto." 
+      return {
+        isValid: false,
+        error: "Tipo de arquivo não suportado. Use PDF, Word, Excel, PowerPoint, imagens, ZIP, RAR ou vídeo."
       };
     }
-    
+
     if (file.size > maxFileSize) {
-      return { 
-        isValid: false, 
-        error: "Arquivo muito grande. Tamanho máximo: 50MB" 
+      return {
+        isValid: false,
+        error: "Arquivo muito grande. Tamanho máximo: 500 MB"
       };
     }
     
@@ -300,10 +315,12 @@ const UploadPage = () => {
 
   const getFileIcon = (type: string) => {
     if (type.startsWith('image/')) return '🖼️';
+    if (type.startsWith('video/')) return '🎬';
     if (type.includes('pdf')) return '📄';
     if (type.includes('word')) return '📝';
     if (type.includes('excel') || type.includes('spreadsheet')) return '📊';
     if (type.includes('powerpoint') || type.includes('presentation')) return '📈';
+    if (type.includes('zip') || type.includes('rar') || type.includes('7z')) return '🗜️';
     if (type.includes('text')) return '📃';
     return '📎';
   };
@@ -360,55 +377,46 @@ const UploadPage = () => {
     setIsUploading(true);
 
     try {
-      console.log('🚀 Iniciando upload real para o backend');
-      console.log('👤 Usuário:', user._id);
-      console.log('🏢 Departamento:', user.departamento._id);
-      
       // Upload real para cada arquivo
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        
-        // Marcar como upload iniciado
-        setFiles(prev => prev.map(f => 
-          f.id === file.id ? { ...f, status: 'uploading' as const, progress: 20 } : f
+
+        setFiles(prev => prev.map(f =>
+          f.id === file.id ? { ...f, status: 'uploading' as const, progress: 5 } : f
         ));
 
-        // Criar dados do documento para envio
         const uploadData = {
           titulo: formData.titulo,
           descricao: formData.descricao,
           categoria: formData.categoria,
-          ...(formData.tipo && { tipo: formData.tipo }), // Apenas incluir se houver tipo
+          ...(formData.tipo && { tipo: formData.tipo }),
           departamento: user.departamento._id,
-          usuario: user._id,
           tipoMovimento: formData.tipoMovimento,
           remetente: formData.remetente,
           destinatario: formData.destinatario,
           responsavel: formData.responsavel,
           dataEnvio: formData.dataEnvio,
           dataRecebimento: formData.dataRecebimento,
-          arquivo: file.file
+          arquivo: file.file,
+          onProgress: (pct: number) => {
+            setFiles(prev => prev.map(f => f.id === file.id ? { ...f, progress: pct } : f));
+          },
         };
 
-        console.log('📝 Dados do upload:', uploadData);
-        console.log('🔍 Responsável no uploadData:', uploadData.responsavel);
-        console.log('🔍 FormData completo:', formData);
+        try {
+          // Tentar fluxo pré-assinado (R2); fallback automático para multer
+          await UploadService.uploadComPresign(uploadData);
+        } catch (presignErr: any) {
+          // Se o backend indicar que não é R2, usar fluxo tradicional
+          if (presignErr?.status === 400 || String(presignErr?.message).includes('R2')) {
+            setFiles(prev => prev.map(f => f.id === file.id ? { ...f, progress: 50 } : f));
+            await UploadService.uploadDocumentoComIDs({ ...uploadData, usuario: user._id });
+          } else {
+            throw presignErr;
+          }
+        }
 
-        // Atualizar progresso para meio do upload
-        setFiles(prev => prev.map(f => 
-          f.id === file.id ? { ...f, progress: 60 } : f
-        ));
-
-        // Enviar para o backend usando IDs dos tipos e categorias selecionados
-        await UploadService.uploadDocumentoComIDs(uploadData);
-        
-        // Atualizar progresso para quase completo
-        setFiles(prev => prev.map(f => 
-          f.id === file.id ? { ...f, progress: 90 } : f
-        ));
-
-        // Marcar como sucesso
-        setFiles(prev => prev.map(f => 
+        setFiles(prev => prev.map(f =>
           f.id === file.id ? { ...f, status: 'success' as const, progress: 100 } : f
         ));
       }
@@ -485,7 +493,7 @@ const UploadPage = () => {
               type="file"
               multiple
               onChange={handleFileSelect}
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv,.rtf,.zip,.rar,.mp4,.webm,.mov,.avi,.wmv"
               className="hidden"
               id="file-input"
             />
@@ -499,7 +507,7 @@ const UploadPage = () => {
             </label>
             
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-              Tipos suportados: PDF, Word, Excel, PowerPoint, Imagens, Texto • Máximo: 50MB
+              Tipos suportados: PDF, Word, Excel, PowerPoint, Imagens, ZIP, RAR, Vídeo • Máximo: 500 MB
             </p>
           </div>
         </div>
